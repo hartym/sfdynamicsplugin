@@ -1,0 +1,12 @@
+.sf_tooltip
+{
+  font:10px/12px Arial,Helvetica,sans-serif;
+  border:solid 1px #666666;
+  padding:3px;
+  position:absolute;
+  z-index:9999;
+  visibility:hidden;
+  color:#333333;
+  background-color:#ffffcc;
+  max-width: 230px;
+}
