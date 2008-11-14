@@ -28,20 +28,4 @@ class sfDynamics
       $manager->load($arg);
     }
   }
-
-  static public function listenToRoutingLoadConfigurationEvent(sfEvent $event)
-  {
-    $r = $event->getSubject();
-
-    if (0)
-    {
-      $r->prependRoute('sfDynamicsPlugin_javascript', '/sf_dynamics/js/:name', array('module' => 'sfDynamics', 'action'=>'javascript'));
-      $r->prependRoute('sfDynamicsPlugin_stylesheet', '/sf_dynamics/css/:name', array('module' => 'sfDynamics', 'action'=>'stylesheet'));
-    }
-    else
-    {
-      $r->prependRoute('sfDynamicsPlugin_javascript', new sfRoute('/dynamics/:name.js', array('module' => 'sfDynamics', 'action'=>'javascript')));
-      $r->prependRoute('sfDynamicsPlugin_stylesheet', new sfRoute('/dynamics/:name.css', array('module' => 'sfDynamics', 'action'=>'stylesheet')));
-    }
-  }
 }
