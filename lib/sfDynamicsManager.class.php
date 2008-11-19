@@ -40,7 +40,7 @@ class sfDynamicsManager implements ArrayAccess
     $this->request    = $context->getRequest();
     $this->controller = $context->getController();
 
-    $this->configuration = include($context->getConfiguration()->getConfigCache()->checkConfig('config/dynamics.yml'));
+    $this->configuration = include($context->getConfiguration()->getConfigCache()->checkConfig('config/dynamics.xml'));
 
     if (isset($this->configuration['__autoload__']))
     {

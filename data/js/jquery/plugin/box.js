@@ -12,40 +12,6 @@
     $.isFunction(data) ? data.call($) : $.box.reveal(data, klass);
   };
 
-  $.box.settings = {
-    loading_image : '/sf_behavior/images/box/loading.gif',
-    close_image   : '/sf_behavior/images/box/closelabel.gif',
-    image_types   : [ 'png', 'jpg', 'jpeg', 'gif' ],
-    box_html  : '\
-  <div id="box" style="display:none;"> \
-    <div class="popup"> \
-      <table> \
-        <tbody> \
-          <tr> \
-            <td class="tl"/><td class="b"/><td class="tr"/> \
-          </tr> \
-          <tr> \
-            <td class="b"/> \
-            <td class="body"> \
-              <div class="box-bd"> \
-              </div> \
-              <div class="box-ft"> \
-                <a href="#" class="close"> \
-                  <img src="/sf_behavior/images/box/closelabel.gif" title="Fermer" alt="Fermer" class="close_image" /> \
-                </a> \
-              </div> \
-            </td> \
-            <td class="b"/> \
-          </tr> \
-          <tr> \
-            <td class="bl"/><td class="b"/><td class="br"/> \
-          </tr> \
-        </tbody> \
-      </table> \
-    </div> \
-  </div>'
-  };
-
   $.box.loading = function() {
     if ($('#box .loading').length == 1)
     {

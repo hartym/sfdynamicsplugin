@@ -10,7 +10,7 @@
  */
 class sfDynamicsPluginConfiguration extends sfPluginConfiguration
 {
-  const ROUTE = 'sfDynamics'
+  const ROUTE = 'sfDynamics';
 
   /**
    * @see sfPluginConfiguration
@@ -22,6 +22,7 @@ class sfDynamicsPluginConfiguration extends sfPluginConfiguration
 
   public function configureRouting(sfEvent $e)
   {
+    $r = $e->getSubject();
     $prefix = sfConfig::get('app_sfDynamicsPlugin_base_route', '/dynamics');
 
     foreach (array('javascript'=>'js', 'stylesheet'=>'css') as $actionName => $fileExtension)

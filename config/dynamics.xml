@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+
+<dynamics>
+  <import resource="dynamics_jquery.xml" />
+  <import resource="dynamics_jquery_addons.xml" />
+</dynamics>
