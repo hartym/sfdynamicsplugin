@@ -1,0 +1,16 @@
+# Contribute to the projet
+
+We're actively looking for contributors.
+
+For now, we (sfDynamics team) assume the task of maintaining and updating jQuery, jQuery ui and jQuery effects libraries,
+along with some extra plugins we're either developping or using. But sfDynamics is not limited to thoose, and if you
+want to take advantage of the plugin's features for your usual JS framework, you're welcome to become the referent contributor
+for it.
+
+# Version Control
+
+We're using
+
+# Exigence
+
+We have high quality exigence. But
