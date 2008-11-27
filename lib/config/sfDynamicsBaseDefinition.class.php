@@ -2,68 +2,45 @@
 
 abstract class sfDynamicsBaseDefinition
 {
-  protected $configuration = null;
-
-  public function __construct(sfApplicationConfiguration $configuration, $xml=null, $bootstrap=null)
+  public function __construct($xml=null)
   {
-    $this->configuration = $configuration;
-
-    if (!is_null($bootstrap))
-    {
-      $this->bootstrap($bootstrap);
-    }
-
     if (!is_null($xml))
     {
       $this->parseXml($xml);
     }
   }
 
-  public function bootstrap($bootstrap)
+  public function getConfigPaths($resource)
   {
-    foreach ($bootstrap as $variable => $value)
+    try
     {
-      $this->$variable = $this->dereference($value);
+      return sfContext::getInstance()->getConfiguration()->getConfigPaths($resource);
+    }
+    catch (Exception $e)
+    {
+      return array($resource);
     }
   }
 
-  public function dereference($value)
+  static public function build($instance, $definition, $state)
   {
-    if (is_array($value))
+    foreach ($definition as $variable)
     {
-      foreach($value as $_key => $_data)
+      if (isset($state[$variable]))
       {
-        $value[$_key] = $this->dereference($_data);
+        $instance->{'set'.ucfirst($variable)}($state[$variable]);
+        unset($state[$variable]);
       }
     }
-    elseif(is_object($value) && is_callable(array($value, 'dereference')))
+
+    if (!empty($state))
     {
-      $value = $value->dereference();
+      throw new sfConfigurationException(sprintf('Could not create %s instance with bootstrap data: extra fields given (%s)', get_class($instance), implode(', ', array_keys($state))));
     }
 
-    return $value;
+    return $instance;
   }
 
-  public function getBootstrapFor($entries)
-  {
-    $bootstrap = array();
-
-    foreach ($entries as $key => $entry)
-    {
-      $bootstrap[$key] = new sfDynamicsDefinitionReference(get_class($entry), $entry->getBootstrapArray());
-    }
-
-    return $bootstrap;
-  }
-
-  static public function getAsPhp($data)
-  {
-    return var_export($data, 1);
-    return preg_replace('/\s+/m', ' ', var_export($data, 1));
-  }
-
-  abstract function getBootstrapArray();
   abstract function parseXml($xml);
-
 }
 

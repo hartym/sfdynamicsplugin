@@ -9,6 +9,35 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
     $i18n        = array(),
     $themes      = array();
 
+  public function getDependencies()
+  {
+    return $this->requires;
+  }
+
+  public function setDescription($description)
+  {
+    $this->description = $description;
+  }
+
+  public function setRequires($requires)
+  {
+    $this->requires = $requires;
+  }
+
+  public function setConflicts($conflicts)
+  {
+    $this->conflicts = $conflicts;
+  }
+
+  public function setI18n($i18n)
+  {
+    $this->i18n = $i18n;
+  }
+
+  public function setThemes($themes)
+  {
+    $this->themes = $themes;
+  }
 
   public function parseXml($xml)
   {
@@ -42,7 +71,7 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
         throw new sfConfigurationException('Each I18n tag should have a language attribute.');
       }
 
-      $this->i18n[$language] = new sfDynamicsAssetCollectionDefinition($this->configuration, $i18n);
+      $this->i18n[$language] = new sfDynamicsAssetCollectionDefinition($i18n);
     }
 
     if (count($xml->theme))
@@ -56,20 +85,14 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
           throw new sfConfigurationException('Each theme tag should have a name attribute.');
         }
 
-        $this->themes[$themeName] = new sfDynamicsAssetCollectionDefinition($this->configuration, $theme);
+        $this->themes[$themeName] = new sfDynamicsAssetCollectionDefinition($theme);
       }
     }
   }
 
-  public function getBootstrapArray()
+  static public function __set_state($state)
   {
-    return array(
-      'description' => $this->description,
-      'requires'    => $this->requires,
-      'conflicts'   => $this->conflicts,
-      'i18n'        => $this->getBootstrapFor($this->i18n),
-      'themes'      => $this->getBootstrapFor($this->themes),
-    );
+    return self::build(new self(), array('javascripts', 'stylesheets', 'description', 'requires', 'conflicts', 'i18n', 'themes'), $state);
   }
 }
 
