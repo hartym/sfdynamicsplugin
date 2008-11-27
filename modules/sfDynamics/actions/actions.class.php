@@ -10,7 +10,7 @@ class sfDynamicsActions extends sfActions
     try
     {
       $this->name = $this->getRequest()->getParameter('name');
-      $this->configuration = $this->manager->getConfiguration($this->name);
+      $this->package = $this->manager->getPackage($this->name);
     }
     catch(Exception $e)
     {
@@ -20,16 +20,12 @@ class sfDynamicsActions extends sfActions
 
   public function executeJavascript($request)
   {
-    $this->getResponse()->setContentType('text/javascript');
+    $this->forward404Unless(count($javascripts = $this->package->getJavascripts()));
 
+    $this->getResponse()->setContentType('text/javascript');
     $js = '';
 
-    if (!isset($this->configuration['javascripts']) || !is_array($this->configuration['javascripts']))
-    {
-      throw new sfError404Exception();
-    }
-
-    foreach ($this->configuration['javascripts'] as $javascript)
+    foreach ($javascripts as $javascript)
     {
       $file = $this->path.'/js/'.$javascript.'.js';
 
@@ -52,16 +48,12 @@ class sfDynamicsActions extends sfActions
 
   public function executeStylesheet($request)
   {
-    $this->getResponse()->setContentType('text/css');
+    $this->forward404Unless(count($stylesheets = $this->package->getStylesheets()));
 
+    $this->getResponse()->setContentType('text/css');
     $css = '';
 
-    if (!isset($this->configuration['stylesheets']) || !is_array($this->configuration['stylesheets']))
-    {
-      throw new sfError404Exception();
-    }
-
-    foreach ($this->configuration['stylesheets'] as $stylesheet)
+    foreach ($stylesheets as $stylesheet)
     {
       $file = $this->path.'/css/'.$stylesheet.'.css';
 

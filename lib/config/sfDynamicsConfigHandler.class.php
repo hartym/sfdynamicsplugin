@@ -4,11 +4,7 @@ class sfDynamicsConfigHandler extends sfConfigHandler
 {
   public function execute($configFiles)
   {
-    $config = $this->parseXmls($configFiles);
-
-    $code = sprintf('<?php return %s;', var_export($config, 1));
-
-    return $code;
+    return sprintf('<?php return %s;', var_export($this->parseXmls($configFiles), 1));
   }
 
   public function parseXmls($files)
@@ -23,9 +19,7 @@ class sfDynamicsConfigHandler extends sfConfigHandler
       }
     }
 
-    $config = new sfDynamicsConfigDefinition(sfContext::getInstance()->getConfiguration(), simplexml_load_file($file));
-
-    return $config->getBootstrapArray();
+    return new sfDynamicsConfigDefinition(simplexml_load_file($file));
   }
 }
 

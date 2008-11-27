@@ -1,5 +1,7 @@
 <?php
 
+$_SERVER['SYMFONY'] = dirname(__FILE__).'/../../../../lib/vendor/symfony/lib';
+
 if (!isset($_SERVER['SYMFONY']))
 {
   throw new RuntimeException('Could not find symfony core libraries.');
