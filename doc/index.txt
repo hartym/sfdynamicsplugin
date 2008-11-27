@@ -11,11 +11,12 @@ how each framework interacts with each of their associated libraries.
 # Javascript frameworks
 
 We're actively looking for configuration writers maintainers for all the following javascript frameworks:
-  * Prototype + scriptaculous
-  * Yahoo UI
-  * ExtJS
-  * Mootools
-  * Dojo
+
+ * Prototype + scriptaculous
+ * Yahoo UI
+ * ExtJS
+ * Mootools
+ * Dojo
 
 To know what configuration packages looks like, have a look at the {{{configuration|configuration reference}}}.
 
