@@ -4,10 +4,29 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
 {
   protected
     $description = '',
+    $paths       = array(),
     $requires    = array(),
     $conflicts   = array(),
     $i18n        = array(),
     $themes      = array();
+
+
+  public function __construct($xml=null, $paths=array())
+  {
+    $this->paths = array_merge($paths, array(sfConfig::get('sf_plugins_dir').'/sfDynamicsPlugin/data'));
+
+    parent::__construct($xml);
+  }
+
+  public function setPaths($paths)
+  {
+    $this->paths = $paths;
+  }
+
+  public function getPaths()
+  {
+    return $this->paths;
+  }
 
   public function getDependencies()
   {
@@ -41,40 +60,50 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
 
   public function parseXml($xml)
   {
-    // javascript, stylesheet
-    parent::parseXml($xml);
+    $xml = parent::parseXml($xml);
 
-    // description
-    if (count($xml->description) > 1)
+    if (isset($xml->description))
     {
-      throw new sfConfigurationException('A package cannot have more than one description node.');
-    }
-    foreach ($xml->description as $description)
-    {
-      $this->description = (string)$description;
-    }
-
-    foreach ($xml->require as $require)
-    {
-      $this->requires[] = (string)$require;
-    }
-
-    foreach ($xml->conflict as $conflict)
-    {
-      $this->conflicts[] = (string)$conflict;
-    }
-
-    foreach ($xml->i18n as $i18n)
-    {
-      if (!strlen($language = (string)$i18n['language']))
+      if (count($xml->description) > 1)
       {
-        throw new sfConfigurationException('Each I18n tag should have a language attribute.');
+        throw new sfConfigurationException('A package cannot have more than one description node.');
       }
-
-      $this->i18n[$language] = new sfDynamicsAssetCollectionDefinition($i18n);
+      foreach ($xml->description as $description)
+      {
+        $this->description = (string)$description;
+      }
     }
 
-    if (count($xml->theme))
+    if (isset($xml->require))
+    {
+      foreach ($xml->require as $require)
+      {
+        $this->requires[] = (string)$require;
+      }
+    }
+
+    if (isset($xml->conflict))
+    {
+      foreach ($xml->conflict as $conflict)
+      {
+        $this->conflicts[] = (string)$conflict;
+      }
+    }
+
+    if (isset($xml->i18n))
+    {
+      foreach ($xml->i18n as $i18n)
+      {
+        if (!strlen($language = (string)$i18n['language']))
+        {
+          throw new sfConfigurationException('Each I18n tag should have a language attribute.');
+        }
+
+        $this->i18n[$language] = new sfDynamicsAssetCollectionDefinition($i18n);
+      }
+    }
+
+    if (isset($xml->theme))
     {
       $hasDefault = false;
 
@@ -88,11 +117,13 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
         $this->themes[$themeName] = new sfDynamicsAssetCollectionDefinition($theme);
       }
     }
+
+    return $xml;
   }
 
   static public function __set_state($state)
   {
-    return self::build(new self(), array('javascripts', 'stylesheets', 'description', 'requires', 'conflicts', 'i18n', 'themes'), $state);
+    return self::build(new self(), array('javascripts', 'stylesheets', 'description', 'requires', 'conflicts', 'i18n', 'themes', 'paths'), $state);
   }
 }
 

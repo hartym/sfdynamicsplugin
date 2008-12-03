@@ -1,7 +1,6 @@
 <?php
 
 require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
-
 require_once(dirname(__FILE__).'/../../../lib/config/sfDynamicsBaseDefinition.class.php');
 require_once(dirname(__FILE__).'/../../../lib/config/sfDynamicsAssetCollectionDefinition.class.php');
 

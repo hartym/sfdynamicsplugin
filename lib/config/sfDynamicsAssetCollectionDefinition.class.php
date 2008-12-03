@@ -15,9 +15,24 @@ class sfDynamicsAssetCollectionDefinition extends sfDynamicsBaseDefinition
     $stylesheets = array(),
     $javascripts = array();
 
+  public function hasStylesheets()
+  {
+    return !empty($this->stylesheets);
+  }
+
   public function getJavascripts()
   {
     return $this->javascripts;
+  }
+
+  public function setStylesheets($stylesheets)
+  {
+    $this->stylesheets = $stylesheets;
+  }
+
+  public function hasJavascripts()
+  {
+    return !empty($this->javascripts);
   }
 
   public function getStylesheets()
@@ -30,22 +45,28 @@ class sfDynamicsAssetCollectionDefinition extends sfDynamicsBaseDefinition
     $this->javascripts = $javascripts;
   }
 
-  public function setStylesheets($stylesheets)
-  {
-    $this->stylesheets = $stylesheets;
-  }
 
   public function parseXml($xml)
   {
-    foreach ($xml->javascript as $index => $javascript)
+    $xml = parent::parseXml($xml);
+
+    if (isset($xml->javascript))
     {
-      $this->javascripts[] = (string)$javascript;
+      foreach ($xml->javascript as $index => $javascript)
+      {
+        $this->javascripts[] = (string)$javascript;
+      }
     }
 
-    foreach ($xml->stylesheet as $index => $stylesheet)
+    if (isset($xml->stylesheet))
     {
-      $this->stylesheets[] = (string)$stylesheet;
+      foreach ($xml->stylesheet as $index => $stylesheet)
+      {
+        $this->stylesheets[] = (string)$stylesheet;
+      }
     }
+
+    return $xml;
   }
 
   static public function __set_state($state)

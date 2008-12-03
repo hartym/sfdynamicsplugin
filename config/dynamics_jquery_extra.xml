@@ -14,6 +14,30 @@
     <javascript>jquery/extra/cookie</javascript>
   </package>
 
+  <package name="jquery.extra.form">
+    <description>
+      == TODO ==
+
+      depends_on:  [ jquery, loader ]
+      javascripts: [ jquery/plugin/form/jquery.form ]
+      scripts:
+        ajaxify:
+          template:  |
+            $(document).ready(function() {
+              var options = {
+                target: '<<target>>'
+              };
+              $('form#<<formId>>').ajaxForm(options);
+            });
+      # Form observer behavior
+        observe:
+          template: |
+            $(document).ready(function() {
+              $('<<target>>').change(function(){ $('<<update>>').load('<<url>>', {value: $(this).val()}); });
+            });
+    </description>
+  </package>
+
   <package name="jquery.extra.box" packable="false">
     <description>
       jQuery Box Plugin
@@ -70,86 +94,6 @@
     <require>jquery</require>
     <javascript>jquery/extra/tooltip</javascript>
     <stylesheet>jquery/extra/tooltip</stylesheet>
-  </package>
-
-  <package name="jquery.extra.clickmenu">
-    <description>
-      == TODO ==
-
-      depends_on:  [ jquery ]
-      javascripts: [ jquery/plugin/clickmenu ]
-      stylesheets: [ clickmenu ]
-    </description>
-  </package>
-
-  <package name="jquery.extra.animation">
-    <description>
-      == TODO ==
-
-      depends_on:  [ jquery ]
-      javascripts: [ jquery/plugin/animation ]
-    </description>
-  </package>
-
-  <package name="jquery.extra.treeview">
-    <description>
-      == TODO ==
-
-      depends_on:  [ jquery, cookie ]
-      javascripts: [ jquery/plugin/treeview ]
-      stylesheets: [ treeview ]
-    </description>
-  </package>
-
-  <package name="jquery.extra.hovermenu">
-    <description>
-      == TODO ==
-
-      depends_on:  [ jquery ]
-      javascripts: [ jquery/plugin/hovermenu ]
-    </description>
-  </package>
-
-  <package name="jquery.extra.selectboxes">
-    <description>
-      == TODO ==
-
-      depends_on:  [ jquery ]
-      javascripts: [ jquery/plugin/selectboxes/jquery.selectboxes ]
-    </description>
-  </package>
-
-  <package name="jquery.extra.form">
-    <description>
-      == TODO ==
-
-      depends_on:  [ jquery, loader ]
-      javascripts: [ jquery/plugin/form/jquery.form ]
-      scripts:
-        ajaxify:
-          template:  |
-            $(document).ready(function() {
-              var options = {
-                target: '<<target>>'
-              };
-              $('form#<<formId>>').ajaxForm(options);
-            });
-      # Form observer behavior
-        observe:
-          template: |
-            $(document).ready(function() {
-              $('<<target>>').change(function(){ $('<<update>>').load('<<url>>', {value: $(this).val()}); });
-            });
-    </description>
-  </package>
-
-  <package name="jquery.extra.clickmenu">
-    <description>
-      == TODO ==
-
-      depends_on: [ jquery ]
-      javascripts: [ jquery/plugin/scrollto/jquery.scrollTo ]
-    </description>
   </package>
 
 </dynamics>

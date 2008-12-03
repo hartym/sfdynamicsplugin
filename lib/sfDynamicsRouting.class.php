@@ -34,7 +34,6 @@ class sfDynamicsRouting
       throw new sfConfigurationException('Invalid asset type');
     }
 
-    echo self::ROUTE.'_'.$translator[$extension].'?name='.$name."<br>";
-    return self::ROUTE.'_'.$translator[$extension].'?name='.$name;
+    return '@'.self::ROUTE.'_'.$translator[$extension].'?name='.str_replace('.', '-', $name);
   }
 }
