@@ -7,6 +7,9 @@ along with some extra plugins we're either developping or using. But sfDynamics 
 want to take advantage of the plugin's features for your usual JS framework, you're welcome to become the referent contributor
 for it.
 
+We're also looking for documentation writers, correctors, enhancers. If you find yourself a writer soul, and think current documentation
+is lacking something, don't hesitate to propose us pulling documentation from your git repository, we'll be glad to do so (see below).
+
 # Version Control
 
 We're using GIT to manage source control. It allows developpers to have free control on their own branches, simplify merge
@@ -28,3 +31,5 @@ provide us a network accessible repository from which to pull.
 We have high quality exigence. Source code you propose should be verbosely commented, should be using symfony coding
 standards (XXX link XXX) and commit messages should give brief description of your changes. You should dive into the existing
 codebase before starting to extend the plugin, to get yourself a good idea of the scope of the plugin.
+
+
