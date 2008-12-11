@@ -87,8 +87,8 @@ class sfDynamicsManager implements ArrayAccess
       // load assets
       if ($this->request instanceof sfWebRequest && !$this->request->isXmlHttpRequest())
       {
-        $this->addStylesheets($package->getStylesheets());
-        $this->addJavascripts($package->getJavascripts());
+        $package->hasJavascripts() && $this->addJavascripts($packageName);
+        $package->hasStylesheets() && $this->addStylesheets($packageName);
       }
 
       $this->packages[$packageName] = true;
@@ -98,11 +98,16 @@ class sfDynamicsManager implements ArrayAccess
   /**
    * adds a list of javascript assets to the response
    */
-  public function addJavascripts()
+  public function addJavascripts($javascripts)
   {
+    if (!is_array($javascripts))
+    {
+      $javascripts = array($javascripts);
+    }
+
     if ($this->response instanceof sfWebResponse && $this->controller instanceof sfWebController)
     {
-      foreach (func_get_args() as $jsName)
+      foreach ($javascripts as $jsName)
       {
         $this->response->addJavascript($this->controller->genUrl(sfDynamicsRouting::uri_for($jsName, 'js')));
       }
@@ -112,11 +117,16 @@ class sfDynamicsManager implements ArrayAccess
   /**
    * adds a list of stylesheet assets to the response
    */
-  public function addStylesheets()
+  public function addStylesheets($stylesheets)
   {
+    if (!is_array($stylesheets))
+    {
+      $stylesheets = array($stylesheets);
+    }
+
     if ($this->response instanceof sfWebResponse && $this->controller instanceof sfWebController)
     {
-      foreach (func_get_args() as $cssName)
+      foreach ($stylesheets as $cssName)
       {
         $this->response->addStylesheet($this->controller->genUrl(sfDynamicsRouting::uri_for($cssName, 'css')));
       }

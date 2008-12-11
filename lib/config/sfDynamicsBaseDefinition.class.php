@@ -41,6 +41,14 @@ abstract class sfDynamicsBaseDefinition
     return $instance;
   }
 
-  abstract function parseXml($xml);
+  public function parseXml($xml)
+  {
+    if (is_string($xml))
+    {
+      $xml = simplexml_load_string($xml);
+    }
+
+    return $xml;
+  }
 }
 

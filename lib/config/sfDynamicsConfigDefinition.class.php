@@ -22,9 +22,9 @@ class sfDynamicsConfigDefinition extends sfDynamicsBaseDefinition
    * @param mixed $xml
    * @return void
    */
-  public function doPackage($packageName, $xml)
+  public function doPackage($packageName, $xml, $paths=array())
   {
-    $this->packages[$packageName] = new sfDynamicsPackageDefinition($xml);
+    $this->packages[$packageName] = new sfDynamicsPackageDefinition($xml, $paths);
   }
 
   /**
@@ -154,7 +154,7 @@ class sfDynamicsConfigDefinition extends sfDynamicsBaseDefinition
 
   static public function __set_state($state)
   {
-    return self::build(new self(), array('imports', 'packages'), $state);
+    return self::build(new self(), array('imports', 'packages', 'paths'), $state);
   }
 }
 
