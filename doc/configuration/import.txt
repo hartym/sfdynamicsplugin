@@ -1,0 +1,24 @@
+# import
+
+## Description
+
+`Import` tags are used to fetch configuration from other files. Importing files obey to few rules:
+
+  * Imported `package`s replace already configured `package`s
+  * If more than one file of the same name is present in the plugin, the project and the application, the one from application always
+    takes precedence on the one from the project, which takes precedence on the one from the plugin.
+  * An `import` clause will always include only one file, following the previous rule.
+
+## Children nodes
+
+`Import` tags has no children.
+
+## PHP definition
+
+An `import` tag is taken care about by the parent's `sfDynamicsConfigDefinition` instance.
+
+## Example
+
+    [xml]
+    <import>myconfig.xml</import>
+

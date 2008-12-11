@@ -1,0 +1,22 @@
+# javascript
+
+## Description
+
+Adds a javascript asset dependance to the parent (most probably a `package`). It only contains text, which is the logic path to the matching
+file.
+
+See [paths and inheritance](/documentation/logic_paths).
+
+## Children nodes
+
+`Javascript` tags has no children.
+
+## PHP definition
+
+An `javascript` tag is taken care about by the parent's `sfDynamicsAssetCollectionDefinition` instance.
+
+## Example
+
+    [xml]
+    <javascript>jquery/jquery.js</javascript>
+
