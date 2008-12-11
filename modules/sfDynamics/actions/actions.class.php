@@ -58,6 +58,7 @@ class sfDynamicsActions extends sfActions
   protected function getConcatenatedAssets($type, $paths, $assets)
   {
     $result = '';
+    $attempts = array();
 
     foreach ($assets as $asset)
     {
@@ -70,12 +71,13 @@ class sfDynamicsActions extends sfActions
           break;
         }
 
+        $attempts[] = $file;
         $file = null;
       }
 
       if (is_null($file))
       {
-        throw new sfError404Exception('Unreadable asset file for package '.$this->name);
+        throw new sfError404Exception('Unreadable asset file for package '.$this->name.'. Attempts in order: '.implode(', ', $attempts));
       }
 
       $result .= file_get_contents($file)."\n";
