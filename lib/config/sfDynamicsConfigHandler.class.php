@@ -26,7 +26,7 @@ class sfDynamicsConfigHandler extends sfConfigHandler
     foreach (sfContext::getInstance()->getConfiguration()->getPluginPaths() as $pluginPath)
     {
       $pluginName = basename($pluginPath);
-      $pluginConfigFile = $pluginPath.'/config/dynamics_plugin.xml';
+      $pluginConfigFile = $pluginPath.'/config/dynamics-plugin.xml';
 
       if (file_exists($pluginConfigFile))
       {
