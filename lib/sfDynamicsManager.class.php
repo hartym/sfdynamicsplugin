@@ -145,6 +145,11 @@ class sfDynamicsManager implements ArrayAccess
     return $this->javascriptBootstrap.$behaviorsJs;
   }
 
+  /**
+   * deprecated/obsolete
+   *
+   * @return void
+   */
   public function getHtmlMarkup()
   {
     $behaviorsMarkup = '';
@@ -157,6 +162,12 @@ class sfDynamicsManager implements ArrayAccess
     return $this->htmlMarkup.$behaviorsMarkup;
   }
 
+  /**
+   * deprecated/obsolete
+   *
+   * @param mixed $isXhr
+   * @return void
+   */
   static public function getMarkup($isXhr=false)
   {
     $instance = self::getInstance();
@@ -171,6 +182,12 @@ class sfDynamicsManager implements ArrayAccess
     return ($isXhr?'':$instance->getHtmlMarkup()).$script;
   }
 
+  /**
+   * deprecated/obsolete
+   *
+   * @param mixed $isXhr
+   * @return void
+   */
   static public function includeMarkup($isXhr=false)
   {
     echo self::getMarkup($isXhr);

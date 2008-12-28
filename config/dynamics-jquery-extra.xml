@@ -15,9 +15,10 @@
   </package>
 
   <package name="jquery.extra.form">
+    <require>jquery</require>
+    <require>loader</require>
+    <javascript>jquery/extra/form</javascript>
     <description>
-      == TODO ==
-
       depends_on:  [ jquery, loader ]
       javascripts: [ jquery/plugin/form/jquery.form ]
       scripts:
@@ -36,6 +37,23 @@
               $('<<target>>').change(function(){ $('<<update>>').load('<<url>>', {value: $(this).val()}); });
             });
     </description>
+    <method name="ajaxify">
+      <javascript>
+        <component module="sfDynamicsJqueryExtra" action="form_ajaxify">
+          <parameter name="target" />
+          <parameter name="form_id" />
+        </component>
+      </javascript>
+    </method>
+    <method name="observe">
+      <javascript>
+        <component module="sfDynamicsJqueryExtra" action="form_observe">
+          <parameter name="target" />
+          <parameter name="update" />
+          <parameter name="url" />
+        </component>
+      </javascript>
+    </method>
   </package>
 
   <package name="jquery.extra.box" packable="false">
