@@ -31,8 +31,7 @@ class sfDynamicsActions extends sfActions
 
     if (!sfConfig::get('sf_debug'))
     {
-      $packer = new JavaScriptPacker($result, 'Normal', true, false);
-      $result = $packer->pack();
+      $result = JSMin::minify($result);
     }
 
     return $this->renderText($result);

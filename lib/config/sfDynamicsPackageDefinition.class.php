@@ -13,7 +13,7 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
 
   public function __construct($xml=null, $paths=array())
   {
-    $this->paths = array_merge($paths, array(sfConfig::get('sf_plugins_dir').'/sfDynamicsPlugin/data'));
+    $this->paths = array_merge($paths, array(sfConfig::get('sf_data_dir'), sfConfig::get('sf_plugins_dir').'/sfDynamicsPlugin/data'));
 
     parent::__construct($xml);
   }
