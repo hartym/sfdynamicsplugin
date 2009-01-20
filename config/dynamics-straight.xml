@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+
+<dynamics>
+  <package name="straight.getElementsByClassName">
+    <javascript>straight/getElementsByClassName-1.0.1</javascript>
+  </package>
+</dynamics>

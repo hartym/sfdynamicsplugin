@@ -1,0 +1,36 @@
+# Contribute to the projet
+
+We're actively looking for contributors.
+
+For now, we (sfDynamics team) assume the task of maintaining and updating jQuery, jQuery ui and jQuery effects libraries,
+along with some extra plugins we're either developping or using. But sfDynamics is not limited to thoose, and if you
+want to take advantage of the plugin's features for your usual JS framework, you're welcome to become the referent contributor
+for it.
+
+We're also looking for documentation writers, correctors, enhancers. If you find yourself a writer soul, and think current documentation
+is lacking something, don't hesitate to propose us pulling documentation from your git repository, we'll be glad to do so (see below).
+
+# Version Control
+
+We're using GIT to manage source control. It allows developpers to have free control on their own branches, simplify merge
+process and removes the recurring problem of commit access. To start working on the project, you have few different options.
+
+The easiest one is to fork the project on [github](http://github.com/hartym/sfdynamicsplugin). It will create your own
+repository from which you can pull and push patches. Once you think you have some great code that could be candidate for the
+next plugin release, just send me (hartym) a pull request and after reviewing, your changes will either be accepted for next
+release, or rejected for some reason. If we reject a pull request, don't worry. That's only to guarantee high code quality in
+the plugin, and we'll try to explain our reasons as much as possible, so you can improve your patch and request a pull again.
+
+If you don't want to use [github](http://github.com/hartym/sfdynamicsplugin), you can clone the public repository on one
+of your boxes using `git clone git://github.com/hartym/sfdynamicsplugin.git`. Work process will be exactly the same, and 
+you will still be able to make pull requests by e-mail, at XXXemailXXX. The harder thing there is that it's up to you to
+provide us a network accessible repository from which to pull.
+
+# Exigence
+
+We have high quality exigence. Source code you propose should be verbosely commented, should be using symfony
+[coding standards](http://trac.symfony-project.org/wiki/HowToContributeToSymfony#CodingStandards) and commit messages should
+give a good description of your changes. You should dive into the existing codebase before starting to extend the plugin,
+to get yourself a good idea of the scope of the plugin.
+
+
