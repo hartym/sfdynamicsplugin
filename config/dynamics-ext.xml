@@ -4,13 +4,13 @@
   <package name="ext.kernel">
     <description>The ext javascript framework base</description>
     <javascript>ext/core/Ext</javascript>
+    <stylesheet>ext/ext-all</stylesheet>
   </package>
 
   <package name="ext">
     <require>ext.kernel</require>
     <require>ext.adapter</require>
     <require>ext.core</require>
-    <stylesheet>ext/ext-all</stylesheet>
   </package>
 
   <!-- Ext Core -->
@@ -27,6 +27,7 @@
     <javascript>ext/core/CompositeElement</javascript>
     <javascript>ext/core/UpdateManager</javascript>
     <javascript>ext/util/DelayedTask</javascript>
+    <!-- <stylesheet>ext/core</stylesheet> -->
   </package>
 
   <!-- Core - Components (Needed for widgets) -->
@@ -36,6 +37,7 @@
     <javascript>ext/widgets/ComponentMgr</javascript>
     <javascript>ext/widgets/Component</javascript>
     <javascript>ext/widgets/BoxComponent</javascript>
+    <!-- <stylesheet>ext/box</stylesheet> -->
   </package>
 
   <package name="ext.core.components.layers">
@@ -48,6 +50,7 @@
     <require>ext.core.components</require>
     <javascript>ext/widgets/Container</javascript>
     <javascript>ext/widgets/Panel</javascript>
+    <!-- <stylesheet>ext/panel</stylesheet> -->
   </package>
 
   <!-- Core - Utilities -->
@@ -91,10 +94,18 @@
     <javascript>ext/dd/ScrollManager</javascript>
   </package>
 
-  <!--
-    @TODO
-    Core - State Management
-  -->
+  <!-- Core - State Management -->
+
+  <package name="ext.core.state">
+    <require>ext</require>
+    <javascript>ext/state/Provider</javascript>
+    <javascript>ext/state/StateManager</javascript>
+  </package>
+
+  <package name="ext.core.state.cookie">
+    <require>ext.core.state</require>
+    <javascript>ext/state/CookieProvider</javascript>
+  </package>
 
   <!-- Layout -->
 
@@ -102,6 +113,7 @@
     <require>ext.core.components.containers</require>
     <require>ext.core.utilities</require>
     <javascript>ext/widgets/layout/ContainerLayout</javascript>
+    <!-- <stylesheet>ext/layout</stylesheet> -->
   </package>
 
   <package name="ext.layout.border">
@@ -128,6 +140,7 @@
     <javascript>ext/widgets/PanelDD</javascript>
     <javascript>ext/widgets/Window</javascript>
     <javascript>ext/widgets/WindowManager</javascript>
+    <!-- <stylesheet>ext/window</stylesheet> -->
   </package>
 
   <package name="ext.layout.viewport">
@@ -144,6 +157,7 @@
     <require>ext.core.components.containers</require>
     <require>ext.layout.all</require>
     <javascript>ext/widgets/TabPanel</javascript>
+    <!-- <stylesheet>ext/tabs</stylesheet> -->
   </package>
   <!-- Button Widget -->
 
@@ -151,6 +165,7 @@
   <package name="ext.resizable">
     <require>ext</require>
     <javascript>ext/widgets/Resizable</javascript>
+    <!-- <stylesheet>ext/resizable</stylesheet> -->
   </package>
 
   <!-- Button Widget -->
@@ -158,8 +173,19 @@
   <package name="ext.button">
     <require>ext.core.utilities</require>
     <javascript>ext/widgets/Button</javascript>
+    <!-- <stylesheet>ext/button</stylesheet> -->
   </package>
 
-
+  <package name="ext.xtheme.gray">
+    <!-- <require>ext</require> to see later if dependency -->
+    <stylesheet>ext/xtheme-gray</stylesheet>
+  </package>
+  
+  <package name="ext.data.ajax">
+    <require>ext.core</require>
+    <javascript>ext/data/connection</javascript>
+  </package>
+  
+  
 </dynamics>
 
