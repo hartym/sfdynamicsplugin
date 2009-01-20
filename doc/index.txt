@@ -1,0 +1,32 @@
+# Welcome to sfDynamicsPlugin
+
+Welcome on sfDynamicsPlugin homepage. This symfony plugin aims to revolution the way javascript is used in symfony projects. It supports
+extensible configuration, library dependances, stylesheets, i18n, themes, packing, caching, and much more. To have a detailed explanation of
+each features, please take a look at the <a href="<?php echo url_for('public/features'); ?>">features list</a>
+
+This plugin is not bound to a specific javascript framework, and provides an easy way to use one set of scripts alltogether. For now, only configuration
+files for jQuery and jQuery UI are provided, but our XML based configuration system allows to create different configuration packages describing
+how each framework interacts with each of their associated libraries.
+
+# Javascript frameworks
+
+We're actively looking for configuration writers maintainers for all the following javascript frameworks:
+
+ * Prototype + scriptaculous
+ * Yahoo UI
+ * ExtJS
+ * Mootools
+ * Dojo
+
+To know what configuration packages looks like, have a look at the {{{configuration|configuration reference}}}.
+
+If you're interested in contributing to the plugin, have a look at the {{{contribute|contribute page}}}.
+
+# History
+
+This plugin is a result of much tries all refactored into one robust implementation of what we believe will be a real enterprise ready
+alternative to the yet unreplaced old school symfony 1.0 javascript helpers.
+
+# Contributors
+
+todo

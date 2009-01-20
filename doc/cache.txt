@@ -1,0 +1,22 @@
+# Caching
+
+As every assets pass through a symfony module, this brings some overhead compared to including static files. But as it brings some
+more power (packing, dynamic js generation, uniform naming), you still want to use it. To remove this overhead, solutions exists though.
+
+First of all, if you're application is using symfony cache (`sf_cache` set to true), you will gain a good bit by having packed and unpacked
+versions automatically cached. This can be sufficient for small sites but still not acceptable for high traffic sites which needs the best
+optimization possible.
+
+# Super-caching
+
+To get a great performance boost, bringing performances almost to static files level (in fact only first request of each kind will generate overhead,
+all next requests will be like getting a static file), sfDynamicsPlugin can be associated to sfSupercachePlugin, which cache the generated
+responses into files under the http published directory. An apache rewrite rule will switch between the two options depending on the cached file
+existence.
+
+## Installing
+
+Follow the guidelines on {{{the symfony project supercache plugin page}}} to install it. Once done, you will have to activate it for js/css files
+by adding the following rewrite rules.
+
+blablabla

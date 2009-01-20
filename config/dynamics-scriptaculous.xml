@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+
+<dynamics>
+  <package name="scriptaculous">
+    <require>prototype</require>
+    <javascript>scriptaculous/1.8.2/scriptaculous</javascript>
+  </package>
+  <package name="builder">
+    <require>scriptaculous</require>
+    <javascript>scriptaculous/1.8.2/builder</javascript>
+  </package>
+  <package name="controls">
+    <require>scriptaculous</require>
+    <javascript>scriptaculous/1.8.2/controls</javascript>
+  </package>
+  <package name="dragdrop">
+    <require>scriptaculous</require>
+    <javascript>scriptaculous/1.8.2/dragdrop</javascript>
+  </package>
+  <package name="effects">
+    <require>scriptaculous</require>
+    <javascript>scriptaculous/1.8.2/effects</javascript>
+  </package>
+  <package name="slider">
+    <require>scriptaculous</require>
+    <javascript>scriptaculous/1.8.2/slider</javascript>
+  </package>
+  <package name="sound">
+    <require>scriptaculous</require>
+    <javascript>scriptaculous/1.8.2/sound</javascript>
+  </package>
+  <package name="unittest">
+    <require>scriptaculous</require>
+    <javascript>scriptaculous/1.8.2/unittest</javascript>
+  </package>
+</dynamics>
+

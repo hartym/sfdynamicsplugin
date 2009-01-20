@@ -1,0 +1,22 @@
+# Install
+
+To install the plugin, you have two major options.
+
+## Use the latest release
+
+The easiest way is to use the latest release available on [the symfony project plugin's page](http://www.symfony-project.org/plugins/sfDynamicsPlugin).
+Thoose releases are heavily tested, and you're assured not to get anything broken by any subsequent release. Just use the plugin:install task on
+it and you'll be done:
+
+    [bash]
+    php symfony plugin:install sfDynamicsPlugin
+
+## Use a git branch
+
+You can also use directly a git branch, by cloning the repository. Depending on if you want to install it for contribution or use, you should use either
+the `master` branch (which can be unstable) or the `stable` branch, which will always match the latest release.
+
+    [bash]
+    git clone XXX...XXX master
+    git clone XXX...XXX stable
+
