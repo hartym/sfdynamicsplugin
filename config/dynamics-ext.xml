@@ -180,12 +180,11 @@
     <!-- <require>ext</require> to see later if dependency -->
     <stylesheet>ext/xtheme-gray</stylesheet>
   </package>
-  
+
   <package name="ext.data.ajax">
     <require>ext.core</require>
-    <javascript>ext/data/connection</javascript>
+    <javascript>ext/data/Connection</javascript>
   </package>
-  
-  
+
 </dynamics>
 
