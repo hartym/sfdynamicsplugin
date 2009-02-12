@@ -1,0 +1,4 @@
+"config/dynamics.xml":
+  class: sfDynamicsConfigHandler
+  file: %sf_plugins_dir%/sfDynamicsPlugin/lib/config/sfDynamicsConfigHandler.class.php
+

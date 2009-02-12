@@ -1,0 +1,30 @@
+# package
+
+## Description
+
+A `package` tag describes a set of javascripts working altogether with optional stylesheets. In fact even javascripts are optionnal, but
+an empty package would be a pretty unuseful one.
+
+If you define a «mypackage» `package`, you'll be able to include it in your PHP code with the following code:
+
+    [php]
+    sfDynamics::load('mypackage');
+
+It will automatically load every needed files, taking care of dependances, `i18n` (if available), `theme` (if available), and
+will throw an `sfDynamicsConflictException` if any conflict is found. If you're not running your app in debug mode, it will also
+take care of {link:packing} all package files.
+
+## Children nodes
+
+  * `require`: optional, any number
+  * `conflict`: optional, any number
+  * `javascript`: optional, any number
+  * `stylesheet`: optional, any number
+  * `i18n`: optional, one by language needing additional `javascript`/`stylesheet` tags
+  * `theme`: optional, one by theme needing additional `javascript`/`stylesheet` tags
+
+## PHP definition
+
+A `package` tag's content is handled by an `sfDynamicsPackageDefinition` instance.
+
+

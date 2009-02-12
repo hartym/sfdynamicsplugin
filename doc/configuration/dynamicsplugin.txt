@@ -1,0 +1,5 @@
+# dynamics-plugin
+
+__This is a draft, needs improvement__
+
+Works like [dynamics](/documentation/configuration-dynamics), but use namespaces, plugin directory and additive inheritance.

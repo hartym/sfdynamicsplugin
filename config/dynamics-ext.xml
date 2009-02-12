@@ -1,0 +1,328 @@
+<?xml version="1.0" ?>
+
+<dynamics>
+  <package name="ext.kernel">
+    <description>The ext javascript framework base</description>
+    <javascript>ext/core/Ext</javascript>
+    <stylesheet>ext/ext-all</stylesheet>
+  </package>
+
+  <package name="ext">
+    <require>ext.kernel</require>
+    <require>ext.adapter</require>
+    <require>ext.core</require>
+  </package>
+
+  <!-- Ext Core -->
+
+  <package name="ext.core">
+    <require>ext.adapter</require>
+    <javascript>ext/core/DomHelper</javascript>
+    <javascript>ext/core/Template</javascript>
+    <javascript>ext/core/DomQuery</javascript>
+    <javascript>ext/util/Observable</javascript>
+    <javascript>ext/core/EventManager</javascript>
+    <javascript>ext/core/Element</javascript>
+    <javascript>ext/core/Fx</javascript>
+    <javascript>ext/core/CompositeElement</javascript>
+    <javascript>ext/core/UpdateManager</javascript>
+    <javascript>ext/util/DelayedTask</javascript>
+    <!-- <stylesheet>ext/core</stylesheet> -->
+  </package>
+
+  <!-- Core - Components (Needed for widgets) -->
+
+  <package name="ext.core.components">
+    <require>ext.core.utilities</require>
+    <javascript>ext/widgets/ComponentMgr</javascript>
+    <javascript>ext/widgets/Component</javascript>
+    <javascript>ext/widgets/BoxComponent</javascript>
+    <!-- <stylesheet>ext/box</stylesheet> -->
+  </package>
+
+  <package name="ext.core.components.layers">
+    <require>ext.core.components</require>
+    <javascript>ext/widgets/Layer</javascript>
+    <javascript>ext/widgets/Shadow</javascript>
+  </package>
+
+  <package name="ext.core.components.containers">
+    <require>ext.core.components</require>
+    <javascript>ext/widgets/Container</javascript>
+    <javascript>ext/widgets/Panel</javascript>
+    <!-- <stylesheet>ext/panel</stylesheet> -->
+  </package>
+
+  <!-- Core - Utilities -->
+
+  <package name="ext.core.utilities">
+    <require>ext</require>
+    <javascript>ext/util/ClickRepeater</javascript>
+    <javascript>ext/util/CSS</javascript>
+    <javascript>ext/util/Format</javascript>
+    <javascript>ext/util/JSON</javascript>
+    <javascript>ext/util/KeyMap</javascript>
+    <javascript>ext/util/KeyNav</javascript>
+    <javascript>ext/util/MixedCollection</javascript>
+    <javascript>ext/util/TaskMgr</javascript>
+    <javascript>ext/util/TextMetrics</javascript>
+    <javascript>ext/util/XTemplate</javascript>
+  </package>
+
+  <!-- Core - XTemplate -->
+
+  <package name="ext.core.xtemplate">
+    <!-- Convenience: everything is already provided by ext.core.utilities -->
+    <require>ext.core.utilities</require>
+  </package>
+
+  <!-- Core - Date Parsing and Formatting -->
+
+  <package name="ext.core.date">
+    <require>ext.core</require>
+    <javascript>ext/util/Date</javascript>
+  </package>
+
+  <!-- Core - Drag and Drop -->
+
+  <package name="ext.core.dragndrop">
+    <require>ext.core.components.layers</require>
+    <javascript>ext/dd/DDCore</javascript>
+    <javascript>ext/dd/StatusProxy</javascript>
+    <javascript>ext/dd/Registry</javascript>
+    <javascript>ext/dd/DragSource</javascript>
+    <javascript>ext/dd/DropTarget</javascript>
+    <javascript>ext/dd/DragZone</javascript>
+    <javascript>ext/dd/DropZone</javascript>
+    <javascript>ext/dd/DragTracker</javascript>
+  </package>
+
+  <package name="ext.core.dragndrop.overflow">
+    <require>ext.core.dragndrop</require>
+    <javascript>ext/dd/ScrollManager</javascript>
+  </package>
+
+  <!-- Core - State Management -->
+
+  <package name="ext.core.state">
+    <require>ext</require>
+    <javascript>ext/state/Provider</javascript>
+    <javascript>ext/state/StateManager</javascript>
+  </package>
+
+  <package name="ext.core.state.cookie">
+    <require>ext.core.state</require>
+    <javascript>ext/state/CookieProvider</javascript>
+  </package>
+
+  <!-- Layout -->
+
+  <package name="ext.layout">
+    <require>ext.core.components.containers</require>
+    <require>ext.core.utilities</require>
+    <javascript>ext/widgets/layout/ContainerLayout</javascript>
+    <!-- <stylesheet>ext/layout</stylesheet> -->
+  </package>
+
+  <package name="ext.layout.border">
+    <require>ext.layout</require>
+    <javascript>ext/widgets/SplitBar</javascript>
+    <javascript>ext/widgets/layout/BorderLayout</javascript>
+  </package>
+
+  <package name="ext.layout.all">
+    <require>ext.layout.border</require>
+    <javascript>ext/widgets/layout/AnchorLayout</javascript>
+    <javascript>ext/widgets/layout/FitLayout</javascript>
+    <javascript>ext/widgets/layout/AbsoluteLayout</javascript>
+    <javascript>ext/widgets/layout/AccordionLayout</javascript>
+    <javascript>ext/widgets/layout/CardLayout</javascript>
+    <javascript>ext/widgets/layout/ColumnLayout</javascript>
+    <javascript>ext/widgets/layout/FormLayout</javascript>
+    <javascript>ext/widgets/layout/TableLayout</javascript>
+  </package>
+
+  <package name="ext.layout.window">
+    <require>ext.layout</require>
+    <require>ext.core.dragndrop</require>
+    <javascript>ext/widgets/PanelDD</javascript>
+    <javascript>ext/widgets/Window</javascript>
+    <javascript>ext/widgets/WindowManager</javascript>
+    <!-- <stylesheet>ext/window</stylesheet> -->
+  </package>
+
+  <package name="ext.layout.viewport">
+    <require>ext.layout</require>
+    <javascript>ext/widgets/Viewport</javascript>
+  </package>
+
+  <!-- DataView -->
+
+  <package name="ext.dataview">
+    <require>ext.core.components</require>
+    <javascript>ext/widgets/DataView</javascript>
+  </package>
+
+  <!-- Resizable -->
+
+  <package name="ext.resizable">
+    <require>ext</require>
+    <javascript>ext/widgets/Resizable</javascript>
+    <!-- <stylesheet>ext/resizable</stylesheet> -->
+  </package>
+
+  <!-- QuickTips -->
+
+  <package name="ext.quicktips">
+    <require>ext.core.components.layers</require>
+    <require>ext.core.components.containers</require>
+    <javascript>ext/widgets/tips/Tip</javascript>
+    <javascript>ext/widgets/tips/ToolTip</javascript>
+    <javascript>ext/widgets/tips/QuickTip</javascript>
+    <javascript>ext/widgets/tips/QuickTips</javascript>
+  </package>
+
+  <package name="ext.quicktips.ajax">
+    <require>ext.quicktips</require>
+    <require>ext.data.core</require>
+  </package>
+
+  <!-- Button Widget -->
+
+  <package name="ext.widget.button">
+    <require>ext.core.utilities</require>
+    <javascript>ext/widgets/Button</javascript>
+    <!-- <stylesheet>ext/button</stylesheet> -->
+  </package>
+
+  <package name="ext.widget.button.quicktips">
+    <require>ext.widget.button</require>
+    <require>ext.quicktips</require>
+  </package>
+
+  <package name="ext.widget.button.actions">
+    <require>ext.widget.button</require>
+    <require>ext.form.ajax</require>
+  </package>
+
+  <!-- @TODO SplitButton Widget -->
+
+  <package name="ext.widget.splitbutton">
+  </package>
+
+  <!-- @TODO CycleButton Widget -->
+
+  <package name="ext.widget.cyclebutton">
+  </package>
+
+  <!-- @TODO SplitBar Widget -->
+
+  <package name="ext.widget.splitbar">
+  </package>
+
+  <!-- @TODO Menu Widget -->
+
+  <package name="ext.widget.menu">
+  </package>
+
+  <!-- @TODO Loading Mask Widget -->
+
+  <package name="ext.widget.loadingmask">
+  </package>
+
+  <!-- @TODO Date Picker Widget (DateMenu) -->
+
+  <package name="ext.widget.datepicker">
+  </package>
+
+  <!-- @TODO Color Picker Widget (ColorMenu) -->
+
+  <package name="ext.widget.colorpicker">
+  </package>
+
+  <!-- @TODO Toolbar Widget -->
+
+  <package name="ext.widget.toolbar">
+  </package>
+
+  <!-- @TODO ProgressBar Widget -->
+
+  <package name="ext.widget.progressbar">
+  </package>
+
+  <!-- MessageBox -->
+
+  <package name="ext.messagebox">
+    <require>ext.core.components.layers</require>
+    <require>ext.core.components.containers</require>
+    <require>ext.layout.window</require>
+    <require>ext.widget.button</require>
+    <require>ext.widget.progressbar</require>
+    <javascript>ext/widgets/MessageBox</javascript>
+  </package>
+
+  <!-- @TODO StatusBar -->
+
+  <package name="ext.widget.statusbar">
+  </package>
+
+  <!-- @TODO Slider -->
+
+  <package name="ext.widget.slider">
+  </package>
+
+  <!-- Data - Core -->
+
+  <package name="ext.data.core">
+    <require>ext.core.utilities</require>
+    <javascript>ext/data/Connection</javascript>
+    <javascript>ext/data/DataField</javascript>
+    <javascript>ext/data/DataProxy</javascript>
+    <javascript>ext/data/DataReader</javascript>
+    <javascript>ext/data/Record</javascript>
+    <javascript>ext/data/SortTypes</javascript>
+    <javascript>ext/data/Store</javascript>
+    <javascript>ext/data/HttpProxy</javascript>
+    <javascript>ext/data/ScriptTagProxy</javascript>
+    <javascript>ext/data/MemoryProxy</javascript>
+  </package>
+
+  <package name="ext.data.core.grouping">
+    <require>ext.data.core</require>
+    <javascript>ext/data/GroupingStore</javascript>
+  </package>
+
+  <package name="ext.data.core.multistore">
+    <require>ext.data.core</require>
+    <javascript>ext/data/StoreMgr</javascript>
+  </package>
+
+  <!-- @TODO Data - JSON -->
+
+  <package name="ext.data.json">
+  </package>
+
+
+  <!-- Tabs -->
+
+  <package name="ext.tabs">
+    <require>ext.core.components.containers</require>
+    <require>ext.layout.all</require>
+    <javascript>ext/widgets/TabPanel</javascript>
+    <!-- <stylesheet>ext/tabs</stylesheet> -->
+  </package>
+  <!-- Button Widget -->
+
+
+  <package name="ext.xtheme.gray">
+    <!-- <require>ext</require> to see later if dependency -->
+    <stylesheet>ext/xtheme-gray</stylesheet>
+  </package>
+
+  <package name="ext.data.ajax">
+    <require>ext.core</require>
+    <javascript>ext/data/Connection</javascript>
+  </package>
+
+</dynamics>
+
