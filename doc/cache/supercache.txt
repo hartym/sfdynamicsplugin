@@ -1,0 +1,5 @@
+# Supercache
+
+To overcome performance problems, you should use the super cache.
+
+TODO

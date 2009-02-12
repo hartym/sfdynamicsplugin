@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+
+<dynamics>
+  <import resource="dynamics-prototype.xml" />
+  <import resource="dynamics-ext.xml" />
+
+  <package name="ext.adapter">
+    <require>scriptaculous</require>
+    <require>ext.kernel</require>
+    <description>The ext adapter for prototype framework</description>
+    <javascript>ext/adapter/prototype-bridge</javascript>
+  </package>
+
+</dynamics>
+
