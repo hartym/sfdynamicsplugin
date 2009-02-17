@@ -28,4 +28,63 @@ class sfDynamics
       $manager->load($arg);
     }
   }
+
+  static public function getRenderer()
+  {
+    static $renderer = null;
+
+    if(is_null($renderer))
+    {
+      $renderer = new sfDynamicsRenderer();
+    }
+
+    return $renderer;
+  }
+
+  static public function getCache()
+  {
+    static $cache = null;
+
+    if(is_null($cache))
+    {
+      $cache = new sfDynamicsCache();
+    }
+
+    return $cache;
+  }
+
+  static public function isCacheEnabled()
+  {
+    return true;
+  }
+
+  static public function isSupercacheEnabled()
+  {
+    return true;
+  }
+
+  static public function isJavascriptPackerEnabled($package)
+  {
+    return false;
+  }
+
+  static public function isJavascriptMinifierEnabled($package)
+  {
+    return (!sfConfig::get('sf_debug'));
+  }
+
+  static public function isJavascriptGroupingEnabled()
+  {
+    return (!sfConfig::get('sf_debug'));
+  }
+
+  static public function isStylesheetTidyEnabled($package)
+  {
+    return (!sfConfig::get('sf_debug'));
+  }
+
+  static public function isStylesheetGroupingEnabled()
+  {
+    return (!sfConfig::get('sf_debug'));
+  }
 }

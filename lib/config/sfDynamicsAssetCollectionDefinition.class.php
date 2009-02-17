@@ -15,6 +15,16 @@ class sfDynamicsAssetCollectionDefinition extends sfDynamicsBaseDefinition
     $stylesheets = array(),
     $javascripts = array();
 
+  public function getCacheKey()
+  {
+    return
+      'js => '.implode(';', $this->getJavascripts()).' '.
+      'css => '.implode(';', $this->getStylesheets()).' '.
+      'options => jspacker:'.(sfDynamics::isJavascriptPackerEnabled($this)?'yes':'no').
+                ' jsminifier:'.(sfDynamics::isJavascriptMinifierEnabled($this)?'yes':'no').
+                ' csstidy:'.(sfDynamics::isStylesheetTidyEnabled($this)?'yes':'no');
+  }
+
   public function hasStylesheets()
   {
     return !empty($this->stylesheets);

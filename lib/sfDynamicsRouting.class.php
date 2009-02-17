@@ -36,4 +36,16 @@ class sfDynamicsRouting
 
     return '@'.self::ROUTE.'_'.$translator[$extension].'?name='.str_replace('.', '-', $name);
   }
+
+  static public function supercache_for($packages, $extension)
+  {
+    $cacheKey = '';
+
+    foreach ($packages as $package)
+    {
+      $cacheKey .= $package->getCacheKey();
+    }
+
+    return sfConfig::get('app_sfDynamicsPlugin_supercache_web_path', '/dynamics').'/'.md5($cacheKey).'.'.$extension;
+  }
 }

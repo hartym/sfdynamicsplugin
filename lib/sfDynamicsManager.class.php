@@ -16,6 +16,12 @@ class sfDynamicsManager implements ArrayAccess
   protected $packages = array();
 
   /**
+   * Assets
+   */
+  protected $javascripts = array();
+  protected $stylesheets = array();
+
+  /**
    * Bootstrap markup and html for scripts.
    *
    * @todo html should be added with javascript code
@@ -42,6 +48,8 @@ class sfDynamicsManager implements ArrayAccess
     $this->controller = $context->getController();
 
     $this->configuration = include($context->getConfiguration()->getConfigCache()->checkConfig('config/dynamics.xml'));
+
+    $context->getEventDispatcher()->connect('response.filter_content', array($this, 'filterContent'));
   }
 
   /**
@@ -91,6 +99,7 @@ class sfDynamicsManager implements ArrayAccess
         $package->hasStylesheets() && $this->addStylesheets($packageName);
       }
 
+      unset($this->packages[$packageName]);
       $this->packages[$packageName] = true;
     }
   }
@@ -105,11 +114,11 @@ class sfDynamicsManager implements ArrayAccess
       $javascripts = array($javascripts);
     }
 
-    if ($this->response instanceof sfWebResponse && $this->controller instanceof sfWebController)
+    foreach ($javascripts as $javascript)
     {
-      foreach ($javascripts as $jsName)
+      if (!in_array($javascript, $this->javascripts))
       {
-        $this->response->addJavascript($this->controller->genUrl(sfDynamicsRouting::uri_for($jsName, 'js')));
+        $this->javascripts[] = $javascript;
       }
     }
   }
@@ -124,13 +133,128 @@ class sfDynamicsManager implements ArrayAccess
       $stylesheets = array($stylesheets);
     }
 
-    if ($this->response instanceof sfWebResponse && $this->controller instanceof sfWebController)
+    foreach ($stylesheets as $stylesheet)
     {
-      foreach ($stylesheets as $cssName)
+      if (!in_array($stylesheet, $this->stylesheets))
       {
-        $this->response->addStylesheet($this->controller->genUrl(sfDynamicsRouting::uri_for($cssName, 'css')));
+        $this->stylesheets[] = $stylesheet;
       }
     }
+  }
+
+  public function generateAssetsHtml()
+  {
+    $html = '';
+    if (sfDynamics::isJavascriptGroupingEnabled())
+    {
+      $packages = array();
+
+      foreach(array_keys($this->packages) as $packageName)
+      {
+        $packages[$packageName] = $this->getPackage($packageName);
+      }
+
+      $url = sfDynamicsRouting::supercache_for($packages, 'js');
+      $this->generateJavascriptSupercache($url, $packages, $this->javascripts);
+      $html .= '  <script type="text/javascript" src="'.$url.'"></script>'."\n";
+    }
+    else
+    {
+      foreach ($this->javascripts as $javascript)
+      {
+        $html .= '  <script type="text/javascript" src="'.$this->controller->genUrl(sfDynamicsRouting::uri_for($javascript, 'js')).'"></script>'."\n";
+      }
+    }
+
+    if (sfDynamics::isStylesheetGroupingEnabled())
+    {
+      $packages = array();
+
+      foreach(array_keys($this->packages) as $packageName)
+      {
+        $packages[$packageName] = $this->getPackage($packageName);
+      }
+
+      $url = sfDynamicsRouting::supercache_for($packages, 'css');
+      $this->generateStylesheetSupercache($url, $packages, $this->stylesheets);
+      $html .= '  <link rel="stylesheet" type="text/css" media="screen" href="'.$url.'" />'."\n";
+    }
+    else
+    {
+      foreach ($this->stylesheets as $stylesheet)
+      {
+        $html .= '  <link rel="stylesheet" type="text/css" media="screen" href="'.$this->controller->genUrl(sfDynamicsRouting::uri_for($stylesheet, 'css')).'" />'."\n";
+      }
+    }
+
+    return $html;
+  }
+
+  public function generateJavascriptSupercache($url, $packages, $javascripts)
+  {
+    $filename = sfConfig::get('sf_web_dir').'/'.$url;
+    if ((!file_exists($filename))||(!sfDynamics::isSupercacheEnabled()))
+    {
+      $renderer = sfDynamics::getRenderer();
+      $src = '';
+
+      foreach ($packages as $name => $package)
+      {
+        $renderedSrc = trim($renderer->getJavascript($name, $package));
+        if ($renderedSrc)
+        {
+          $src .= '/* '.$name.' */ '.$renderedSrc."\n";
+        }
+      }
+
+      @file_put_contents($filename, $src);
+      if (!file_exists($filename))
+      {
+        throw new sfException('Supercache could not be written: '.$filename);
+      }
+    }
+  }
+
+  public function generateStylesheetSupercache($url, $packages, $stylesheets)
+  {
+    $filename = sfConfig::get('sf_web_dir').'/'.$url;
+    if ((!file_exists($filename))||(!sfDynamics::isSupercacheEnabled()))
+    {
+      $renderer = sfDynamics::getRenderer();
+      $src = '';
+      foreach ($packages as $name => $package)
+      {
+        $renderedSrc = trim($renderer->getStylesheet($name, $package));
+        if ($renderedSrc)
+        {
+          $src .= '/* '.$name.' */ '.$renderedSrc."\n";
+        }
+      }
+
+      @file_put_contents($filename, $src);
+      if (!file_exists($filename))
+      {
+        throw new sfException('Supercache could not be written: '.$filename);
+      }
+    }
+  }
+
+  public function filterContent(sfEvent $event, $content)
+  {
+    $response = $event->getSubject();
+
+    if (false !== ($pos = strpos($content, '</head>')))
+    {
+      $this->context->getConfiguration()->loadHelpers(array('Tag', 'Asset'));
+
+      $html = $this->generateAssetsHtml();
+
+      if ($html)
+      {
+        $content = substr($content, 0, $pos)."\n".$html.substr($content, $pos);
+      }
+    }
+    return $content;
   }
 
   public function getJavascript()
