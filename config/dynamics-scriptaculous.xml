@@ -3,35 +3,45 @@
 <dynamics>
   <package name="scriptaculous">
     <require>prototype</require>
-    <javascript>scriptaculous/1.8.2/scriptaculous</javascript>
+    <!-- Our version removed the autoloading of associated libraries. If needed, use scriptaculous.all package. -->
+    <javascript>scriptaculous/1.8.2/scriptaculous.dynamics</javascript>
   </package>
-  <package name="builder">
+  <package name="scriptaculous.builder">
     <require>scriptaculous</require>
     <javascript>scriptaculous/1.8.2/builder</javascript>
   </package>
-  <package name="controls">
+  <package name="scriptaculous.controls">
     <require>scriptaculous</require>
     <javascript>scriptaculous/1.8.2/controls</javascript>
   </package>
-  <package name="dragdrop">
+  <package name="scriptaculous.dragdrop">
     <require>scriptaculous</require>
     <javascript>scriptaculous/1.8.2/dragdrop</javascript>
   </package>
-  <package name="effects">
+  <package name="scriptaculous.effects">
     <require>scriptaculous</require>
     <javascript>scriptaculous/1.8.2/effects</javascript>
   </package>
-  <package name="slider">
+  <package name="scriptaculous.slider">
     <require>scriptaculous</require>
     <javascript>scriptaculous/1.8.2/slider</javascript>
   </package>
-  <package name="sound">
+  <package name="scriptaculous.sound">
     <require>scriptaculous</require>
     <javascript>scriptaculous/1.8.2/sound</javascript>
   </package>
-  <package name="unittest">
+  <package name="scriptaculous.unittest">
     <require>scriptaculous</require>
     <javascript>scriptaculous/1.8.2/unittest</javascript>
+  </package>
+  <package name="scriptaculous.all">
+    <require>scriptaculous</require>
+    <require>scriptaculous.builder</require>
+    <require>scriptaculous.effects</require>
+    <require>scriptaculous.dragdrop</require>
+    <require>scriptaculous.controls</require>
+    <require>scriptaculous.slider</require>
+    <require>scriptaculous.sound</require>
   </package>
 </dynamics>
 

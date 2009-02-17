@@ -20,23 +20,30 @@ class sfDynamicsActions extends sfActions
     }
   }
 
+  /**
+   * executeJavascript
+   *
+   * @param mixed $request
+   * @return void
+   */
   public function executeJavascript($request)
   {
-    $this->forward404Unless(count($javascripts = $this->package->getJavascripts()));
-    $this->forward404Unless(count($paths = $this->package->getPaths()));
+    $this->forward404Unless(count($this->package->getJavascripts()));
+    $this->forward404Unless(count($this->package->getPaths()));
 
     $this->getResponse()->setContentType('text/javascript');
 
-    $result = $this->getConcatenatedAssets('js', $paths, $javascripts);
+    $renderer = sfDynamics::getRenderer();
 
-    if (!sfConfig::get('sf_debug'))
-    {
-      $result = JSMin::minify($result);
-    }
-
-    return $this->renderText($result);
+    return $this->renderText($renderer->getJavascript($this->name, $this->package));
   }
 
+  /**
+   * executeStylesheet
+   *
+   * @param mixed $request
+   * @return void
+   */
   public function executeStylesheet($request)
   {
     $this->forward404Unless(count($stylesheets = $this->package->getStylesheets()));
@@ -44,45 +51,14 @@ class sfDynamicsActions extends sfActions
 
     $this->getResponse()->setContentType('text/css');
 
-    $result = $this->getConcatenatedAssets('css', $paths, $stylesheets);
-
-    if (!sfConfig::get('sf_debug'))
-    {
-      $result = preg_replace('/\s+/m', ' ', $result);
-    }
-
-    return $this->renderText($result);
+    $renderer = sfDynamics::getRenderer();
+    return $this->renderText($renderer->getStylesheet($this->name, $this->package));
   }
 
-  protected function getConcatenatedAssets($type, $paths, $assets)
+  public function canPack($type, $package)
   {
-    $result = '';
-    $attempts = array();
-
-    foreach ($assets as $asset)
-    {
-      foreach ($paths as $path)
-      {
-        $file = $path.'/'.$type.'/'.$asset.'.'.$type;
-
-        if (file_exists($file) && is_readable($file) && is_file($file))
-        {
-          break;
-        }
-
-        $attempts[] = $file;
-        $file = null;
-      }
-
-      if (is_null($file))
-      {
-        throw new sfError404Exception('Unreadable asset file for package '.$this->name.'. Attempts in order: '.implode(', ', $attempts));
-      }
-
-      $result .= file_get_contents($file)."\n";
-    }
-
-    return $result;
+    return !sfConfig::get('sf_debug');
   }
+
 
 }
