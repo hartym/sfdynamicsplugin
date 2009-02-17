@@ -1,0 +1,22 @@
+# stylesheet
+
+## Description
+
+Adds a javascript asset dependance to the parent (most probably a `package`). It only contains text, which is the logic path to the matching
+file.
+
+See [paths and inheritance](/documentation/logic_paths).
+
+## Children nodes
+
+`Stylesheet` tags has no children.
+
+## PHP definition
+
+An `stylesheet` tag is taken care about by the parent's `sfDynamicsAssetCollectionDefinition` instance.
+
+## Example
+
+    [xml]
+    <stylesheet>mycss.css</stylesheet>
+

@@ -1,0 +1,24 @@
+# Tutorial Part 1 - Installing Dynamics
+
+First of all we need to install the plugin. The easiest way is to use the {@download?version=latest&format=archive&start=auto|latest release} and unpack it
+into your project's plugins directory. If you're using symfony 1.1, the plugin is ready to go at this point. With symfony 1.2, which introduced explicit plugin
+activation, you still have to edit your `ProjectConfiguration` class and enable `sfDynamicsPlugin`.
+
+
+# Tutorial Part 2 - Having a look to configuration
+
+Now, let me introduce a bit of configuration theory. The plugin bundles a bunch of configuration files, which are written in XML (for more information, see
+{configuration|configuration chapter}). The only included configuration file by default, is dynamics.xml, which will include all other needed configuration
+files using `import` clauses.
+
+If you define a dynamics.xml file in your project configuration directory, the plugin's one will be completely ignored. Let's write the following one, 
+including only bare dynamics packages and jquery vendor packages.
+
+<dynamics>
+  <import resource="dynamics-straight.xml" />
+  <import resource="dynamics-jquery.xml" />
+</dynamics>
+
+
+# Tutorial part 3 - First use
+

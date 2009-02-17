@@ -1,0 +1,2 @@
+This tutorial aims at making easy to give a try to dynamics, and targets people wanting to quickly start using the plugin, or thoose who
+needs some written support for installing. This should be your first step into using the plugin.

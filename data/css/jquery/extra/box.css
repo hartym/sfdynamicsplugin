@@ -1,0 +1,82 @@
+#box .b {
+  background:url(../images/box/b.png);
+}
+
+#box .tl {
+  background:url(../images/box/tl.png);
+}
+
+#box .tr {
+  background:url(../images/box/tr.png);
+}
+
+#box .bl {
+  background:url(../images/box/bl.png);
+}
+
+#box .br {
+  background:url(../images/box/br.png);
+}
+
+#box {
+  position: fixed;
+  _position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  text-align: left;
+}
+
+#box .popup {
+  position: relative;
+}
+
+#box table {
+  margin: auto;
+  border-collapse: collapse;
+}
+
+#box .body {
+  padding: 10px;
+  background: #fff;
+  width: 430px;
+}
+
+#box .loading {
+  text-align: center;
+}
+
+#box .image {
+  text-align: center;
+}
+
+#box img {
+  border: 0;
+}
+
+#box .box-hd {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #666;
+  margin: 1px;
+  padding: 1px;
+}
+
+#box .box-ft {
+  border-top: 1px solid #ddd;
+  padding-top: 5px;
+  margin-top: 10px;
+  text-align: right;
+}
+
+#box .tl, #box .tr, #box .bl, #box .br {
+  height: 10px;
+  width: 10px;
+  overflow: hidden;
+  padding: 0;
+}

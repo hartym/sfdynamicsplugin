@@ -1,0 +1,30 @@
+div.sf_ajax_loader
+{
+  position: fixed;
+  !position: absolute;
+  top: 10px;
+  left: 50%;
+  margin-left: -125px;
+  top: 50%;
+  margin-top: -20px;
+  border: 2px solid #519e2d;
+  background-color: #fff;
+  font-weight: bold;
+  padding: 16px;
+  filter: alpha(opacity=85);
+  -moz-opacity:0.85;
+  -khtml-opacity: 0.85;
+  opacity: 0.85;
+  display: none;
+  z-index: 9999;
+}
+
+div.sf_ajax_loader img
+{
+  vertical-align: middle;
+}
+
+div.sf_ajax_loader .active
+{
+  display: block;
+}
