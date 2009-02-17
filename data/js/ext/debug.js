@@ -42,7 +42,7 @@ function createConsole(){
         height:200,
         logView: logView,
         layout: 'fit',
-        
+
         tools:[{
             id: 'close',
             handler: function(){
@@ -237,7 +237,7 @@ Ext.debug.DomTree = Ext.extend(Ext.tree.TreePanel, {
 
 
         Ext.debug.DomTree.superclass.initComponent.call(this);
-        
+
         // tree related stuff
         var styles = false, hnode;
         var nonSpace = /^\s*$/;

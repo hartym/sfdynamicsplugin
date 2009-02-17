@@ -205,49 +205,122 @@
     <require>ext.form.ajax</require>
   </package>
 
-  <!-- @TODO SplitButton Widget -->
+  <!-- SplitButton Widget -->
 
   <package name="ext.widget.splitbutton">
+    <require>ext.widget.button</require>
+    <javascript>ext/widgets/SplitButton</javascript>
   </package>
 
-  <!-- @TODO CycleButton Widget -->
+  <!-- CycleButton Widget -->
 
   <package name="ext.widget.cyclebutton">
+    <require>ext.widget.splitbutton</require>
+    <javascript>ext/widgets/CycleButton</javascript>
   </package>
 
-  <!-- @TODO SplitBar Widget -->
+  <!-- SplitBar Widget -->
 
   <package name="ext.widget.splitbar">
+    <require>ext.core.dragndrop</require>
+    <javascript>ext/widgets/SplitBar</javascript>
   </package>
 
-  <!-- @TODO Menu Widget -->
+  <!-- Menu Widget -->
 
   <package name="ext.widget.menu">
+    <require>ext.core.utilities</require>
+    <require>ext.core.components.layers</require>
+    <javascript>ext/widgets/menu/MenuMgr</javascript>
+    <javascript>ext/widgets/menu/BaseItem</javascript>
+    <javascript>ext/widgets/menu/Adapter</javascript>
+    <javascript>ext/widgets/menu/Menu</javascript>
+    <javascript>ext/widgets/menu/Item</javascript>
+    <javascript>ext/widgets/menu/CheckItem</javascript>
+    <javascript>ext/widgets/menu/TextItem</javascript>
+    <javascript>ext/widgets/menu/Separator</javascript>
   </package>
 
-  <!-- @TODO Loading Mask Widget -->
+  <package name="ext.widget.menu.colorpicker">
+    <require>ext.widget.colorpicker</require>
+    <require>ext.widget.menu</require>
+  </package>
+
+  <package name="ext.widget.menu.datepicker">
+    <require>ext.widget.menu</require>
+    <require>ext.widget.datepicker</require>
+  </package>
+
+  <package name="ext.widget.menu.actions">
+    <require>ext.widget.menu</require>
+    <require>ext.form.ajaxloading</require>
+  </package>
+
+  <!--
+    <require>ext.</require>
+    <javascript>ext/</javascript>
+    <stylesheet>ext/</stylesheet>
+  -->
+
+  <!-- Loading Mask Widget -->
 
   <package name="ext.widget.loadingmask">
+    <javascript>ext/widgets/LoadMask</javascript>
   </package>
 
-  <!-- @TODO Date Picker Widget (DateMenu) -->
+  <!-- Date Picker Widget (DateMenu) -->
 
   <package name="ext.widget.datepicker">
+    <require>ext.core.date</require>
+    <require>ext.core.utilities</require>
+    <require>ext.core.components.layers</require>
+    <require>ext.widget.menu</require>
+    <javascript>ext/widgets/DatePicker</javascript>
+    <javascript>ext/widgets/menu/DateMenu</javascript>
+    <javascript>ext/widgets/menu/DateItem</javascript>
   </package>
 
-  <!-- @TODO Color Picker Widget (ColorMenu) -->
+  <!-- Color Picker Widget (ColorMenu) -->
 
   <package name="ext.widget.colorpicker">
+    <require>ext.core.utilities</require>
+    <require>ext.core.components.layers</require>
+    <require>ext.widget.menu</require>
+    <javascript>ext/widgets/ColorPalette</javascript>
+    <javascript>ext/widgets/menu/ColorMenu</javascript>
+    <javascript>ext/widgets/menu/ColorItem</javascript>
   </package>
 
-  <!-- @TODO Toolbar Widget -->
+  <!-- Toolbar Widget -->
 
   <package name="ext.widget.toolbar">
+    <require>ext.core.utilities</require>
+    <require>ext.layout</require>
+    <require>ext.widget.button</require>
+    <require>ext.widget.splitbutton</require>
+    <javascript>ext/widgets/Toolbar</javascript>
   </package>
 
-  <!-- @TODO ProgressBar Widget -->
+  <package name="ext.widget.toolbar.menu">
+    <require>ext.widget.toolbar</require>
+    <require>ext.widget.menu</require>
+  </package>
+
+  <package name="ext.widget.toolbar.paging">
+    <require>ext.widget.toolbar</require>
+    <javascript>ext/widgets/PagingToolbar</javascript>
+  </package>
+
+  <package name="ext.widget.toolbar.actions">
+    <require>ext.widget.toolbar</require>
+    <require>ext.form.ajaxloading</require>
+  </package>
+
+  <!-- ProgressBar Widget -->
 
   <package name="ext.widget.progressbar">
+    <require>ext.core.utilities</require>
+    <javascript>ext/widgets/ProgressBar</javascript>
   </package>
 
   <!-- MessageBox -->
@@ -261,14 +334,30 @@
     <javascript>ext/widgets/MessageBox</javascript>
   </package>
 
-  <!-- @TODO StatusBar -->
+  <!-- StatusBar -->
 
-  <package name="ext.widget.statusbar">
+  <package name="ext.statusbar">
+    <require>ext.core.utilities</require>
+    <require>ext.widget.button</require>
+    <require>ext.widget.toolbar</require>
+    <javascript>ext/widgets/StatusBar</javascript>
   </package>
 
-  <!-- @TODO Slider -->
+  <package name="ext.statusbar.splitbutton">
+    <require>ext.statusbar</require>
+    <require>ext.widget.splitbutton</require>
+  </package>
 
-  <package name="ext.widget.slider">
+  <package name="ext.statusbar.actions">
+    <require>ext.statusbar</require>
+    <require>ext.form.ajaxloading</require>
+  </package>
+
+  <!-- Slider -->
+
+  <package name="ext.slider">
+    <require>ext.core.dragndrop</require>
+    <javascript>ext/widgets/Slider</javascript>
   </package>
 
   <!-- Data - Core -->
@@ -297,9 +386,125 @@
     <javascript>ext/data/StoreMgr</javascript>
   </package>
 
-  <!-- @TODO Data - JSON -->
+  <!-- Data - JSON -->
 
   <package name="ext.data.json">
+    <require>ext.core.utilities</require>
+    <require>ext.data.core</require>
+    <javascript>ext/data/JsonReader</javascript>
+  </package>
+
+  <package name="ext.data.json.store">
+    <require>ext.data.json</require>
+    <javascript>ext/data/JsonStore</javascript>
+  </package>
+
+  <!-- Data - XML Support -->
+
+  <package name="ext.data.xml">
+    <require>ext.core.utilities</require>
+    <require>ext.data.core</require>
+    <javascript>ext/data/XmlReader</javascript>
+  </package>
+
+  <!--  Data - Simple Store -->
+
+  <package name="ext.data.simplestore">
+    <require>ext.core.utilities</require>
+    <require>ext.data.core</require>
+    <require>ext.data.json</require>
+    <javascript>ext/data/ArrayReader</javascript>
+    <javascript>ext/data/SimpleStore</javascript>
+  </package>
+
+  <!-- Form - Basic Fields -->
+
+  <package name="ext.form.basic">
+    <require>ext.core.components</require>
+    <javascript>ext/widgets/form/Field</javascript>
+    <javascript>ext/widgets/form/Checkbox</javascript>
+    <javascript>ext/widgets/form/TextField</javascript>
+    <javascript>ext/widgets/form/NumberField</javascript>
+    <javascript>ext/widgets/form/Radio</javascript>
+    <javascript>ext/widgets/form/TextArea</javascript>
+    <javascript>ext/widgets/form/Hidden</javascript>
+    <javascript>ext/widgets/form/FieldSet</javascript>
+  </package>
+
+  <package name="ext.form.basic.customvalidation">
+    <require>ext.form.basic</require>
+    <javascript>ext/widgets/form/VTypes</javascript>
+  </package>
+
+  <package name="ext.form.basic.timefield">
+    <require>ext.form.basic</require>
+    <javascript>ext/widgets/form/TimeField</javascript>
+  </package>
+
+  <package name="ext.form.basic.grouped">
+    <require>ext.form.basic</require>
+    <javascript>ext/widgets/form/CheckboxGroup</javascript>
+    <javascript>ext/widgets/form/RadioGroup</javascript>
+  </package>
+
+  <!-- Form - ComboBox Widget -->
+
+  <package name="ext.form.combobox">
+    <require>ext.form.basic</require>
+    <javascript>ext/widgets/form/Combo</javascript>
+  </package>
+
+  <package name="ext.form.combobox.customvalidation">
+    <require>ext.form.basic.customvalidation</require>
+  </package>
+
+  <!-- Form - Date Field -->
+
+  <package name="ext.form.datefield">
+    <require>ext.form.basic</require>
+    <require>ext.widget.datepicker</require>
+    <javascript>ext/widgets/form/TriggerField</javascript>
+    <javascript>ext/widgets/form/DateField</javascript>
+  </package>
+
+
+  <!-- Form - Html Editor -->
+
+  <package name="ext.form.htmleditor">
+    <require>ext.core.utilities</require>
+    <require>ext.quicktips</require>
+    <require>ext.form.basic</require>
+    <require>ext.widget.toolbar</require>
+    <require>ext.widget.splitbutton</require>
+    <require>ext.widget.menu</require>
+    <require>ext.widget.colorpicker</require>
+    <javascript>ext/widgets/form/HtmlEditor</javascript>
+  </package>
+
+  <!-- Form - Ajax and Loading Support -->
+
+  <package name="ext.form.ajaxloading">
+    <javascript>ext/widgets/form/BasicForm</javascript>
+    <javascript>ext/widgets/form/Action</javascript>
+  </package>
+
+  <package name="ext.form.ajaxloading.xml">
+    <require>ext.data.xml</require>
+  </package>
+
+  <!-- Form - Dynamic Rendering -->
+
+  <package name="ext.form.dynamicrendering">
+    <require>ext.form.ajaxloading</require>
+    <require>ext.layout.all</require>
+    <javascript>ext/widgets/form/Form</javascript>
+  </package>
+
+  <!-- Form - Floating Editor -->
+
+  <package name="ext.form.floatingeditor">
+    <require>ext.core.components.layers</require>
+    <javascript>ext/widgets/Editor</javascript>
   </package>
 
 
@@ -311,17 +516,81 @@
     <javascript>ext/widgets/TabPanel</javascript>
     <!-- <stylesheet>ext/tabs</stylesheet> -->
   </package>
-  <!-- Button Widget -->
 
+  <!-- Grid - Core -->
+
+  <package name="ext.grid.core">
+    <require>ext.core.utilities</require>
+    <require>ext.core.components.layers</require>
+    <javascript>ext/widgets/grid/GridPanel</javascript>
+<!--    <javascript>ext/widgets/grid/AbstractGridView</javascript>-->
+    <javascript>ext/widgets/grid/AbstractSelectionModel</javascript>
+    <javascript>ext/widgets/grid/RowSelectionModel</javascript>
+    <javascript>ext/widgets/grid/ColumnModel</javascript>
+    <javascript>ext/widgets/grid/GridView</javascript>
+  </package>
+
+  <!-- Grid - Editing Support -->
+
+  <package name="ext.grid.editing">
+    <require>ext.</require>
+    <javascript>ext/r</javascript>
+  </package>
+
+  <!-- Grid - Property Grid -->
+
+  <package name="ext.grid.property">
+    <require>ext.</require>
+    <javascript>ext/r</javascript>
+  </package>
+
+  <!-- Tree - Core -->
+
+  <package name="ext.tree.core">
+    <require>ext.core.components.containers</require>
+    <javascript>ext/widgets/tree/TreePanel</javascript>
+    <javascript>ext/widgets/tree/TreeSelectionModel</javascript>
+    <javascript>ext/data/Tree</javascript>
+    <javascript>ext/widgets/tree/TreeNode</javascript>
+    <javascript>ext/widgets/tree/TreeNodeUI</javascript>
+    <javascript>ext/widgets/tree/TreeEventModel</javascript>
+  </package>
+
+  <!-- Tree - Ajax Loading Support -->
+
+  <package name="ext.tree.ajaxloading">
+    <require>ext.core.utilities</require>
+    <require>ext.tree.core</require>
+    <javascript>ext/widgets/tree/AsyncTreeNode</javascript>
+    <javascript>ext/widgets/tree/TreeLoader</javascript>
+  </package>
+
+  <!-- Tree - Editing Support -->
+
+  <package name="ext.tree.editing">
+    <require>ext.</require>
+    <javascript>ext/r</javascript>
+  </package>
+
+  <!-- History -->
+
+  <package name="ext.history">
+    <require>ext.</require>
+    <javascript>ext/r</javascript>
+  </package>
+
+  <!-- Debug -->
+
+  <package name="ext.debug">
+    <require>ext.core.dragndrop.overflow</require>
+    <require>ext.tree.core</require>
+    <require>ext.tree.ajaxloading</require>
+    <javascript>ext/debug</javascript>
+  </package>
 
   <package name="ext.xtheme.gray">
     <!-- <require>ext</require> to see later if dependency -->
     <stylesheet>ext/xtheme-gray</stylesheet>
-  </package>
-
-  <package name="ext.data.ajax">
-    <require>ext.core</require>
-    <javascript>ext/data/Connection</javascript>
   </package>
 
 </dynamics>
