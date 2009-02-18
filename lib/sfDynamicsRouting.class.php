@@ -46,6 +46,6 @@ class sfDynamicsRouting
       $cacheKey .= $package->getCacheKey();
     }
 
-    return sfConfig::get('app_sfDynamicsPlugin_supercache_web_path', '/dynamics').'/'.md5($cacheKey).'.'.$extension;
+    return .'/'.md5($cacheKey).'.'.$extension;
   }
 }

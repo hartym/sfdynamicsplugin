@@ -1,11 +1,10 @@
 <?php
 /**
- * sfDynamicsPlugin - Behavior manager class
+ * sfDynamicsPlugin - Main engine
  *
- * To enable magic, include the following in your layout, just before the </body> tag:
- * sfJavascriptBehaviorManager::includeMarkup();
+ * Under refactoring. Some code is obsolete.
  *
- * @author Romain Dorgueil <romain.dorgueil@sensio.com>
+ * @author Romain Dorgueil <romain.dorgueil@dakrazy.net>
  */
 class sfDynamicsManager implements ArrayAccess
 {
