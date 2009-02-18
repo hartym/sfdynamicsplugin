@@ -4,7 +4,7 @@
  *
  * Under refactoring. Some code is obsolete.
  *
- * @author Romain Dorgueil <romain.dorgueil@dakrazy.net>
+ * @author Romain Dorgueil <romain.dorgueil@symfony-project.com>
  */
 class sfDynamicsManager implements ArrayAccess
 {
