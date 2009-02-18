@@ -1,8 +1,23 @@
 <?php
 
+/**
+ * sfDynamicsRenderer - Assets renderer. Manage minifying and grouping.
+ *
+ * @package sfDynamicsPlugin
+ * @version SVN: $Id: $
+ * @author  Romain Dorgueil <romain.dorgueil@symfony-project.com>
+ * @license
+ */
 class sfDynamicsRenderer
 {
-  public function getJavascript($name, $package)
+  /**
+   * getJavascript - render javascripts for a package
+   *
+   * @param  string                              $name
+   * @param  sfDynamicsAssetCollectionDefinition $package
+   * @return string
+   */
+  public function getJavascript($name, sfDynamicsAssetCollectionDefinition $package)
   {
     if (count($javascripts = $package->getJavascripts()))
     {
@@ -37,7 +52,14 @@ class sfDynamicsRenderer
     }
   }
 
-  public function getStylesheet($name, $package)
+  /**
+   * getStylesheet - render stylesheets for a package
+   *
+   * @param  string                              $name
+   * @param  sfDynamicsAssetCollectionDefinition $package
+   * @return string
+   */
+  public function getStylesheet($name, sfDynamicsAssetCollectionDefinition $package)
   {
     if (count($stylesheets = $package->getStylesheets()))
     {
@@ -72,7 +94,14 @@ class sfDynamicsRenderer
     }
   }
 
-
+  /**
+   * getConcatenatedAssets - Packs a list of assets in one string
+   *
+   * @param mixed $type
+   * @param mixed $paths
+   * @param mixed $assets
+   * @return void
+   */
   protected function getConcatenatedAssets($type, $paths, $assets)
   {
     $result = '';

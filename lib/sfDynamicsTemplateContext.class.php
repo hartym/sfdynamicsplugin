@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * sfDynamicsTemplateContext
+ *
+ * @TODO find out what this class was meant to do...
+ *
+ * @package   sfDynamicsPlugin
+ * @version   SVN: $Id: $
+ * @author    Romain Dorgueil <romain.dorgueil@symfony-project.com>
+ * @license
+ */
 class sfDynamicsTemplateContext
 {
   protected

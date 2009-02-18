@@ -22,7 +22,7 @@ try
 {
   $package = new sfDynamicsPackageDefinition($testPackageXml);
 
-  t->isa_ok($package, 'sfDynamicsPackageDefinition', 'Instance creation from XML data works')
+  $t->isa_ok($package, 'sfDynamicsPackageDefinition', 'Instance creation from XML data works');
 }
 catch (Exception $e)
 {

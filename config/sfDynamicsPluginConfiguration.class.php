@@ -15,6 +15,6 @@ class sfDynamicsPluginConfiguration extends sfPluginConfiguration
    */
   public function initialize()
   {
-    $this->dispatcher->connect('routing.load_configuration', array('sfDynamicsRouting', 'configure'));
+    require dirname(__FILE__).'/config.php';
   }
 }
