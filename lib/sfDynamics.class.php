@@ -55,12 +55,12 @@ class sfDynamics
 
   static public function isCacheEnabled()
   {
-    return true;
+    return !sfConfig::get('sf_debug');
   }
 
   static public function isSupercacheEnabled()
   {
-    return true;
+    return !sfConfig::get('sf_debug');
   }
 
   static public function isJavascriptPackerEnabled($package)
