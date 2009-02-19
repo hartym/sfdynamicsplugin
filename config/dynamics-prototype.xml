@@ -9,6 +9,6 @@
       see http://prototypejs.org/
     </description>
     <conflict>jquery</conflict>
-    <javascript>prototype/prototype</javascript>
+    <javascript>prototype/prototype-1.6.0.3-dynamics</javascript>
   </package>
 </dynamics>
