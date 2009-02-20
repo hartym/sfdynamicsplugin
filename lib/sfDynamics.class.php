@@ -75,38 +75,14 @@ class sfDynamics
     return $cache;
   }
 
-  static public function isCacheEnabled()
+  static public function getExtensionFromType($type)
   {
-    return !sfConfig::get('sf_debug');
-  }
-
-  static public function isSupercacheEnabled()
-  {
-    return !sfConfig::get('sf_debug');
-  }
-
-  static public function isJavascriptPackerEnabled($package)
-  {
-    return false;
-  }
-
-  static public function isJavascriptMinifierEnabled($package)
-  {
-    return (!sfConfig::get('sf_debug'));
-  }
-
-  static public function isJavascriptGroupingEnabled()
-  {
-    return (!sfConfig::get('sf_debug'));
-  }
-
-  static public function isStylesheetTidyEnabled($package)
-  {
-    return (!sfConfig::get('sf_debug'));
-  }
-
-  static public function isStylesheetGroupingEnabled()
-  {
-    return (!sfConfig::get('sf_debug'));
+    switch ($type)
+    {
+      case 'javascript': return 'js';
+      case 'stylesheet': return 'css';
+      default:
+        throw new BadMethodCallException('Invalid asset type.');
+    }
   }
 }
