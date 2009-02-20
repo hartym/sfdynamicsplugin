@@ -11,9 +11,9 @@ We're actively looking for configuration writers maintainers for all the followi
  * Mootools
  * Dojo
 
-To know what configuration packages looks like, have a look at the {{{configuration|configuration reference}}}.
+To know what configuration packages looks like, have a look at the [configuration reference](/documentation/configuration)
 
-If you're interested in contributing to the plugin, have a look at the {{{contribute|contribute page}}}.
+If you're interested in contributing to the plugin, have a look at the [contribute page](/documentation/contribute).
 
 # History
 
