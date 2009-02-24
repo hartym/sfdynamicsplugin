@@ -9,6 +9,7 @@
   $(document).ready(function() {
     $('a#say-hello').click(function() {
       $('div#hello').toggle();
+      return false;
     })
   });
 </script>

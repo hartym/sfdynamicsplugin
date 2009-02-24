@@ -15,27 +15,26 @@
   </package>
 
   <package name="jquery.extra.form">
-    <description>
-      == TODO ==
-
-      depends_on:  [ jquery, loader ]
-      javascripts: [ jquery/plugin/form/jquery.form ]
-      scripts:
-        ajaxify:
-          template:  |
-            $(document).ready(function() {
-              var options = {
-                target: '<<target>>'
-              };
-              $('form#<<formId>>').ajaxForm(options);
-            });
-      # Form observer behavior
-        observe:
-          template: |
-            $(document).ready(function() {
-              $('<<target>>').change(function(){ $('<<update>>').load('<<url>>', {value: $(this).val()}); });
-            });
-    </description>
+    <require>jquery</require>
+    <require>loader</require>
+    <javascript>jquery/extra/form</javascript>
+    <method name="ajaxify">
+      <javascript>
+        <component module="sfDynamicsJqueryExtra" action="form_ajaxify">
+          <parameter name="target" />
+          <parameter name="form_id" />
+        </component>
+      </javascript>
+    </method>
+    <method name="observe">
+      <javascript>
+        <component module="sfDynamicsJqueryExtra" action="form_observe">
+          <parameter name="target" />
+          <parameter name="update" />
+          <parameter name="url" />
+        </component>
+      </javascript>
+    </method>
   </package>
 
   <package name="jquery.extra.box" packable="false">

@@ -11,34 +11,38 @@
 class sfDynamicsRenderer
 {
   /**
-   * getJavascript - render javascripts for a package
+   * getAsset - render assets of a given type for a package
    *
    * @param  string                              $name
    * @param  sfDynamicsAssetCollectionDefinition $package
+   * @param  string                              $type
    * @return string
    */
-  public function getJavascript($name, sfDynamicsAssetCollectionDefinition $package)
+  public function getAsset($name, sfDynamicsAssetCollectionDefinition $package, $type)
   {
-    if (count($javascripts = $package->getJavascripts()))
+    $extension = sfDynamics::getExtensionFromType($type);
+    $getAssets = 'get'.ucfirst($type).'s';
+
+    if (count($assets = $package->$getAssets()))
     {
       $paths = $package->getPaths();
 
-      $cache = sfDynamics::getCache();
-
-      if (sfDynamics::isCacheEnabled() && $cache->has($cacheKey = '/'.sfConfig::get('sf_environment').(sfConfig::get('sf_debug')?'/debug':'').'/js/'.md5($package->getCacheKey())))
+      if (sfDynamicsConfig::isCacheEnabled())
       {
-        $result = $cache->get($cacheKey);
-      }
-      else
-      {
-        $result = $this->getConcatenatedAssets('js', $paths, $javascripts);
+        $cache = sfDynamics::getCache();
+        $cacheKey = sfDynamicsCache::generateKey($package, $type);
 
-        if (sfDynamics::isJavascriptMinifierEnabled($package))
+        if ($cache->has($cacheKey))
         {
-          $result = JSMin::minify($result);
+          $result = $cache->get($cacheKey);
         }
+      }
 
-        if (sfDynamics::isCacheEnabled())
+      if (!isset($result))
+      {
+        $result = $this->{'filter'.ucfirst($type)}($package, $this->getConcatenatedAssets($extension, $paths, $assets));
+
+        if (sfDynamicsConfig::isCacheEnabled())
         {
           $cache->set($cacheKey, $result);
         }
@@ -52,46 +56,24 @@ class sfDynamicsRenderer
     }
   }
 
-  /**
-   * getStylesheet - render stylesheets for a package
-   *
-   * @param  string                              $name
-   * @param  sfDynamicsAssetCollectionDefinition $package
-   * @return string
-   */
-  public function getStylesheet($name, sfDynamicsAssetCollectionDefinition $package)
+  protected function filterJavascript(sfDynamicsAssetCollectionDefinition $package, $code)
   {
-    if (count($stylesheets = $package->getStylesheets()))
+    if (sfDynamicsConfig::isJavascriptMinifierEnabled($package))
     {
-      $paths = $package->getPaths();
-
-      $cache = sfDynamics::getCache();
-
-      if (sfDynamics::isCacheEnabled() && $cache->has($cacheKey = '/'.sfConfig::get('sf_environment').(sfConfig::get('sf_debug')?'/debug':'').'/css/'.md5($package->getCacheKey())))
-      {
-        $result = $cache->get($cacheKey);
-      }
-      else
-      {
-        $result = $this->getConcatenatedAssets('css', $paths, $stylesheets);
-
-        if (sfDynamics::isStylesheetTidyEnabled($package))
-        {
-          $result = preg_replace('/\s\s+/m', ' ', str_replace(array("\n", "\t"), ' ', $result));
-        }
-
-        if (sfDynamics::isCacheEnabled())
-        {
-          $cache->set($cacheKey, $result);
-        }
-      }
-
-      return $result;
+      $code = JSMin::minify($code);
     }
-    else
+
+    return $code;
+  }
+
+  protected function filterStylesheet(sfDynamicsAssetCollectionDefinition $package, $code)
+  {
+    if (sfDynamicsConfig::isStylesheetTidyEnabled($package))
     {
-      return '';
+      $code = preg_replace('/\s\s+/m', ' ', str_replace(array("\n", "\t"), ' ', $code));
     }
+
+    return $code;
   }
 
   /**
@@ -133,4 +115,30 @@ class sfDynamicsRenderer
     return $result;
   }
 
+  public function generateSupercache($url, $packages, $assets, $type)
+  {
+    if (!sfDynamicsConfig::isSupercacheEnabled())
+    {
+      throw new BadMethodCallException('Supercache is disabled.');
+    }
+
+    if (!file_exists($filename = sfConfig::get('sf_web_dir').'/'.$url))
+    {
+      $src = '';
+
+      foreach ($packages as $name => $package)
+      {
+        if ($renderedSrc = trim($this->getAsset($name, $package, $type)))
+        {
+          $src .= '/* '.$name.' */ '.$renderedSrc."\n";
+        }
+      }
+
+      @file_put_contents($filename, $src);
+      if (!file_exists($filename))
+      {
+        throw new sfException('Supercache could not be written: '.$filename);
+      }
+    }
+  }
 }

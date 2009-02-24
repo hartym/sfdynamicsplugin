@@ -20,9 +20,9 @@ class sfDynamicsAssetCollectionDefinition extends sfDynamicsBaseDefinition
     return
       'js => '.implode(';', $this->getJavascripts()).' '.
       'css => '.implode(';', $this->getStylesheets()).' '.
-      'options => jspacker:'.(sfDynamics::isJavascriptPackerEnabled($this)?'yes':'no').
-                ' jsminifier:'.(sfDynamics::isJavascriptMinifierEnabled($this)?'yes':'no').
-                ' csstidy:'.(sfDynamics::isStylesheetTidyEnabled($this)?'yes':'no');
+      'options => jspacker:'.(sfDynamicsConfig::isJavascriptPackerEnabled($this)?'yes':'no').
+                ' jsminifier:'.(sfDynamicsConfig::isJavascriptMinifierEnabled($this)?'yes':'no').
+                ' csstidy:'.(sfDynamicsConfig::isStylesheetTidyEnabled($this)?'yes':'no');
   }
 
   public function hasStylesheets()
