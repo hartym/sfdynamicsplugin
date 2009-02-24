@@ -60,4 +60,4 @@ The default fallback configuration files are found under the plugin's `config` d
 
 To know more about this, you can read the full [configuration documentation](/documentation/configuration) which has a reference page for each tag available in dynamics*.xml files.
 
-You now know enough to (go ahead in the tutorial)[/documentation/02-installation] and start using the plugin.
+You now know enough to [go ahead in the tutorial](/documentation/02-installation) and start using the plugin.
