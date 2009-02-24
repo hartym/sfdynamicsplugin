@@ -35,7 +35,7 @@ class sfDynamicsActions extends sfActions
 
     $renderer = sfDynamics::getRenderer();
 
-    return $this->renderText($renderer->getJavascript($this->name, $this->package));
+    return $this->renderText($renderer->getAsset($this->name, $this->package, 'javascript', 'js'));
   }
 
   /**
@@ -52,13 +52,6 @@ class sfDynamicsActions extends sfActions
     $this->getResponse()->setContentType('text/css');
 
     $renderer = sfDynamics::getRenderer();
-    return $this->renderText($renderer->getStylesheet($this->name, $this->package));
+    return $this->renderText($renderer->getAsset($this->name, $this->package, 'stylesheet', 'css'));
   }
-
-  public function canPack($type, $package)
-  {
-    return !sfConfig::get('sf_debug');
-  }
-
-
 }

@@ -2,16 +2,13 @@
 /**
  * sfDynamicsPlugin - Main engine
  *
- * Under refactoring. Some code is obsolete.
- *
  * @author Romain Dorgueil <romain.dorgueil@symfony-project.com>
  */
-class sfDynamicsManager implements ArrayAccess
+class sfDynamicsManager
 {
   /**
    * Loaded behaviors objects
    */
-  protected $behaviors = array();
   protected $packages = array();
 
   /**
@@ -19,14 +16,6 @@ class sfDynamicsManager implements ArrayAccess
    */
   protected $javascripts = array();
   protected $stylesheets = array();
-
-  /**
-   * Bootstrap markup and html for scripts.
-   *
-   * @todo html should be added with javascript code
-   */
-  protected $htmlMarkup          = '';
-  protected $javascriptBootstrap = '';
 
   /**
    * Context references
@@ -59,7 +48,7 @@ class sfDynamicsManager implements ArrayAccess
    */
   public function isLoaded($packageName)
   {
-    return isset($this->packages[$packageName]) && (true===$this->packages[$packageName]);
+    return isset($this->packages[$packageName]) && $this->packages[$packageName];
   }
 
   /**
@@ -94,147 +83,79 @@ class sfDynamicsManager implements ArrayAccess
       // load assets
       if ($this->request instanceof sfWebRequest && !$this->request->isXmlHttpRequest())
       {
-        $package->hasJavascripts() && $this->addJavascripts($packageName);
-        $package->hasStylesheets() && $this->addStylesheets($packageName);
+        $package->hasJavascripts() && $this->addAssets($packageName, 'javascript');
+        $package->hasStylesheets() && $this->addAssets($packageName, 'stylesheet');
       }
 
-      unset($this->packages[$packageName]);
-      $this->packages[$packageName] = true;
+      unset($this->packages[$packageName]); // This is needed to preserve assets order.
+      $this->packages[$packageName] = $package;
     }
   }
 
   /**
-   * adds a list of javascript assets to the response
+   * adds a list of assets of given type to the list to add when filtering the response
    */
-  public function addJavascripts($javascripts)
+  public function addAssets($assets, $type)
   {
-    if (!is_array($javascripts))
+    if (!is_array($assets))
     {
-      $javascripts = array($javascripts);
+      $assets = array($assets);
     }
+    $property = $type.'s';
 
-    foreach ($javascripts as $javascript)
+    foreach ($assets as $asset)
     {
-      if (!in_array($javascript, $this->javascripts))
+      if (!in_array($asset, $this->$property))
       {
-        $this->javascripts[] = $javascript;
-      }
-    }
-  }
-
-  /**
-   * adds a list of stylesheet assets to the response
-   */
-  public function addStylesheets($stylesheets)
-  {
-    if (!is_array($stylesheets))
-    {
-      $stylesheets = array($stylesheets);
-    }
-
-    foreach ($stylesheets as $stylesheet)
-    {
-      if (!in_array($stylesheet, $this->stylesheets))
-      {
-        $this->stylesheets[] = $stylesheet;
+        $this->{$property}[] = $asset;
       }
     }
   }
 
   public function generateAssetsHtml()
   {
+    $renderer = sfDynamics::getRenderer();
     $html = '';
-    if (sfDynamics::isJavascriptGroupingEnabled())
-    {
-      $packages = array();
 
-      foreach(array_keys($this->packages) as $packageName)
-      {
-        $packages[$packageName] = $this->getPackage($packageName);
-      }
-
-      $url = sfDynamicsRouting::supercache_for($packages, 'js');
-      $this->generateJavascriptSupercache($url, $packages, $this->javascripts);
-      $html .= '  <script type="text/javascript" src="'.$url.'"></script>'."\n";
-    }
-    else
+    /* generate useable package array */
+    $packages = array();
+    foreach(array_keys($this->packages) as $packageName)
     {
-      foreach ($this->javascripts as $javascript)
-      {
-        $html .= '  <script type="text/javascript" src="'.$this->controller->genUrl(sfDynamicsRouting::uri_for($javascript, 'js')).'"></script>'."\n";
-      }
+      $packages[$packageName] = $this->getPackage($packageName);
     }
 
-    if (sfDynamics::isStylesheetGroupingEnabled())
+    foreach (array('javascript'=>'js', 'stylesheet'=>'css') as $type => $ext)
     {
-      $packages = array();
+      $assets = $this->{$type.'s'};
 
-      foreach(array_keys($this->packages) as $packageName)
+      if (sfDynamicsConfig::isGroupingEnabledFor($type) && sfDynamicsConfig::isSupercacheEnabled())
       {
-        $packages[$packageName] = $this->getPackage($packageName);
+        $url = sfDynamicsRouting::supercache_for($packages, $ext);
+        $renderer->generateSupercache($url, $packages, $assets, $type);
+        $html .= '  '.$this->getTag($url, $type)."\n";
       }
-
-      $url = sfDynamicsRouting::supercache_for($packages, 'css');
-      $this->generateStylesheetSupercache($url, $packages, $this->stylesheets);
-      $html .= '  <link rel="stylesheet" type="text/css" media="screen" href="'.$url.'" />'."\n";
-    }
-    else
-    {
-      foreach ($this->stylesheets as $stylesheet)
+      else
       {
-        $html .= '  <link rel="stylesheet" type="text/css" media="screen" href="'.$this->controller->genUrl(sfDynamicsRouting::uri_for($stylesheet, 'css')).'" />'."\n";
+        foreach ($assets as $asset)
+        {
+          $url = $this->controller->genUrl(sfDynamicsRouting::uri_for($asset, $ext));
+          $html .= '  '.$this->getTag($url, $type)."\n";
+        }
       }
     }
-
     return $html;
   }
 
-  public function generateJavascriptSupercache($url, $packages, $javascripts)
+  public function getTag($url, $type)
   {
-    $filename = sfConfig::get('sf_web_dir').'/'.$url;
-    if ((!file_exists($filename))||(!sfDynamics::isSupercacheEnabled()))
+    switch ($type)
     {
-      $renderer = sfDynamics::getRenderer();
-      $src = '';
-
-      foreach ($packages as $name => $package)
-      {
-        $renderedSrc = trim($renderer->getJavascript($name, $package));
-        if ($renderedSrc)
-        {
-          $src .= '/* '.$name.' */ '.$renderedSrc."\n";
-        }
-      }
-
-      @file_put_contents($filename, $src);
-      if (!file_exists($filename))
-      {
-        throw new sfException('Supercache could not be written: '.$filename);
-      }
-    }
-  }
-
-  public function generateStylesheetSupercache($url, $packages, $stylesheets)
-  {
-    $filename = sfConfig::get('sf_web_dir').'/'.$url;
-    if ((!file_exists($filename))||(!sfDynamics::isSupercacheEnabled()))
-    {
-      $renderer = sfDynamics::getRenderer();
-      $src = '';
-      foreach ($packages as $name => $package)
-      {
-        $renderedSrc = trim($renderer->getStylesheet($name, $package));
-        if ($renderedSrc)
-        {
-          $src .= '/* '.$name.' */ '.$renderedSrc."\n";
-        }
-      }
-
-      @file_put_contents($filename, $src);
-      if (!file_exists($filename))
-      {
-        throw new sfException('Supercache could not be written: '.$filename);
-      }
+      case 'javascript':
+        return '<script type="text/javascript" src="'.$url.'"></script>';
+      case 'stylesheet':
+        return '<link rel="stylesheet" type="text/css" media="screen" href="'.$url.'" />';
+      default:
+        throw new BadMethodCallException('Invalid asset type.');
     }
   }
 
@@ -244,8 +165,6 @@ class sfDynamicsManager implements ArrayAccess
 
     if (false !== ($pos = strpos($content, '</head>')))
     {
-      $this->context->getConfiguration()->loadHelpers(array('Tag', 'Asset'));
-
       $html = $this->generateAssetsHtml();
 
       if ($html)
@@ -254,94 +173,5 @@ class sfDynamicsManager implements ArrayAccess
       }
     }
     return $content;
-  }
-
-  public function getJavascript()
-  {
-    $behaviorsJs = '';
-
-    foreach ($this->behaviors as $behavior)
-    {
-      $behaviorsJs .= $behavior->getJavascript();
-    }
-
-    return $this->javascriptBootstrap.$behaviorsJs;
-  }
-
-  public function getHtmlMarkup()
-  {
-    $behaviorsMarkup = '';
-
-    foreach ($this->behaviors as $behavior)
-    {
-      $behaviorsMarkup .= $behavior->getMarkup();
-    }
-
-    return $this->htmlMarkup.$behaviorsMarkup;
-  }
-
-  static public function getMarkup($isXhr=false)
-  {
-    $instance = self::getInstance();
-
-    $script = trim($instance->getJavascript());
-
-    if (isset($script[0]))
-    {
-      $script = self::getJavascriptTag($isXhr?$script:'$(document).ready(function(){'.$instance->getJavascript().'});');
-    }
-
-    return ($isXhr?'':$instance->getHtmlMarkup()).$script;
-  }
-
-  static public function includeMarkup($isXhr=false)
-  {
-    echo self::getMarkup($isXhr);
-  }
-
-  /**
-   * ArrayAccess: isset
-   */
-  public function offsetExists($offset)
-  {
-    return isset($this->configuration[$offset]);
-  }
-
-  /**
-   * ArrayAccess: getter
-   */
-  public function offsetGet($offset)
-  {
-    return $this->get($offset);
-  }
-
-  /**
-   * ArrayAccess: setter
-   */
-  public function offsetSet($offset, $value)
-  {
-    throw new LogicException('Cannot use array access of javascript behavior manager in write mode.');
-  }
-
-  /**
-   * ArrayAccess: unset
-   */
-  public function offsetUnset($offset)
-  {
-    throw new LogicException('Cannot use array access of javascript behavior manager in write mode.');
-  }
-
-  static public function getJavascriptTag($js)
-  {
-    return '<script type="text/javascript">
-      //<![CDATA[
-      '.$js.'
-      //]]>
-      </script>';
-  }
-
-  public function tag($js)
-  {
-    return self::getJavascriptTag($js);
   }
 }

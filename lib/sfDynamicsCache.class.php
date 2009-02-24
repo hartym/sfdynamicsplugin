@@ -27,6 +27,11 @@ class sfDynamicsCache extends sfFileCache
     return sfConfig::get('sf_cache_dir').DIRECTORY_SEPARATOR.'sfDynamicsPlugin';
   }
 
+  static public function generateKey(sfDynamicsAssetCollectionDefinition $package, $type)
+  {
+    return '/'.sfConfig::get('sf_environment').(sfConfig::get('sf_debug')?'/debug':'').'/'.$type.'/'.md5($package->getCacheKey());
+  }
+
   /**
    * getSuperCacheDir - give the directory where supercache of minified assets are stored
    *
@@ -41,16 +46,26 @@ class sfDynamicsCache extends sfFileCache
   /**
    * clearSuperCache - clear supercache of minified assets
    *
+   * @listen task.cache.clear
+   *
    * @param  sfEvent $event
    * @return void
    */
   static public function clearSuperCache(sfEvent $event)
   {
-    $event->getSubject()->logSection('cache', 'Clearing sfDynamicsPlugin minified assets super cache');
+    static $done=false;
 
-    if (is_dir($cacheDir = self::getSuperCacheDir(true)))
+    /* symfony send the task.cache.clear event once by app. */
+    if (!$done)
     {
-      $event->getSubject()->getFilesystem()->remove(sfFinder::type('file')->ignore_version_control()->discard('.sf')->in($cacheDir));
+      $event->getSubject()->logSection('cache', 'Clearing sfDynamicsPlugin minified assets super cache');
+
+      if (is_dir($cacheDir = self::getSuperCacheDir(true)))
+      {
+        $event->getSubject()->getFilesystem()->remove(sfFinder::type('file')->ignore_version_control()->discard('.sf')->in($cacheDir));
+      }
+
+      $done = true;
     }
   }
 }
