@@ -1,0 +1,43 @@
+# Tutorial Part 2 - Installation
+
+We're going to write a brand new symfony project to try out the plugin. Just
+create a new directory, and initialize an empty project.  You should already be
+familiar with the symfony version (1.1, 1.2, or 1.3) you're using.
+
+## Let's get it..
+
+First of all we need to install the plugin. You have few different options that
+are available to install the plugin. The easiest one is to use the
+`plugin:install` task to get the latest version:
+
+    [shell]
+    $ ./symfony plugin:install sfDynamicsPlugin --stability=alpha
+
+Other options include setting the svn:externals property of your plugin
+directory to a svn tag, or to the svn trunk, and pulling directly from the git
+repository. We won't dive into detailed explanations about this.
+
+## Additional steps
+
+The most important additional step there is to create an apache-writeable
+%sf_web_dir%/dynamics directory, which will be used for grouped assets
+supercache. For now, this is not configurable but it will be soon.
+
+    [shell]
+    $ mkdir web/dynamics
+    $ chmod 777 web/dynamics
+
+As of symfony 1.2, you also have to activate the plugin by editing your
+`config/ProjectConfiguration.class.php` and adding the following line where
+relevant (if you don't know where this is, you should consider grabbing some
+informations about symfony first).
+
+    [php]
+    $this->enablePlugins(array('sfDynamicsPlugin'));
+
+## Check everything is ok
+
+* This part of the tutorial needs to be written *
+
+You're now ready to take one step further and [start using dynamics in your
+project](/documentation/tutorial-03_).

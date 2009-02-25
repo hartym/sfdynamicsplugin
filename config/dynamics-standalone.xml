@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+
+<dynamics>
+  <package name="standalone.getElementsByClassName">
+    <javascript>standalone/getElementsByClassName-1.0.1</javascript>
+  </package>
+  <package name="standalone.DD_belatedPNG">
+    <javascript>standalone/DD_belatedPNG/DD_belatedPNG_0.0.7a</javascript>
+  </package>
+</dynamics>
