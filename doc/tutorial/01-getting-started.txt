@@ -1,0 +1,63 @@
+# Tutorial Part 1 - Getting Started
+
+Before we look further at each step needed to use the full power of the plugin, we're going to look at the jQuery Hello World example. 
+
+You can open this example by looking at it directly on the documentation website, or by opening the `examples/jquery/000-hello-world/` directory found under the plugin root.
+
+## Looking at the controller
+
+First of all, open `action.class.php` and look at the `execute()` method. It's as simple as:
+
+    [php]
+    sfDynamics::load('jquery');
+
+It asks sfDynamics to load the `jquery` package, after each of its dependances (if there are any). A `package` is not only one javascript file. It's a set of javascripts and stylesheets, a list of dependances and conflicts (in term of sfDynamics `package`)s, and eventually a list of theming and i18n assets.
+
+For now all you have to remember is that this line just made the jQuery library available in the view.
+
+## Looking at the view
+
+It's now time to look at the template. Nothing complex there, just a little snippet of javascript to toggle visibility of an "Hello World" div.
+
+I already hear some people muttering about the bad practice of putting inline styles and scripts within templates. This is just the most basic example, and we choosed to [keep it simple](http://en.wikipedia.org/wiki/KISS_principle).
+
+## Behind the scene
+
+But hey, why did the `sfDynamics::load()` method understand the `jquery` name?
+
+The plugin comes with a bunch of configuration files, written in XML, describing the `package`s. For example, in `config/dynamics-jquery.xml`, you'll find the following information:
+
+    [xml]
+    <dynamics>
+      <package name="jquery">
+        <description>
+          The jQuery Javascript Framework
+          ===============================
+          see http://www.jquery.com/
+        </description>
+        <conflict>prototype</conflict>
+        <conflict>yui</conflict>
+        <javascript>jquery/jquery-1.2.6</javascript>
+      </package>
+      
+      <!-- some irrelevant informations (for us) about other packages -->
+    </package>
+
+So even if I do not use `jQuery` library, configuration will parse all this? Nope.
+
+The fact thoose packages were available is that the application's `config/dynamics.xml` package contained the following:
+
+    [xml]
+    <?xml version="1.0" ?>
+
+    <dynamics>
+      <import resource="dynamics-jquery.xml" />
+    </dynamics>
+
+The XML schema of both files are the same. Any `dynamics*.xml` file, except for `dynamics-plugin.xml` which has a little namespacing feature added, obey to the same rules.
+
+The default fallback configuration files are found under the plugin's `config` directory, and thoose are completely overriden by the project's one (if named the same), which are completely overriden by the application's one.
+
+To know more about this, you can read the full [configuration documentation](/documentation/configuration) which has a reference page for each tag available in dynamics*.xml files.
+
+You now know enough to [go ahead in the tutorial](/documentation/tutorial-02_installation) and start using the plugin.
