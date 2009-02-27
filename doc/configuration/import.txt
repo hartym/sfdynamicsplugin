@@ -20,5 +20,5 @@ An `import` tag is taken care about by the parent's `sfDynamicsConfigDefinition`
 ## Example
 
     [xml]
-    <import>myconfig.xml</import>
+    <import resource="myconfig.xml" />
 
