@@ -1,0 +1,145 @@
+# Bundled configuration files
+
+A set of packagesets are bundled with the plugin. Here is the list, and status of each one.
+
+## dynamics.xml
+
+Empty default configuration file. If you install (and enable) the plugin but do
+not provide another dynamics.xml file within your project or the current app,
+it will be the main one, and so the plugin will do nothing.
+
+## dynamics-ext.xml
+
+Provides configuration/dependances/scripts/stylesheets for ExtJS 2.2
+
+
+*TODO: list of packages provided*
+
+
+**Status**: useable, some dependances may have undetected problems
+
+**Author**: Romain Dorgueil <romain.dorgueil at symfony-project dot com>
+
+**Maintainer**: nobody, looking for one
+
+
+## dynamics-prototype-ext-bridge.xml
+
+Provides the adapters for using ExtJS with other frameworks.
+
+
+*TODO: list of packages provided*
+
+
+**Status**: useable
+
+**Author**: Romain Dorgueil <romain.dorgueil at symfony-project dot com>
+
+**Maintainer**: nobody, looking for one
+
+
+## dynamics-jquery.xml
+
+Provides configuration/dependances/scripts/stylesheets for jQuery and jQuery UI
+
+
+*TODO: list of packages provided*
+
+
+**jQuery version**: *TODO*
+
+**jQuery UI version**: *TODO*
+
+
+**Status**: useable
+
+**Author**: Romain Dorgueil <romain.dorgueil at symfony-project dot com>
+
+**Maintainer**:  Romain Dorgueil <romain.dorgueil at symfony-project dot com>
+
+
+## dynamics-jquery-extra.xml
+
+Provides additional plugins for jQuery (unofficial ones)
+
+
+**This packageset is subject to major changes**
+
+*TODO: list of packages provided*
+
+
+**Status**: hazardous
+
+**Author**: Romain Dorgueil <romain.dorgueil at symfony-project dot com>
+
+**Maintainer**: Romain Dorgueil <romain.dorgueil at symfony-project dot com>
+
+
+## dynamics-prototype.xml
+
+Provides the Prototype JS Framework.
+
+
+*TODO: list of packages provided*
+
+
+**Prototype version**: *TODO* (dynamics version fixes some patched bugs from
+the next release)
+
+
+**Status**: useable
+
+**Author**: Romain Dorgueil <romain.dorgueil at symfony-project dot com>
+
+**Maintainer**: nobody, looking for one
+
+
+## dynamics-scriptaculous.xml
+
+Provides the Script.aculo.us effects library for Prototype
+
+
+*TODO: list of packages provided*
+
+
+**Script.aculo.us version**: *TODO* (few versions included, and dynamics
+version that removes the scriptaculous autoload parsing the query URL)
+
+
+**Status**: useable
+
+**Author**: Romain Dorgueil <romain.dorgueil at symfony-project dot com>
+
+**Maintainer**: Romain Dorgueil <romain.dorgueil at symfony-project dot com>
+
+
+## dynamics-standalone.xml
+
+Some simple standalone scripts
+
+
+*TODO: list of packages provided*
+
+
+**Status**: stable, some new scripts may appear from time to time
+
+**Author**: Romain Dorgueil <romain.dorgueil at symfony-project dot com>
+
+**Maintainer**: Romain Dorgueil <romain.dorgueil at symfony-project dot com>
+
+
+## dynamics-yui.xml
+
+Wants to provide Yahoo! UI integration. Nothing done yet.
+
+
+No package provided
+
+
+**Status**: empty
+
+**Author**: nobody (will that be you?)
+
+**Maintainer**: nobody (will that be you?)
+
+
