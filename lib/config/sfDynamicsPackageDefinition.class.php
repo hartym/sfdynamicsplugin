@@ -25,7 +25,7 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
 
   public function getPaths()
   {
-    return $this->paths;
+    return array_merge(array(sfConfig::get('sf_app_dir').'/data'), $this->paths);
   }
 
   public function getDependencies()

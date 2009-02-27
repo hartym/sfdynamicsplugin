@@ -40,7 +40,7 @@ class sfDynamicsRenderer
 
       if (!isset($result))
       {
-        $result = $this->{'filter'.ucfirst($type)}($package, $this->getConcatenatedAssets($extension, $paths, $assets));
+        $result = $this->{'filter'.ucfirst($type)}($name, $this->getConcatenatedAssets($name, $extension, $paths, $assets));
 
         if (sfDynamicsConfig::isCacheEnabled())
         {
@@ -79,12 +79,13 @@ class sfDynamicsRenderer
   /**
    * getConcatenatedAssets - Packs a list of assets in one string
    *
-   * @param mixed $type
-   * @param mixed $paths
-   * @param mixed $assets
+   * @param sfDynamicsPackageDefinition $package
+   * @param string                      $type    either «js» or «css»
+   * @param array                       $paths
+   * @param array                       $assets
    * @return void
    */
-  protected function getConcatenatedAssets($type, $paths, $assets)
+  protected function getConcatenatedAssets($packageName, $type, array $paths, array $assets)
   {
     $result = '';
     $attempts = array();
@@ -106,7 +107,7 @@ class sfDynamicsRenderer
 
       if (is_null($file))
       {
-        throw new sfError404Exception('Unreadable asset file for package '.$this->name.'. Attempts in order: '.implode(', ', $attempts));
+        throw new sfDynamicsUnreadableAssetException(sprintf('Unreadable asset file for package «%s».%sAttempts in order: %s%s', $packageName, "\n\n", "\n - ", implode("\n - ", $attempts)));
       }
 
       $result .= file_get_contents($file)."\n";

@@ -135,13 +135,16 @@ class sfDynamicsConfigDefinition extends sfDynamicsBaseDefinition
   {
     if ($xml->getName()!='dynamics')
     {
-      throw new sfConfigurationException('Invalid config');
+      throw new sfDynamicsConfigurationException('Invalid XML file.'."\n\n".'Root node\'s tag name must be «dynamics».');
     }
 
     foreach ($xml->import as $import)
     {
-      $resource = 'config/'.(string)$import['resource'];
-      $this->doImport($resource);
+      if (!$resource = (string)$import['resource'])
+      {
+        throw new sfDynamicsConfigurationException('Invalid «import» tag.'."\n\n".'A «resource» attribute is needed, containing the name of the resource to import.');
+      }
+      $this->doImport('config/'.$resource);
     }
 
     foreach ($xml->package as $package)
