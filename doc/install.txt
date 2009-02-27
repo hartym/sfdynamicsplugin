@@ -2,6 +2,8 @@
 
 To install the plugin, you have two major options.
 
+*TODO: This needs to be rewritten, and is maybe outdated*
+
 ## Use the latest release
 
 The easiest way is to use the latest release available on [the symfony project plugin's page](http://www.symfony-project.org/plugins/sfDynamicsPlugin).

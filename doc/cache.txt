@@ -1,22 +1,41 @@
 # Caching
 
-As every assets pass through a symfony module, this brings some overhead compared to including static files. But as it brings some
-more power (packing, dynamic js generation, uniform naming), you still want to use it. To remove this overhead, solutions exists though.
+As every assets pass through a symfony module, this brings some overhead
+compared to including static files. But as it brings some more power (packing,
+dynamic js generation, uniform naming), you still want to use it. To remove
+this overhead, solutions exists though.
 
-First of all, if you're application is using symfony cache (`sf_cache` set to true), you will gain a good bit by having packed and unpacked
-versions automatically cached. This can be sufficient for small sites but still not acceptable for high traffic sites which needs the best
-optimization possible.
+First of all, if you're application is using symfony cache (`sf_cache` set to
+true), you will gain a good bit by having packed and unpacked versions
+automatically cached. This can be sufficient for small sites but still not
+acceptable for high traffic sites which needs the best optimization possible.
+
 
 # Super-caching
 
-To get a great performance boost, bringing performances almost to static files level (in fact only first request of each kind will generate overhead,
-all next requests will be like getting a static file), sfDynamicsPlugin can be associated to sfSupercachePlugin, which cache the generated
-responses into files under the http published directory. An apache rewrite rule will switch between the two options depending on the cached file
-existence.
+To get a great performance boost, bringing performances almost to static files
+level (in fact only first request of each kind will generate overhead, all next
+requests will be like getting a static file), sfDynamicsPlugin can generate
+supercache versions (static files put under the web tree) of your grouped and
+minified assets. This is the default when `sf_debug == false` and will be
+configurable soon enough (understand: not yet).
 
-## Installing
+The only requirement to have supercache activated is to have a
+`%sf_web_dir%/dynamics` directory in which apache can write. It's great if your
+shell user have write access there too, so your `symfony cache:clear` command
+will clean it up too.
 
-Follow the guidelines on {{{the symfony project supercache plugin page}}} to install it. Once done, you will have to activate it for js/css files
-by adding the following rewrite rules.
 
-blablabla
+# Drawbacks
+
+The only drawback of this system is that cached version are static (yes, it's
+the feature too), so you'll need to `symfony clear:cache` in order to refresh
+your js/css. To avoid this, you should work with `sf_debug == true` when
+changing thoose files.
+
+
+# Backward compatibility note
+
+The first attempt of implementing this was by using `sfSupercachePlugin`. This
+is not anymore true and the feature is fully integrated to the plugin.
+

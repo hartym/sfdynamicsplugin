@@ -1,4 +1,0 @@
-# Packing
-
-To enhance network traffic, sfDynamics plugin integrates the PHP Javascript Packer library which is used to minify javascript files. You do not
-have anything to do, all js will be packed when sf_debug is false. To help you debug, js is left intact if sf_debug is true.
