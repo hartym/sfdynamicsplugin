@@ -1,0 +1,14 @@
+# Assets filters
+
+*This is incomplete. TODO: rewrite*
+
+# Javascript
+
+  * Minifier
+  * Packer (bogus, disabled)
+
+# Stylesheets
+
+  * Minifier
+  * Tidy ? (bogus, disabled)
+

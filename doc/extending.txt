@@ -2,6 +2,5 @@
 
 sfDynamics is written to be easily extensible. You can use it as the dependance/assets manager in your own plugins.
 
-## Registering your plugin with sfDynamics
-
+*This needs to be written*
 
