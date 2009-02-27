@@ -27,6 +27,10 @@ supercache. For now, this is not configurable but it will be soon.
     $ mkdir web/dynamics
     $ chmod 777 web/dynamics
 
+Now, you can add the `sfDynamics` module in the enabled_modules setting of your
+application's setting. The `sfDynamics` module is the rendering gateway needed
+to compile/pack/shrink/expand/crush your assets. Just remember that without a
+
 As of symfony 1.2, you also have to activate the plugin by editing your
 `config/ProjectConfiguration.class.php` and adding the following line where
 relevant (if you don't know where this is, you should consider grabbing some
@@ -37,7 +41,8 @@ informations about symfony first).
 
 ## Check everything is ok
 
-* This part of the tutorial needs to be written *
+*This part of the tutorial needs to be written*
 
 You're now ready to take one step further and [start using dynamics in your
-project](/documentation/tutorial-03_).
+first project](/documentation/tutorial-03_start_using_dynamics).
+

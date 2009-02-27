@@ -1,0 +1,113 @@
+# Tutorial Part 3 - First project
+
+In this part, our aim will be to use jQuery package-set, that is bundled with
+the plugin as `dynamics-jquery.xml`. To know more about bundled package-set,
+you should have a look at the [bundled configuration files
+page](/documentation/bundled_configuration).
+
+We will load some packages, write scripts depending on it, and look at how it
+is rendered in debug and non-debug modes.
+
+## Basic concepts
+
+We thought sfDynamics plugin should not provide anything by default. It's why,
+without any action on your side, no packages are available in your application.
+It's up to you to `require` some bundled configuration files, or to write your
+own. This behavior is brought to you by the `dynamics.xml` file bundled in the
+plugin, that looks like:
+
+    [xml]
+    <?xml version="1.0" ?>
+
+    <dynamics>
+    </dynamics>
+
+It should be pretty obvious it does not provide much.
+
+## Creating your first package
+
+To start tuning it for your own application, you should copy this
+`plugins/sfDynamicsPlugin/config/dynamics.xml` in your project's `config`
+directory.
+
+As said before, we're going to use the `dynamics-jquery.xml` package-set, so
+write the following `require` clause within the dynamics tag:
+
+    [xml]
+    <import resource="dynamics-jquery.xml" />
+
+Now any package present in `dynamics-jquery.xml` is available for direct use in
+your project, or for indirect use through your own dynamics packages. Unless
+you want to do real simple things (like the [hello world
+example](/example/jquery/000-hello-world)), you probably want to use the second
+option, and add jquery as a dependance.
+
+Let's write a simple package (just add it after the `require` tag):
+
+    [xml]
+    <package name="my.first.package">
+      <require>jquery</require>
+
+      <javascript>my.first.javascript</javascript>
+      <stylesheet>my.first.stylesheet</stylesheet>
+    </package>
+
+This tells sfDynamics that there is a «my.first.package» package, which depends
+on the `jquery` package, and that contains one javascript and one stylesheet
+file. We now need to create thoose files. Create the
+`%sf_root_dir%/data/js/my.first.javascript.js` and the
+`%sf_root_dir%/data/js/my.first.stylesheet.css` files.
+
+In `%sf_root_dir%/data/js/my.first.javascript.js`, write:
+
+    [js]
+    var playSomeFunk = function() {
+      for (var i=0; i<10; i++)
+      { 
+        $('.funky').fadeOut(200).fadeIn(200).addClass('jamming');
+      }
+    };
+
+In `%sf_root_dir%/data/js/my.first.stylesheet.css`, write:
+
+    [css]
+    .jamming
+    {
+      color: blue;
+    }
+
+## Let's test our brand new package
+
+Ok, let the fun begin.
+
+We need a module/action to test our package.
+
+Here is the controller (of course, yours won't have the same classname):
+
+    [php]
+    class tutorial03Actions extends sfActions
+    {
+      public function executeIndex(sfWebRequest $request)
+      {
+        sfDynamics::load('my.first.package');
+      }
+    }
+
+And here is a sample template:
+
+    [html]
+    <div class="funky">a funky div</div>
+    <div class="boring">a boring div</div>
+    <span class="funky">a funky span</span>
+    <span class="boring">a boring span</span>
+    <div class="funky">a funky div</div>
+    <div class="boring">a boring div</div>
+    
+    <a href="#" onclick="playSomeFunk();">
+      Play some funk!
+    </a>
+
+You should be able to access the page, and click the «Play some funk!» link.
+
+Easy wasn't it?
+
