@@ -6,7 +6,7 @@
  * @package sfDynamicsPlugin
  * @version SVN: $Id: $
  * @author  Romain Dorgueil <romain.dorgueil@symfony-project.com>
- * @license
+ * @license MIT
  */
 class sfDynamicsRenderer
 {
@@ -56,6 +56,13 @@ class sfDynamicsRenderer
     }
   }
 
+  /**
+   * filterJavascript - javascript specific rendering filters
+   *
+   * @param  sfDynamicsAssetCollectionDefinition $package
+   * @param  string $code
+   * @return string
+   */
   protected function filterJavascript(sfDynamicsAssetCollectionDefinition $package, $code)
   {
     if (sfDynamicsConfig::isJavascriptMinifierEnabled($package))
@@ -66,6 +73,13 @@ class sfDynamicsRenderer
     return $code;
   }
 
+  /**
+   * filterStylesheet - stylesheet specific rendering filters
+   *
+   * @param  sfDynamicsAssetCollectionDefinition $package
+   * @param  string $code
+   * @return string
+   */
   protected function filterStylesheet(sfDynamicsAssetCollectionDefinition $package, $code)
   {
     if (sfDynamicsConfig::isStylesheetTidyEnabled($package))
@@ -116,6 +130,15 @@ class sfDynamicsRenderer
     return $result;
   }
 
+  /**
+   * generateSupercache - creates supercache file for given packages
+   *
+   * @param mixed $url
+   * @param mixed $packages
+   * @param mixed $assets
+   * @param mixed $type
+   * @return void
+   */
   public function generateSupercache($url, $packages, $assets, $type)
   {
     if (!sfDynamicsConfig::isSupercacheEnabled())
