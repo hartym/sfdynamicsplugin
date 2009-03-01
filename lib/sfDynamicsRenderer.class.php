@@ -40,7 +40,7 @@ class sfDynamicsRenderer
 
       if (!isset($result))
       {
-        $result = $this->{'filter'.ucfirst($type)}($name, $this->getConcatenatedAssets($name, $extension, $paths, $assets));
+        $result = $this->{'filter'.ucfirst($type)}($package, $this->getConcatenatedAssets($name, $extension, $paths, $assets));
 
         if (sfDynamicsConfig::isCacheEnabled())
         {
