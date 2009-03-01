@@ -58,4 +58,14 @@ class sfDynamicsConfig
   {
     return !sfConfig::get('sf_debug');
   }
+
+  /**
+   * getSuperCacheDir - path under sf_web_dir in which we'll store the supercached assets
+   *
+   * @return string
+   */
+  static public function getSuperCacheDir()
+  {
+    return sfConfig::get('app_sfDynamicsPlugin_supercache_web_path', 'dynamics');
+  }
 }
