@@ -85,7 +85,7 @@ class sfDynamicsConfigDefinition extends sfDynamicsBaseDefinition
   {
     if (!isset($this->packages[$name]))
     {
-      throw new sfConfigurationException('Unknown required dynamics package «'.$name.'»');
+      throw new sfConfigurationException('Unknown required dynamics package «'.$name.'».'."\n\n".'If you just added or changed packages configuration, you should consider runing the cache:clear task on your project to regenerate configuration cache.');
     }
 
     return $this->packages[$name];
