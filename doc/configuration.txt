@@ -2,34 +2,38 @@
 
 ## Overview
 
-sfDynamics configuration files are XML files describing javascript `packages`. Each `package` corresponds to a coherent list
-of items, which works together. For further information about it, see the `package` reference below.
+sfDynamics configuration files are XML files describing javascript `packages`.
+Each `package` corresponds to a coherent list of items, which works together.
+For further information about it, see the `package` reference below.
 
-The only read file is `dynamics.xml`. By convention, it should only contain only `import` tags, to import configuration sets
-defined in other files. For example, `dynamics-jquery.xml`, bundled with the plugin (but not included by default), provides
-configuration/dependances relations between vendor jQuery libraries, jQuery UI and jQuery effects.
+The only read file is `dynamics.xml`. By convention, it should only contain
+only `import` tags, to import configuration sets defined in other files. For
+example, `dynamics-jquery.xml`, bundled with the plugin (but not included by
+default), provides configuration/dependances relations between vendor jQuery
+libraries, jQuery UI and jQuery effects.
 
-Our configuration system supports destructive inheritance between files. Default configuration is provided by the plugin, but it
-will be completely ignored if you create a `dynamics.xml` file in your project's config directory. Again, if your application 
-defines a `dynamics.xml`, the plugin will give it precedence and ignore everything else.
+Our configuration system supports destructive inheritance between files.
+Default configuration is provided by the plugin, but it will be completely
+ignored if you create a `dynamics.xml` file in your project's config directory.
+Again, if your application defines a `dynamics.xml`, the plugin will give it
+precedence and ignore the default file provided by the plugin.
 
-
-## sfDynamics plugins
-
-When creating plugins, you often want to add features to thoose already existing, instead of replacing existing features by yours.
-For this, you can create a `dynamics-plugin.xml` configuration file in your plugin's `config` directory using the same structure
-as the main `dynamics.xml` file, but with a `dynamics-plugin` root node. Every package defined within this file will be prefixed
-by the plugin's name. For example, if you define a `test` package in `sfTestPlugin`, it will be available as `sfTestPlugin.test`.
-
-More information is available on the [extending Dynamics](/documentation/extending) page.
+  * [Read about extending sfDynamics with your symfony
+    plugins](/documentation/extending)
+  * [Read about configuration files bundled with
+    sfDynamics](/documentation/bundled_configuration)
 
 # Configuration Reference
 
   * [dynamics](/documentation/configuration-dynamics)
   * [dynamics-plugin](/documentation/configuration-dynamicsplugin)
-  * [i18n](/documentation/configuration-i18n) _not yet implemented_
   * [import](/documentation/configuration-import)
   * [javascript](/documentation/configuration-javascript)
   * [package](/documentation/configuration-package)
   * [stylesheet](/documentation/configuration-stylesheet)
+
+# Incoming features
+
+  * [i18n](/documentation/configuration-i18n) _not yet implemented_
   * [theme](/documentation/configuration-theme) _not yet implemented_
+  * [switch](/documentation/configuration-switch) _not yet implemented__
