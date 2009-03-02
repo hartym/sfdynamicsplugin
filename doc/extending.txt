@@ -1,6 +1,32 @@
 # Extending the plugin
 
-sfDynamics is written to be easily extensible. You can use it as the dependance/assets manager in your own plugins.
+sfDynamics is written to be easily extensible. You can use it as the
+dependance/assets manager in your own plugins.
 
-*This needs to be written*
+## Why?
+
+One big problem when writing plugins is always assets management. Will you
+provide your version of some js framework? Will that be a task user must do?
+How will you manage a few plugins providing many times the same js library? How
+will you know that two js libraries are in conflict?
+
+sfDynamics tries to be a good answer to all thoose questions. No need to
+provide the js framework, no need to give the user additional install tasks,
+libraries will be included once and an exception will be thrown as you try to
+load two conflictual packages.
+
+# How?
+
+sfDynamics plugins configuration files are just a bit different from other
+configuration files. The base file read in your plugin's configuration
+directory will be `dynamics-plugin.xml` instead of `dynamics.xml`, and its root
+node will be `dynamics-plugin` instead of `dynamics`.
+
+Every package defined within this file will be prefixed by the plugin's name.
+For example, if you define a `test` package in `sfTestPlugin`, it will be
+available as `sfTestPlugin.test`.
+
+This is not yet a definitive choice, and we're interested in your opinion about
+this. Is implicit namespacing a good idea? Would a `namespace` explicit tag,
+available in plugins and in other configuration files, be a better idea?
 
