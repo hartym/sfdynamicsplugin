@@ -1,4 +1,4 @@
 "config/dynamics.xml":
   class: sfDynamicsConfigHandler
-  file: %sf_plugins_dir%/sfDynamicsPlugin/lib/config/sfDynamicsConfigHandler.class.php
+  file: <?php echo realpath(dirname(__FILE__).'/../lib/config'); ?>/sfDynamicsConfigHandler.class.php
 
