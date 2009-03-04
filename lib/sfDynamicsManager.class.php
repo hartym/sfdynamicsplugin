@@ -73,22 +73,31 @@ class sfDynamicsManager
     {
       $this->packages[$packageName] = false;
 
-      $package = $this->getPackage($packageName);
-
-      foreach($package->getDependencies() as $dependency)
+      try
       {
-        $this->load($dependency);
-      }
+        $package = $this->getPackage($packageName);
 
-      // load assets
-      if ($this->request instanceof sfWebRequest && !$this->request->isXmlHttpRequest())
+        foreach($package->getDependencies() as $dependency)
+        {
+          $this->load($dependency);
+        }
+
+        // load assets
+        if ($this->request instanceof sfWebRequest && !$this->request->isXmlHttpRequest())
+        {
+          $package->hasJavascripts() && $this->addAssets($packageName, 'javascript');
+          $package->hasStylesheets() && $this->addAssets($packageName, 'stylesheet');
+        }
+
+        unset($this->packages[$packageName]); // This is needed to preserve assets order.
+        $this->packages[$packageName] = $package;
+      }
+      catch (Exception $e)
       {
-        $package->hasJavascripts() && $this->addAssets($packageName, 'javascript');
-        $package->hasStylesheets() && $this->addAssets($packageName, 'stylesheet');
+        // could not load package
+        unset($this->packages[$packageName]);
+        throw $e;
       }
-
-      unset($this->packages[$packageName]); // This is needed to preserve assets order.
-      $this->packages[$packageName] = $package;
     }
   }
 
