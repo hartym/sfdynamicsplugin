@@ -4,5 +4,13 @@ $this->dispatcher->connect('task.cache.clear', array('sfDynamicsCache', 'clearSu
 
 if (!is_writeable(sfDynamicsCache::getSuperCacheDir(true)))
 {
-  throw new sfConfigurationException('sfDynamicsPlugin supercache directory does not exists or is not writeable.'."\n\n".'Please check that «'.sfDynamicsCache::getSuperCacheDir(true).'» is writeable.');
+  $_superCacheDir = sfDynamicsCache::getSuperCacheDir(true);
+
+  if (false!==strpos($_superCacheDir, '..'))
+  {
+    throw new sfConfigurationException('sfDynamicsPlugin supercache directory does not exists, and contains «..» components. Please check your configuration, or that «'.$_superCacheDir.'» is writeable.');
+  }
+
+  mkdir($_superCacheDir, 0777, true);
+  chmod($_superCacheDir, 0777);
 }
