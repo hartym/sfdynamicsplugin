@@ -40,7 +40,7 @@ class sfDynamicsRenderer
 
       if (!isset($result))
       {
-        $result = $this->{'filter'.ucfirst($type)}($package, $this->getConcatenatedAssets($name, $extension, $paths, $assets));
+        $result = $this->{'filterConcatenated'.ucfirst($type)}($package, $this->getConcatenatedAssets($name, $package, $extension, $paths, $assets));
 
         if (sfDynamicsConfig::isCacheEnabled())
         {
@@ -63,13 +63,18 @@ class sfDynamicsRenderer
    * @param  string $code
    * @return string
    */
-  protected function filterJavascript(sfDynamicsAssetCollectionDefinition $package, $code)
+  protected function filterConcatenatedJavascript(sfDynamicsAssetCollectionDefinition $package, $code)
   {
     if (sfDynamicsConfig::isJavascriptMinifierEnabled($package))
     {
       $code = JSMin::minify($code);
     }
 
+    return $code;
+  }
+
+  protected function filterJavascript(sfDynamicsAssetCollectionDefinition $package, $filename, $code)
+  {
     return $code;
   }
 
@@ -80,11 +85,22 @@ class sfDynamicsRenderer
    * @param  string $code
    * @return string
    */
-  protected function filterStylesheet(sfDynamicsAssetCollectionDefinition $package, $code)
+  protected function filterConcatenatedStylesheet(sfDynamicsAssetCollectionDefinition $package, $code)
   {
     if (sfDynamicsConfig::isStylesheetTidyEnabled($package))
     {
       $code = preg_replace('/\s\s+/m', ' ', str_replace(array("\n", "\t"), ' ', $code));
+    }
+
+    return $code;
+  }
+
+  protected function filterStylesheet(sfDynamicsAssetCollectionDefinition $package, $filename, $code)
+  {
+    if (sfDynamicsConfig::isStylesheetImportResolutionEnabled($package))
+    {
+      $callback = create_function('$v', sprintf('return file_get_contents(%s.\'/\'.$v[2]);', var_export(dirname($filename), true)));
+      $code = preg_replace_callback('/@import\s+url\((["\']?)([a-z\/\\._-]+)(\1)\);/i', $callback, $code);
     }
 
     return $code;
@@ -99,7 +115,7 @@ class sfDynamicsRenderer
    * @param array                       $assets
    * @return void
    */
-  protected function getConcatenatedAssets($packageName, $type, array $paths, array $assets)
+  protected function getConcatenatedAssets($packageName, $package, $type, array $paths, array $assets)
   {
     $result = '';
     $attempts = array();
@@ -124,7 +140,7 @@ class sfDynamicsRenderer
         throw new sfDynamicsUnreadableAssetException(sprintf('Unreadable asset file for package «%s».%sAttempts in order: %s%s', $packageName, "\n\n", "\n - ", implode("\n - ", $attempts)));
       }
 
-      $result .= file_get_contents($file)."\n";
+      $result .= $this->{'filter'.ucfirst(sfDynamics::getTypeFromExtension($type))}($package, $file, file_get_contents($file))."\n";
     }
 
     return $result;

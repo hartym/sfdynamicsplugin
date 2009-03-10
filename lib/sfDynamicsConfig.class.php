@@ -54,6 +54,11 @@ class sfDynamicsConfig
     }
   }
 
+  static public function isStylesheetImportResolutionEnabled($package)
+  {
+    return true;
+  }
+
   static public function isStylesheetTidyEnabled($package)
   {
     return !sfConfig::get('sf_debug');
