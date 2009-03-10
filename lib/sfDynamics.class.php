@@ -82,7 +82,18 @@ class sfDynamics
       case 'javascript': return 'js';
       case 'stylesheet': return 'css';
       default:
-        throw new BadMethodCallException('Invalid asset type.');
+        throw new BadMethodCallException(sprintf('Invalid asset type «%s».', $type));
+    }
+  }
+
+  static public function getTypeFromExtension($extension)
+  {
+    switch ($extension)
+    {
+      case 'js': return 'javascript';
+      case 'css': return 'stylesheet';
+      default:
+        throw new BadMethodCallException(sprintf('Invalid asset extension «%s».', $extension));
     }
   }
 }

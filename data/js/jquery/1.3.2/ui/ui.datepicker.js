@@ -23,7 +23,7 @@ var PROP_NAME = 'datepicker';
    allowing multiple different settings on the same page. */
 
 function Datepicker() {
-	this.debug = false; // Change this to true to start debugging
+	this.debug = true; // Change this to true to start debugging
 	this._curInst = null; // The current instance in use
 	this._keyEvent = false; // If the last event was a key event
 	this._disabledInputs = []; // List of date picker inputs that have been disabled
@@ -1400,7 +1400,7 @@ $.extend(Datepicker.prototype, {
 					drawMonth = 0;
 					drawYear++;
 				}
-				calender += '</tbody></table>' + (isMultiMonth ? '</div>' + 
+				calender += '</tbody></table>' + (isMultiMonth ? '</div>' +
 							((numMonths[0] > 0 && col == numMonths[1]-1) ? '<div class="ui-datepicker-row-break"></div>' : '') : '');
 				group += calender;
 			}
