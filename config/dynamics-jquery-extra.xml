@@ -2,14 +2,6 @@
 
 <dynamics>
   <package name="jquery.extra.cookie">
-    <description>
-      jQuery Cookie Plugin
-      ====================
-
-      A simple, lightweight utility plugin for reading, writing and deleting cookies.
-
-      see http://plugins.jquery.com/project/Cookie
-    </description>
     <require>jquery</require>
     <javascript>jquery/extra/cookie</javascript>
   </package>
@@ -38,58 +30,23 @@
   </package>
 
   <package name="jquery.extra.box" packable="false">
-    <description>
-      jQuery Box Plugin
-      =================
-
-      Generic lightbox manager
-
-      todo old autoscript:
-      $('a[rel*=box]').filter('a :not(.has-box)').box().addClass('has-box');
-    </description>
     <require>jquery</require>
     <javascript>jquery/extra/box</javascript>
     <stylesheet>jquery/extra/box</stylesheet>
   </package>
 
   <package name="jquery.extra.links">
-    <description>
-      Links behavior. obsolete?
-
-      Create unobstrusive ajax links
-    </description>
     <require>jquery</require>
     <javascript>jquery/plugin/links</javascript>
   </package>
 
   <package name="jquery.extra.ajaxloader">
-    <description>
-      if ( 0 == $('div.sf_ajax_loader').length )
-      {
-        $('body').append('<div class="sf_ajax_loader"><img src="/images/loading.gif" alt="" />Chargement en cours...<img src="/images/loading.gif" alt="" /><'+'/div>');
-
-        $(document).ajaxSend(function() {
-          $('div.sf_ajax_loader').show();
-        });
-
-        $(document).ajaxStop(function() {
-          setTimeout(function() { $('div.sf_ajax_loader').hide(); }, 250);
-        });
-      }
-      else
-      {
-        setTimeout(function() { $('div.sf_ajax_loader').hide(); }, 250);
-      }
-    </description>
     <require>jquery</require>
     <stylesheet>jquery/extra/ajaxloader</stylesheet>
     <javascript>jquery/extra/ajaxloader</javascript>
   </package>
 
   <package name="jquery.extra.tooltip">
-    <description>
-      class:       sfJavascriptTooltipBehavior
-    </description>
     <require>jquery</require>
     <javascript>jquery/extra/tooltip</javascript>
     <stylesheet>jquery/extra/tooltip</stylesheet>
