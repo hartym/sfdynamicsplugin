@@ -20,6 +20,16 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
     parent::__construct($xml);
   }
 
+  public function setPrependPaths($paths)
+  {
+    $this->prependPaths = $paths;
+  }
+
+  public function setAppendPaths($paths)
+  {
+    $this->appendPaths = $paths;
+  }
+
   public function setPaths($paths)
   {
     $this->paths = $paths;
