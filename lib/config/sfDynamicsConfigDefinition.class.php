@@ -133,6 +133,10 @@ class sfDynamicsConfigDefinition extends sfDynamicsBaseDefinition
    */
   public function parseXml($xml)
   {
+    if (!$xml)
+    {
+      throw new Exception();
+    }
     if ($xml->getName()!='dynamics')
     {
       throw new sfDynamicsConfigurationException('Invalid XML file.'."\n\n".'Root node\'s tag name must be «dynamics».');
