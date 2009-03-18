@@ -131,7 +131,7 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
 
   static public function __set_state($state)
   {
-    return self::build(new self(), array('javascripts', 'stylesheets', 'description', 'requires', 'conflicts', 'i18n', 'themes', 'paths'), $state);
+    return self::build(new self(), array('javascripts', 'stylesheets', 'description', 'requires', 'conflicts', 'i18n', 'themes', 'prependPaths', 'appendPaths', 'paths'), $state);
   }
 }
 
