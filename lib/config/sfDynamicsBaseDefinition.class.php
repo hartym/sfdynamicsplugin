@@ -50,5 +50,15 @@ abstract class sfDynamicsBaseDefinition
 
     return $xml;
   }
+
+  protected function parsePath($path)
+  {
+    return preg_replace_callback('/%([a-z0-9_]+)%/i', array($this, 'getPathConfigValueCallback'), $path);
+  }
+
+  public function getPathConfigValueCallback($matches)
+  {
+    return sfConfig::get($matches[1]);
+  }
 }
 
