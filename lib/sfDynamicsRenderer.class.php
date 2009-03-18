@@ -25,7 +25,7 @@ class sfDynamicsRenderer
 
     if (count($assets = $package->$getAssets()))
     {
-      $paths = $package->getPaths();
+      $paths = $package->getPaths('/'.$type);
 
       if (sfDynamicsConfig::isCacheEnabled())
       {
@@ -124,7 +124,7 @@ class sfDynamicsRenderer
     {
       foreach ($paths as $path)
       {
-        $file = $path.'/'.$type.'/'.$asset.'.'.$type;
+        $file = $path.'/'.$asset.'.'.$type;
 
         if (file_exists($file) && is_readable($file) && is_file($file))
         {
