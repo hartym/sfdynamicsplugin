@@ -3,12 +3,14 @@
 class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
 {
   protected
-    $description = '',
-    $paths       = array(),
-    $requires    = array(),
-    $conflicts   = array(),
-    $i18n        = array(),
-    $themes      = array();
+    $description  = '',
+    $paths        = array(),
+    $prependPaths = array(),
+    $appendPaths  = array(),
+    $requires     = array(),
+    $conflicts    = array(),
+    $i18n         = array(),
+    $themes       = array();
 
 
   public function __construct($xml=null, $paths=array())
@@ -25,7 +27,7 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
 
   public function getPaths()
   {
-    return array_merge(array(sfConfig::get('sf_app_dir').'/data'), $this->paths);
+    return array_merge($this->prependPaths, array(sfConfig::get('sf_app_dir').'/data'), $this->paths, $this->appendPaths);
   }
 
   public function getDependencies()
@@ -62,15 +64,21 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
   {
     $xml = parent::parseXml($xml);
 
-    if (isset($xml->description))
+    if (isset($xml->path))
     {
-      if (count($xml->description) > 1)
+      foreach ($xml->path as $path)
       {
-        throw new sfConfigurationException('A package cannot have more than one description node.');
-      }
-      foreach ($xml->description as $description)
-      {
-        $this->description = (string)$description;
+        switch (isset($path['priority']) ? $path['priority'] : 'high')
+        {
+          case 'high':
+            $this->appendPaths[] = $this->parsePath((string)$path);
+            break;
+          case 'low':
+            $this->prependPaths[] = $this->parsePath((string)$path);
+            break;
+          default:
+            throw new sfConfigurationException('Path «priority» attribute can only be «high» or «low».');
+        }
       }
     }
 
