@@ -35,9 +35,16 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
     $this->paths = $paths;
   }
 
-  public function getPaths()
+  public function getPaths($suffix='')
   {
-    return array_merge($this->prependPaths, array(sfConfig::get('sf_app_dir').'/data'), $this->paths, $this->appendPaths);
+    $defaultPaths = array();
+
+    foreach (array_merge(array(sfConfig::get('sf_app_dir').'/data'), $this->paths) as $defaultPath)
+    {
+      $defaultPaths[] = $defaultPath.$suffix;
+    }
+
+    return array_merge($this->prependPaths, $defaultPaths, $this->appendPaths);
   }
 
   public function getDependencies()
