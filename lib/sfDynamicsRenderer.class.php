@@ -140,7 +140,12 @@ class sfDynamicsRenderer
         throw new sfDynamicsUnreadableAssetException(sprintf('Unreadable asset file for package «%s».%sAttempts in order: %s%s', $packageName, "\n\n", "\n - ", implode("\n - ", $attempts)));
       }
 
-      $result .= $this->{'filter'.ucfirst(sfDynamics::getTypeFromExtension($type))}($package, $file, file_get_contents($file))."\n";
+      if (sfConfig::get('sf_debug'))
+      {
+        $result .= sprintf("/* \n * sfDynamicsPlugin include: %s\n */", $file)."\n\n";
+      }
+
+      $result .= $this->{'filter'.ucfirst(sfDynamics::getTypeFromExtension($type))}($package, $file, file_get_contents($file))."\n\n";
     }
 
     return $result;
