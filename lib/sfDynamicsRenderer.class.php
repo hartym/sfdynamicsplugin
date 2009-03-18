@@ -25,7 +25,7 @@ class sfDynamicsRenderer
 
     if (count($assets = $package->$getAssets()))
     {
-      $paths = $package->getPaths('/'.$type);
+      $paths = $package->getPaths('/'.$extension);
 
       if (sfDynamicsConfig::isCacheEnabled())
       {
