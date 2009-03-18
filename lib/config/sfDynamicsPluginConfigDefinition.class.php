@@ -33,7 +33,7 @@ class sfDynamicsPluginConfigDefinition extends sfDynamicsConfigDefinition
   {
     if ($xml->getName()!='dynamics-plugin')
     {
-      throw new sfConfigurationException('Invalid config');
+      throw new sfConfigurationException(sprintf('Invalid dynamics-plugin.xml file for plugin "%s". Root note should be a dynamics-plugin tag.', $this->pluginName));
     }
 
     foreach ($xml->import as $import)
