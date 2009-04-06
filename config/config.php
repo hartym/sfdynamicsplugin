@@ -14,3 +14,8 @@ if (!is_writeable(sfDynamicsCache::getSuperCacheDir(true)))
   mkdir($_superCacheDir, 0777, true);
   chmod($_superCacheDir, 0777);
 }
+
+require_once dirname(__FILE__).'/../lib/debug/sfWebDebugPanelDynamics.class.php';
+
+$this->dispatcher->connect('debug.web.load_panels', array('sfWebDebugPanelDynamics', 'listenToLoadPanelEvent'));
+
