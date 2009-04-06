@@ -62,6 +62,11 @@ class sfDynamicsManager
     return $this->configuration->getPackage($packageName);
   }
 
+  public function getPackages()
+  {
+    return $this->packages;
+  }
+
   /**
    * Loads a behavior
    *
