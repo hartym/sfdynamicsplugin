@@ -17,22 +17,22 @@ class sfWebDebugPanelDynamics extends sfWebDebugPanel
     $controller = sfContext::getInstance()->getController();
 
     $html = '
-    <style>
-      table#sfWebDebugDynamics ul,
-      table#sfWebDebugDynamics ul li
+    <style type="text/css">
+      div#sfWebDebugDynamics table ul,
+      div#sfWebDebugDynamics table ul li
       {
         margin: 0;
         padding: 0;
         list-style-type: dash;
       }
-      table#sfWebDebugDynamics ul
+      div#sfWebDebugDynamics table ul
       {
         padding-left: 16px;
 
       }
     </style>
 
-    <table class="sfWebDebugLogs" id="sfWebDebugDynamics">
+    <table class="sfWebDebugLogs">
       <tr>
         <td>&nbsp;</td>
         <th>Javascript items</th>
