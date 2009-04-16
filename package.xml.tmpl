@@ -15,7 +15,13 @@
     <user>francois.b</user>
     <email>francois.beliveau@my-labz.com</email>
     <active>yes</active>
- </developer>
+  </developer>
+  <developer>
+    <name>Geoffrey Bachelet</name>
+    <user>geoffrey</user>
+    <email>geoffrey.bachelet@gmail.com</email>
+    <active>yes</active>
+  </developer>
   <date>##CURRENT_DATE##</date>
   <version>
     <release>##PLUGIN_VERSION##</release>
@@ -49,7 +55,29 @@
   <phprelease></phprelease>
   <changelog>
     <release>
-      <date>2009-06-03</date>
+      <date>2009-16-04</date>
+      <version><release>0.9.1</release><api>0.9</api></version>
+      <stability><release>beta</release><api>beta</api></stability>
+      <notes>
+        <![CDATA[
+        This release include changes from r17032 to r17356
+
+        * fix debug panel xhtml (add type attribute to style node and remove
+          duplicate id)
+        * update package.xml.tmpl
+        * evolution on jquery package definition files to allow keeping
+          concurrent versions of jquery.
+        * added package md5 sums check on definition to avoid allowing two
+          different version of the same package (for example jquery 1.2.x and
+          jquery 1.3.x) being defined at the same time.
+        * merge of dynamic_path_resolver branch (from r17132 to r17351).
+          Feature is not yet complete, see
+          http://dynamics.lighthouseapp.com/projects/24930/tickets/8-relative-path-resolver#ticket-8-1
+      ]]>
+      </notes>
+    </release>
+    <release>
+      <date>2009-04-06</date>
       <version><release>0.9.0</release><api>0.9</api></version>
       <stability><release>beta</release><api>beta</api></stability>
       <notes>
