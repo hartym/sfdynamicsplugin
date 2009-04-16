@@ -95,6 +95,15 @@ class sfDynamicsRenderer
     return $code;
   }
 
+  /**
+   * filterStylesheet - stylesheet specific rendering filters
+   *
+   * @param  sfDynamicsAssetCollectionDefinition $package
+   * @param  string $filename
+   * @param  string $code
+   * @return string
+   */
+
   protected function filterStylesheet(sfDynamicsAssetCollectionDefinition $package, $filename, $code)
   {
     if (sfDynamicsConfig::isStylesheetImportResolutionEnabled($package))
@@ -103,7 +112,34 @@ class sfDynamicsRenderer
       $code = preg_replace_callback('/@import\s+url\((["\']?)([a-z\/\\._-]+)(\1)\);/i', $callback, $code);
     }
 
+    if (sfDynamicsConfig::isStylesheetRelativePathsResolutionEnabled($package))
+    {
+      $callback = create_function('$v', sprintf('return %s::resolveStylesheetRelativePathsCallback($v, \'%s\');', __CLASS__, $filename));
+      $code = preg_replace_callback('/url\((\'|")?(\.[^\'"]+)(\'|")?\)/iU', $callback, $code);
+    }
+
     return $code;
+  }
+
+  /**
+   * Callback to resolve assets relative paths in stylesheets
+   *
+   * @param array $matches The array of matches from pcre
+   * @param string $filename The filename of the stylesheet
+   * @return string
+   */
+
+  static public function resolveStylesheetRelativePathsCallback($matches, $filename)
+  {
+    $countSubDirs = substr_count($matches[2], '../');
+    $relativePath = str_replace(sfConfig::get('sf_web_dir'), '', dirname($filename));
+    if ($countSubDirs > substr_count($relativePath, '/'))
+    {
+      return $matches[0];
+    }
+    $absolutePath = implode('/', explode('/', $relativePath, $countSubDirs * -1));
+    $absolutePath = $absolutePath.'/'.str_replace('../', '', $matches[2]);
+    return sprintf('url("%s")', $absolutePath);
   }
 
   /**
