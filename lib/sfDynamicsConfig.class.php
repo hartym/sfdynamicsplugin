@@ -59,6 +59,11 @@ class sfDynamicsConfig
     return true;
   }
 
+  static public function isStylesheetRelativePathsResolutionEnabled($package)
+  {
+    return true;
+  }
+
   static public function isStylesheetTidyEnabled($package)
   {
     return !sfConfig::get('sf_debug');
