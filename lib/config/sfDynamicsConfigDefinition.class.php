@@ -122,7 +122,21 @@ class sfDynamicsConfigDefinition extends sfDynamicsBaseDefinition
   public function merge($config)
   {
     $this->imports  = array_merge($this->imports, $config->getImports());
-    $this->packages = array_merge($this->packages, $config->getPackages());
+
+    foreach ($config->getPackages() as $packageName => $package)
+    {
+      if (isset($this->packages[$packageName]))
+      {
+        if (!$this->packages[$packageName]->isEqual($package))
+        {
+          throw new sfDynamicsConfigurationException(sprintf('Two different packages with name "%s" were included by configuration.', $packageName));
+        }
+      }
+      else
+      {
+        $this->packages[$packageName] = $package;
+      }
+    }
   }
 
   /**
@@ -133,10 +147,11 @@ class sfDynamicsConfigDefinition extends sfDynamicsBaseDefinition
    */
   public function parseXml($xml)
   {
-    if (!$xml)
+    if (!($xml && $xml instanceof SimpleXMLElement))
     {
-      throw new Exception();
+      throw new InvalidArgumentException('Invalid XML given');
     }
+
     if ($xml->getName()!='dynamics')
     {
       throw new sfDynamicsConfigurationException('Invalid XML file.'."\n\n".'Root node\'s tag name must be «dynamics».');
