@@ -20,6 +20,11 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
     parent::__construct($xml);
   }
 
+  public function isEqual(sfDynamicsPackageDefinition $package)
+  {
+    return md5(serialize($this)) == md5(serialize($package));
+  }
+
   public function setPrependPaths($paths)
   {
     $this->prependPaths = $paths;
