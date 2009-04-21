@@ -61,7 +61,7 @@ class sfDynamicsConfig
 
   static public function isStylesheetRelativePathsResolutionEnabled($package)
   {
-    return true;
+    return false;
   }
 
   static public function isStylesheetTidyEnabled($package)
