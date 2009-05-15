@@ -40,7 +40,7 @@ class sfDynamicsRenderer
 
       if (!isset($result))
       {
-        $result = $this->{'filterConcatenated'.ucfirst($type)}($package, $this->getConcatenatedAssets($name, $package, $extension, $paths, $assets));
+        $result = $this->{'filterConcatenated'.ucfirst($type)}($package, $this->getConcatenatedAssets($package, $paths, $assets));
 
         if (sfDynamicsConfig::isCacheEnabled())
         {
@@ -61,6 +61,7 @@ class sfDynamicsRenderer
    *
    * @param  sfDynamicsAssetCollectionDefinition $package
    * @param  string $code
+   * @todo move to AssetCollection (JavascriptCollection ?)
    * @return string
    */
   protected function filterConcatenatedJavascript(sfDynamicsAssetCollectionDefinition $package, $code)
@@ -73,16 +74,12 @@ class sfDynamicsRenderer
     return $code;
   }
 
-  protected function filterJavascript(sfDynamicsAssetCollectionDefinition $package, $filename, $code)
-  {
-    return $code;
-  }
-
   /**
    * filterStylesheet - stylesheet specific rendering filters
    *
    * @param  sfDynamicsAssetCollectionDefinition $package
    * @param  string $code
+   * @todo move to AssetCollection (StylesheetCollection ?)
    * @return string
    */
   protected function filterConcatenatedStylesheet(sfDynamicsAssetCollectionDefinition $package, $code)
@@ -96,53 +93,6 @@ class sfDynamicsRenderer
   }
 
   /**
-   * filterStylesheet - stylesheet specific rendering filters
-   *
-   * @param  sfDynamicsAssetCollectionDefinition $package
-   * @param  string $filename
-   * @param  string $code
-   * @return string
-   */
-
-  protected function filterStylesheet(sfDynamicsAssetCollectionDefinition $package, $filename, $code)
-  {
-    if (sfDynamicsConfig::isStylesheetImportResolutionEnabled($package))
-    {
-      $callback = create_function('$v', sprintf('return file_get_contents(%s.\'/\'.$v[2]);', var_export(dirname($filename), true)));
-      $code = preg_replace_callback('/@import\s+url\((["\']?)([a-z\/\\._-]+)(\1)\);/i', $callback, $code);
-    }
-
-    if (sfDynamicsConfig::isStylesheetRelativePathsResolutionEnabled($package))
-    {
-      $callback = create_function('$v', sprintf('return %s::resolveStylesheetRelativePathsCallback($v, \'%s\');', __CLASS__, $filename));
-      $code = preg_replace_callback('/url\((\'|")?(\.[^\'"]+)(\'|")?\)/iU', $callback, $code);
-    }
-
-    return $code;
-  }
-
-  /**
-   * Callback to resolve assets relative paths in stylesheets
-   *
-   * @param array $matches The array of matches from pcre
-   * @param string $filename The filename of the stylesheet
-   * @return string
-   */
-
-  static public function resolveStylesheetRelativePathsCallback($matches, $filename)
-  {
-    $countSubDirs = substr_count($matches[2], '../');
-    $relativePath = str_replace(sfConfig::get('sf_web_dir'), '', dirname($filename));
-    if ($countSubDirs > substr_count($relativePath, '/'))
-    {
-      return $matches[0];
-    }
-    $absolutePath = implode('/', explode('/', $relativePath, $countSubDirs * -1));
-    $absolutePath = $absolutePath.'/'.str_replace('../', '', $matches[2]);
-    return sprintf('url("%s")', $absolutePath);
-  }
-
-  /**
    * getConcatenatedAssets - Packs a list of assets in one string
    *
    * @param sfDynamicsPackageDefinition $package
@@ -151,37 +101,16 @@ class sfDynamicsRenderer
    * @param array                       $assets
    * @return void
    */
-  protected function getConcatenatedAssets($packageName, $package, $type, array $paths, array $assets)
+  protected function getConcatenatedAssets($package, array $paths, array $assets)
   {
     $result = '';
     $attempts = array();
 
     foreach ($assets as $asset)
     {
-      foreach ($paths as $path)
-      {
-        $file = $path.'/'.$asset.'.'.$type;
+      $asset->computePath($paths);
 
-        if (file_exists($file) && is_readable($file) && is_file($file))
-        {
-          break;
-        }
-
-        $attempts[] = $file;
-        $file = null;
-      }
-
-      if (is_null($file))
-      {
-        throw new sfDynamicsUnreadableAssetException(sprintf('Unreadable asset file for package «%s».%sAttempts in order: %s%s', $packageName, "\n\n", "\n - ", implode("\n - ", $attempts)));
-      }
-
-      if (sfConfig::get('sf_debug'))
-      {
-        $result .= sprintf("/* \n * sfDynamicsPlugin include: %s\n */", $file)."\n\n";
-      }
-
-      $result .= $this->{'filter'.ucfirst(sfDynamics::getTypeFromExtension($type))}($package, $file, file_get_contents($file))."\n\n";
+      $result .= $asset->getFilteredContent($package);
     }
 
     return $result;
