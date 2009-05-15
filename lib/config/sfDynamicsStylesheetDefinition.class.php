@@ -29,7 +29,7 @@ class sfDynamicsStylesheetDefinition extends sfDynamicsAssetDefinition
       $code = preg_replace_callback('/@import\s+url\((["\']?)([a-z\/\\._-]+)(\1)\);/i', $callback, $code);
     }
 
-    $findUrlRegexp = '/url\((\'|")?(\.[^\'"]+)(\'|")?\)/iU';
+    $findUrlRegexp = '/url\((\'|")?([^\/][^\'"]+)(\'|")?\)/iU';
 
     if (isset($this->options['image_path_prefix']))
     {
