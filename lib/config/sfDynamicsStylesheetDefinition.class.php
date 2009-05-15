@@ -29,13 +29,34 @@ class sfDynamicsStylesheetDefinition extends sfDynamicsAssetDefinition
       $code = preg_replace_callback('/@import\s+url\((["\']?)([a-z\/\\._-]+)(\1)\);/i', $callback, $code);
     }
 
+    $findUrlRegexp = '/url\((\'|")?(\.[^\'"]+)(\'|")?\)/iU';
+
+    if (isset($this->options['image_path_prefix']))
+    {
+      $callback = create_function('$v', sprintf('return %s::addImagePrefixPathCallback($v, \'%s\');', __CLASS__, $this->options['image_path_prefix']));
+      $code = preg_replace_callback($findUrlRegexp, $callback, $code);
+    }
+
     if (sfDynamicsConfig::isStylesheetRelativePathsResolutionEnabled($package))
     {
       $callback = create_function('$v', sprintf('return %s::resolveRelativePathsCallback($v, \'%s\');', __CLASS__, $this->path));
-      $code = preg_replace_callback('/url\((\'|")?(\.[^\'"]+)(\'|")?\)/iU', $callback, $code);
+      $code = preg_replace_callback($findUrlRegexp, $callback, $code);
     }
 
     return $code;
+  }
+
+  /**
+   * Callback to add the image_path_prefix
+   *
+   * @param $matches
+   * @param $image_path_prefix
+   * @return string
+   */
+
+  static public function addImagePrefixPathCallback($matches, $image_path_prefix)
+  {
+    return sprintf('url("%s%s")', $image_path_prefix, $matches[2]);
   }
 
   /**
