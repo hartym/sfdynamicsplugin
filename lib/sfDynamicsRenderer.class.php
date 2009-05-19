@@ -110,7 +110,7 @@ class sfDynamicsRenderer
     {
       $asset->computePath($paths);
 
-      $result .= $asset->getFilteredContent($package);
+      $result .= $asset->getFilteredContent($package)."\n";
     }
 
     return $result;
