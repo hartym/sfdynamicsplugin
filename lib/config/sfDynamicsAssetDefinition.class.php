@@ -20,9 +20,10 @@ abstract class sfDynamicsAssetDefinition extends sfDynamicsBaseDefinition
 
   public function getFilteredContent(sfDynamicsAssetCollectionDefinition $package)
   {
+    $code = '';
     if (sfConfig::get('sf_debug'))
     {
-      $code = sprintf("/* \n * sfDynamicsPlugin include: %s\n */", $this->path)."\n\n";
+      $code .= sprintf("/* \n * sfDynamicsPlugin include: %s\n */", $this->path)."\n\n";
     }
 
     $code .= file_get_contents($this->path);
