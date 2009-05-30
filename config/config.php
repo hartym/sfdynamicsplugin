@@ -17,5 +17,3 @@ if (!is_writeable(sfDynamicsCache::getSuperCacheDir(true)))
 
 require_once dirname(__FILE__).'/../lib/debug/sfWebDebugPanelDynamics.class.php';
 
-$this->dispatcher->connect('debug.web.load_panels', array('sfWebDebugPanelDynamics', 'listenToLoadPanelEvent'));
-
