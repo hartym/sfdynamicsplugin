@@ -53,6 +53,10 @@ class sfDynamicsConfigDefinition extends sfDynamicsBaseDefinition
       $this->merge($_config);
       $this->imports[$resource] = true;
     }
+    else
+    {
+      throw new sfConfigurationException(sprintf('Could not find any suitable configuration file matching the resource referenced by <import> tag.%s The problematic resource is "%s".', "\n\n", $resource));
+    }
   }
 
   /**
