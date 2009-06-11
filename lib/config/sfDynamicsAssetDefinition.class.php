@@ -78,7 +78,14 @@ abstract class sfDynamicsAssetDefinition extends sfDynamicsBaseDefinition
 
       if (is_null($file))
       {
-        throw new sfDynamicsUnreadableAssetException(sprintf('Unreadable asset file for package «%s».%sAttempts in order: %s%s', $packageName, "\n\n", "\n - ", implode("\n - ", $attempts)));
+        throw new sfDynamicsUnreadableAssetException(
+          sprintf(
+            'Unreadable asset file for package.%sAttempts in order: %s%s',
+            "\n\n",
+            "\n - ",
+            implode("\n - ", $attempts)
+          )
+        );
       }
     }
   }
