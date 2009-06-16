@@ -1,24 +1,79 @@
-# Install
+# Installing sfDynamics
 
-To install the plugin, you have two major options.
+To install the plugin, you have a few major options.
 
 *TODO: This needs to be rewritten, and is maybe outdated*
 
 ## Use the latest release
 
-The easiest way is to use the latest release available on [the symfony project plugin's page](http://www.symfony-project.org/plugins/sfDynamicsPlugin).
-Thoose releases are heavily tested, and you're assured not to get anything broken by any subsequent release. Just use the plugin:install task on
-it and you'll be done:
+The easiest way is to use the latest release available on [the symfony project
+plugin's page](http://www.symfony-project.org/plugins/sfDynamicsPlugin).
+Thoose releases are heavily tested, and you're assured not to get anything
+broken by any subsequent release. Just use the plugin:install task on it and
+you'll be done:
 
     [bash]
     php symfony plugin:install sfDynamicsPlugin
 
-## Use a git branch
+## Checkout the subversion repository
 
-You can also use directly a git branch, by cloning the repository. Depending on if you want to install it for contribution or use, you should use either
-the `master` branch (which can be unstable) or the `stable` branch, which will always match the latest release.
+In your project directory, just run:
 
     [bash]
-    git clone XXX...XXX master
-    git clone XXX...XXX stable
+    svn checkout http://svn.symfony-project.com/plugins/sfDynamicsPlugin/trunk plugins/sfDynamicsPlugin
+
+Whenever you need to update to the last revision, run:
+
+    [bash]
+    svn update
+
+Basic subversion knowledge is required to work with it.
+
+
+## Use the subversion repository as an external in your project
+
+Edit the svn:externals property of your project's plugins directory by running:
+
+    [bash]
+    svn propedit svn:externals plugins
+
+Add the following external:
+
+    sfDynamicsPlugin -rxxx http://svn.symfony-project.com/plugins/sfDynamicsPlugin/trunk
+
+Don't forget to replace `xxx` by the revision you want to use. Freezing to a
+revision will avoid accidental updates in your project. If you are intrepid
+(crazy?), you can also skip the -r part and always use the last revision.
+
+
+## Use a git branch
+
+For now, there is only one `master` git branch available. You can clone this
+branch by running the following:
+
+    [bash]
+    git clone git://github.com/hartym/sfdynamicsplugin.git plugins/sfDynamicsPlugin
+
+Whenever you need to update your current branch to the last revision, run:
+
+    [bash]
+    git pull origin master
+
+Using git is not recommended for beginners, and you should have some basic git
+knowledge before trying the experience. Using git as source control is more
+powerfull, and is a great way to contribute to the plugin, but can look a
+little strange to newcommers.
+
+## Additional steps
+
+Once this is done, you have a few steps remaining to make dynamics work nicely
+in your project. Thoose steps are detailed step by step in [the installation
+tutorial](/documentation/tutorial-02_installation) page.
+
+To sum it up, you need to:
+
+  - create a world writeable web/dynamics directory
+  - enable the plugin in your ProjectConfiguration (if applicable to your
+    symfony version)
+  - activate the sfDynamics module in your applications
 
