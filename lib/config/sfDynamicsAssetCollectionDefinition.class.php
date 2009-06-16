@@ -30,31 +30,10 @@ class sfDynamicsAssetCollectionDefinition extends sfDynamicsBaseDefinition
     return !empty($this->stylesheets);
   }
 
-  public function getJavascripts()
-  {
-    return $this->javascripts;
-  }
-
-  public function setStylesheets($stylesheets)
-  {
-    $this->stylesheets = $stylesheets;
-  }
-
   public function hasJavascripts()
   {
     return !empty($this->javascripts);
   }
-
-  public function getStylesheets()
-  {
-    return $this->stylesheets;
-  }
-
-  public function setJavascripts($javascripts)
-  {
-    $this->javascripts = $javascripts;
-  }
-
 
   public function parseXml($xml)
   {
@@ -64,7 +43,7 @@ class sfDynamicsAssetCollectionDefinition extends sfDynamicsBaseDefinition
     {
       foreach ($xml->javascript as $index => $javascript)
       {
-        $this->javascripts[] = (string)$javascript;
+        $this->javascripts[] = new sfDynamicsJavascriptDefinition($javascript);
       }
     }
 
@@ -72,7 +51,7 @@ class sfDynamicsAssetCollectionDefinition extends sfDynamicsBaseDefinition
     {
       foreach ($xml->stylesheet as $index => $stylesheet)
       {
-        $this->stylesheets[] = (string)$stylesheet;
+        $this->stylesheets[] = new sfDynamicsStylesheetDefinition($stylesheet);
       }
     }
 

@@ -15,5 +15,3 @@ if (!is_writeable(sfDynamicsCache::getSuperCacheDir(true)))
   chmod($_superCacheDir, 0777);
 }
 
-require_once dirname(__FILE__).'/../lib/debug/sfWebDebugPanelDynamics.class.php';
-

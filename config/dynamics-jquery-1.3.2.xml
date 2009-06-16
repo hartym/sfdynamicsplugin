@@ -178,7 +178,6 @@
     <javascript>jquery/1.3.2/ui/ui.core</javascript>
     <javascript>jquery/1.3.2/ui/ui.accordion</javascript>
     <javascript>jquery/1.3.2/ui/ui.datepicker</javascript>
-    <stylesheet>themes/default/ui.datepicker</stylesheet>
     <javascript>jquery/1.3.2/ui/ui.dialog</javascript>
     <javascript>jquery/1.3.2/ui/ui.draggable</javascript>
     <javascript>jquery/1.3.2/ui/ui.droppable</javascript>

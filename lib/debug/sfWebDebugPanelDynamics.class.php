@@ -9,7 +9,7 @@ class sfWebDebugPanelDynamics extends sfWebDebugPanel
 
   public function getPanelTitle()
   {
-    return 'sfDynamicsPlugin informations';
+    return 'sfDynamicsPlugin';
   }
 
   public function getPanelContent()
@@ -76,7 +76,7 @@ class sfWebDebugPanelDynamics extends sfWebDebugPanel
 
       $html .= '</tr>';
     }
-    $html .= '</table>';
+    $html .= '</table><br />';
 
     return '<div id="sfWebDebugDynamics">'.$html.'</div>';
   }
