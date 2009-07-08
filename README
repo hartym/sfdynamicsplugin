@@ -3,11 +3,14 @@ sfDynamicsPlugin
 
 Overview
 --------
-sfDynamicsPlugin is a symfony plugin aiming to manage javascript features within a project. It
-supports js and css dependencies, javascript/css packing, theming, i18n, caching and more.
+sfDynamicsPlugin is a symfony plugin aiming to manage client-side dynamics
+behavior development within a symfony project.  It contains a
+javascript/stylesheet package management system, with full dependency/conflict
+support.
 
-For now, the plugin is bundled with a set of libraries based on jQuery, jQuery UI and some
-additional jQuery plugins, but will in the future support different sets of libraries.
+The plugin bundle the major javascript frameworks (jQuery, jQuery UI,
+prototype, scriptaculous, extJS, and maybe more in the future) but does not
+include anything in your site unless configured so.
 
 We do not provide...
 --------------------
@@ -20,9 +23,3 @@ written in javascript, so you don't have to learn a new PHP logic to write your 
 simplify your life by allowing you to write JS without knowing anything of JS, but by doing so it
 forces developpers to understand what their script do, and will save much time of debugging headaches.
 
-We will provide in the future...
---------------------------------
-Logging/firebug integration for debug mode.
-
-First steps
------------

@@ -6,6 +6,7 @@
  * @package    sfDynamicsPlugin
  * @subpackage configuration
  * @version    SVN: $Id: $
+ * @author     Romain Dorgueil <romain.dorgueil@symfony-project.com>
  * @author     Geoffrey Bachelet <geoffrey.bachelet@gmail.com>
  * @license    MIT License
  */
@@ -81,7 +82,9 @@ class sfDynamicsStylesheetDefinition extends sfDynamicsAssetDefinition
   }
 
   /**
-   * @todo remove in php 5.3
+   * @todo remove in php 5.3 (use of __callStatic)
+   *
+   * romain: we won't remove it soon, as php 5.2 support will be needed for long time.
    */
   static public function __set_state($state)
   {

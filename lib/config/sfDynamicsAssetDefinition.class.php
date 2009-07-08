@@ -6,6 +6,7 @@
  * @package    sfDynamicsPlugin
  * @subpackage configuration
  * @version    SVN: $Id: $
+ * @author     Romain Dorgueil <romain.dorgueil@symfony-project.com>
  * @author     Geoffrey Bachelet <geoffrey.bachelet@gmail.com>
  * @license    MIT License
  */
@@ -13,10 +14,22 @@ abstract class sfDynamicsAssetDefinition extends sfDynamicsBaseDefinition
 {
   protected
     $resource,
-    $options = array(),
+    $options = array(
+        'vary' => null,
+      ),
     $path;
 
   abstract public function getExtension();
+
+  public function getOption($option, $default=null)
+  {
+    return isset($this->options[$option]) ? $this->options[$option] : $default;
+  }
+
+  public function getVary()
+  {
+    return $this->getOption('vary', 'none');
+  }
 
   public function getFilteredContent(sfDynamicsAssetCollectionDefinition $package)
   {
@@ -37,7 +50,7 @@ abstract class sfDynamicsAssetDefinition extends sfDynamicsBaseDefinition
 
     if (!$this->resource)
     {
-      throw new sfDynamicsConfigurationException();
+      throw new sfDynamicsConfigurationException('Could not parse resource as string.');
     }
 
     if (isset($xml['image_path_prefix']))

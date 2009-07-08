@@ -25,6 +25,11 @@ class sfDynamics
   {
     if (is_null(self::$manager))
     {
+      if (!in_array('sfDynamics', sfConfig::get('sf_enabled_modules', array())))
+      {
+        throw new sfConfigurationException('The module "sfDynamics" is not enabled.'.PHP_EOL.PHP_EOL.'Please add it to the enabled_modules list in your applications\' settings.yml.');
+      }
+
       if (is_null($context))
       {
         $context = sfContext::getInstance();
@@ -55,7 +60,7 @@ class sfDynamics
   {
     static $renderer = null;
 
-    if(is_null($renderer))
+    if (is_null($renderer))
     {
       $renderer = new sfDynamicsRenderer();
     }
@@ -67,7 +72,7 @@ class sfDynamics
   {
     static $cache = null;
 
-    if(is_null($cache))
+    if (is_null($cache))
     {
       $cache = new sfDynamicsCache();
     }

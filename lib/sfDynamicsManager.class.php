@@ -54,6 +54,8 @@ class sfDynamicsManager
   /**
    * getPackage
    *
+   * Retrieve a package from configuration.
+   *
    * @param mixed $packageName
    * @return void
    */
@@ -90,8 +92,8 @@ class sfDynamicsManager
         // load assets
         if ($this->request instanceof sfWebRequest && !$this->request->isXmlHttpRequest())
         {
-          $package->hasJavascripts() && $this->addAssets($packageName, 'javascript');
-          $package->hasStylesheets() && $this->addAssets($packageName, 'stylesheet');
+          $package->hasJavascripts() && $this->addAssetsFromPackage($package, 'javascript');
+          $package->hasStylesheets() && $this->addAssetsFromPackage($package, 'stylesheet');
         }
 
         unset($this->packages[$packageName]); // This is needed to preserve assets order.
@@ -108,84 +110,132 @@ class sfDynamicsManager
 
   /**
    * adds a list of assets of given type to the list to add when filtering the response
+   *
+   * @param  array $assets  an array of sfDynamicsAssetDefinition
+   * @param  string $type   either stylesheet or javascript
+   * @return void
    */
-  public function addAssets($assets, $type)
+  protected function addAssets(array $assets, $type)
   {
-    if (!is_array($assets))
-    {
-      $assets = array($assets);
-    }
     $property = $type.'s';
 
     foreach ($assets as $asset)
     {
+      $vary = $asset->getVary();
+
+      if (!isset($this->{$property}[$vary]))
+      {
+        $this->{$property}[$vary] = array();
+      }
+
       if (!in_array($asset, $this->$property))
       {
-        $this->{$property}[] = $asset;
+        $this->{$property}[$vary][] = $asset;
       }
     }
+  }
+
+  protected function addAssetsFromPackage(sfDynamicsPackageDefinition $package, $type)
+  {
+    $getter = 'get'.ucfirst($type).'s';
+
+    $this->addAssets($package->$getter(), $type);
   }
 
   public function generateAssetsHtml()
   {
     $renderer = sfDynamics::getRenderer();
-    $html = '';
+    $htmls = array();
 
-    /* generate useable package array */
-    $packages = array();
-    foreach(array_keys($this->packages) as $packageName)
-    {
-      $packages[$packageName] = $this->getPackage($packageName);
-    }
+    // duplicate package
+    $packages = $this->packages;
 
     foreach (array('javascript'=>'js', 'stylesheet'=>'css') as $type => $ext)
     {
-      $assets = $this->{$type.'s'};
+      $namespacedAssets = $this->{$type.'s'};
 
-      if (sfDynamicsConfig::isGroupingEnabledFor($type) && sfDynamicsConfig::isSupercacheEnabled())
+      foreach ($namespacedAssets as $namespace => $assets)
       {
-        $url = sfDynamicsRouting::supercache_for($packages, $ext);
-        $renderer->generateSupercache($url, $packages, $assets, $type);
-        $html .= '  '.$this->getTag($url, $type)."\n";
-      }
-      else
-      {
-        foreach ($assets as $asset)
+        // initialize
+        isset($htmls[$namespace]) or $htmls[$namespace] = '';
+        $html = '';
+
+        // either supercache mode ...
+        if (sfDynamicsConfig::isGroupingEnabledFor($type) && sfDynamicsConfig::isSupercacheEnabled())
         {
-          $url = $this->controller->genUrl(sfDynamicsRouting::uri_for($asset, $ext));
-          $html .= '  '.$this->getTag($url, $type)."\n";
+          $url = sfDynamicsRouting::supercache_for($packages, $ext);
+          $renderer->generateSupercache($url, $packages, $assets, $type);
+          $html .= '  '.$this->getTag($url, $type, $namespace)."\n";
         }
+        // ... or package mode
+        else
+        {
+          foreach ($assets as $asset)
+          {
+            $url = $this->controller->genUrl(sfDynamicsRouting::uri_for($asset, $ext));
+            $html .= '  '.$this->getTag($url, $type, $namespace)."\n";
+          }
+
+        }
+
+        $htmls[$namespace] .= $html;
       }
     }
-    return $html;
+
+    return $htmls;
   }
 
-  public function getTag($url, $type)
+  /**
+   * Render an html tag for an asset
+   *
+   * @throws BadMethodCallException if trying to render an invalid asset type.
+   * @param  string $url
+   * @param  string $type
+   * @param  string $vary
+   * @return string
+   */
+  public function getTag($url, $type, $vary="none")
   {
     switch ($type)
     {
       case 'javascript':
         return '<script type="text/javascript" src="'.$url.'"></script>';
+
       case 'stylesheet':
-        return '<link rel="stylesheet" type="text/css" media="screen" href="'.$url.'" />';
+        // @todo refactor in stylesheet definition
+        in_array($vary, array('screen', 'print', 'audio', 'all')) or $vary = 'all';
+        return sprintf('<link rel="stylesheet" type="text/css" media="%s" href="%s" />', $vary, $url);
+
       default:
         throw new BadMethodCallException('Invalid asset type.');
     }
   }
 
+  /**
+   * Listen to content filtering event and add our asset loading HTML.
+   *
+   * @param  sfEvent $event
+   * @param  string $content
+   * @return string
+   */
   public function filterContent(sfEvent $event, $content)
   {
+    // event subject is a sfResponse instance
     $response = $event->getSubject();
 
     if (false !== ($pos = strpos($content, '</head>')))
     {
-      $html = $this->generateAssetsHtml();
+      $htmls = $this->generateAssetsHtml();
 
-      if ($html)
+      if (count($htmls))
       {
-        $content = substr($content, 0, $pos)."\n".$html.substr($content, $pos);
+        foreach ($htmls as $namespace => $html)
+        {
+          $content = substr($content, 0, $pos)."\n".$html.substr($content, $pos);
+        }
       }
     }
+
     return $content;
   }
 }
