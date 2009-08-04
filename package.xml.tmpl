@@ -55,7 +55,35 @@
   <phprelease></phprelease>
   <changelog>
     <release>
-      <date>2009-16-04</date>
+      <date>2009-08-04</date>
+      <version><release>0.9.2</release><api>0.9</api></version>
+      <stability><release>beta</release><api>beta</api></stability>
+      <notes>
+        <![CDATA[
+        This release include changes from r17356 to r20766
+
+        * r17356: updated package.xml template for 0.9.1 release
+        * r17494: disabled bogus relative_path_resolver feature. Related to
+          http://dynamics.lighthouseapp.com/projects/24930/tickets/10-relative-url-in-css-render-all-unix-path#ticket-10-3
+        * r18307: refactored assets definition collections
+        * r18309: implemented image_path_prefix option for stylesheets
+        * r18310: updated url finder regexp to find url that starts by anything
+          but a slash
+        * r18478: fixed minor bug in renderer and assetCollectionDefinition
+          classes and removed stylesheet from jquery.all package
+        * r18786: switched the web debug toolbar into plugin configuration
+          class to avoid compatibility problems with symfony 1.1
+        * r19163: Last adjustements before #sflive09fr - Fixed some
+          compatibility problems, added explicit exceptions
+        * r19296: merged last changes from git branch
+        * r20756: merged last changes. Error checking, doc, default media.
+        * r20762: removed symfony 1.1 support, added ., - and _ characters in
+          package name.
+      ]]>
+      </notes>
+    </release>
+    <release>
+      <date>2009-04-16</date>
       <version><release>0.9.1</release><api>0.9</api></version>
       <stability><release>beta</release><api>beta</api></stability>
       <notes>
