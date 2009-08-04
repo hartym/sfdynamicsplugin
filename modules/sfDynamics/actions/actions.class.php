@@ -2,17 +2,23 @@
 
 class sfDynamicsActions extends sfActions
 {
-  public function setupContext()
+  public function executeAsset($request)
   {
-    $this->path = sfConfig::get('sf_plugins_dir').'/sfDynamicsPlugin/data'; // default, should change
-    $this->manager = sfDynamics::getManager();
-
     try
     {
-      $this->name = str_replace('-', '.', $this->getRequest()->getParameter('name'));
-      $this->forward404Unless(sfDynamicsPackageDefinition::checkIsValidPackageName($this->name));
+      $name = $this->getRequest()->getParameter('name');
+      $this->forward404Unless(sfDynamicsPackageDefinition::checkIsValidPackageName($name));
 
-      $this->package = $this->manager->getPackage($this->name);
+      $extensionPosition = strrpos($name, '.');
+      $assetExtension = substr($name, $extensionPosition+1);
+      $assetType = sfDynamics::getTypeFromExtension($assetExtension);
+      $name = substr($name, 0, $extensionPosition);
+
+      $this->package = sfDynamics::getManager()->getPackage($name);
+
+      $this->{'pre'.ucfirst($assetType)}();
+
+      return $this->renderText(sfDynamics::getRenderer()->getAsset($name, $this->package, $assetType, $assetExtension));
     }
     catch (Exception $e)
     {
@@ -20,42 +26,20 @@ class sfDynamicsActions extends sfActions
     }
   }
 
-  /**
-   * executeJavascript
-   *
-   * @param mixed $request
-   * @return void
-   */
-  public function executeJavascript($request)
+  protected function preJavascript()
   {
-    $this->setupContext();
-
     $this->forward404Unless(count($this->package->getJavascripts()));
     $this->forward404Unless(count($this->package->getPaths()));
 
     $this->getResponse()->setContentType('text/javascript');
 
-    $renderer = sfDynamics::getRenderer();
-
-    return $this->renderText($renderer->getAsset($this->name, $this->package, 'javascript', 'js'));
   }
 
-  /**
-   * executeStylesheet
-   *
-   * @param mixed $request
-   * @return void
-   */
-  public function executeStylesheet($request)
+  protected function preStylesheet()
   {
-    $this->setupContext();
-
-    $this->forward404Unless(count($stylesheets = $this->package->getStylesheets()));
-    $this->forward404Unless(count($paths = $this->package->getPaths()));
+    $this->forward404Unless(count($this->package->getStylesheets()));
+    $this->forward404Unless(count($this->package->getPaths()));
 
     $this->getResponse()->setContentType('text/css');
-
-    $renderer = sfDynamics::getRenderer();
-    return $this->renderText($renderer->getAsset($this->name, $this->package, 'stylesheet', 'css'));
   }
 }

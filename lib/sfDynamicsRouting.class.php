@@ -46,16 +46,16 @@ class sfDynamicsRouting
     {
       list($sfVersionMajor, $sfVersionMinor, $sfVersionRelease) = explode('.', SYMFONY_VERSION);
 
-      if (($sfVersionMajor!=1) || (!in_array($sfVersionMinor, array(1,2,3))))
+      if (($sfVersionMajor!=1) || (!in_array($sfVersionMinor, array(2,3))))
       {
-        throw new sfConfigurationException(self::PLUGIN_NAME.' needs symfony 1.1 to 1.3 to run.');
+        throw new sfConfigurationException(self::PLUGIN_NAME.' needs symfony 1.2 to 1.3 to run.');
       }
 
       self::$newStyleRoutes = (bool)($sfVersionMinor>1);
     }
     else
     {
-      throw new sfConfigurationException(self::PLUGIN_NAME.' needs symfony 1.1 to 1.3 to run, but no version were found.');
+      throw new sfConfigurationException(self::PLUGIN_NAME.' needs symfony 1.2 to 1.3 to run, but no version were found.');
     }
   }
 
@@ -69,15 +69,15 @@ class sfDynamicsRouting
    * @param  array $routeParameters
    * @return void
    */
-  static protected function addRoute(sfRouting $r, $routeName, $routeUrl, $routeParameters)
+  static protected function addRoute(sfRouting $r, $routeName, $routePattern, $routeDefaults, $routeRequirements=array(), $routeOptions=array())
   {
     if (self::$newStyleRoutes)
     {
-      $r->prependRoute(self::ROUTE.'_'.$routeName, new sfRoute($routeUrl, $routeParameters));
+      $r->prependRoute(self::ROUTE.'_'.$routeName, new sfRoute($routePattern, $routeDefaults, $routeRequirements, $routeOptions));
     }
     else
     {
-      $r->prependRoute(self::ROUTE.'_'.$routeName, $routeUrl, $routeParameters);
+      $r->prependRoute(self::ROUTE.'_'.$routeName, $routePattern, $routeDefaults, $routeRequirements);
     }
   }
 
@@ -96,31 +96,35 @@ class sfDynamicsRouting
     $routing = $event->getSubject();
     $prefix = sfConfig::get('app_'.self::PLUGIN_NAME.'_base_route', '/dynamics');
 
-    foreach (self::$types as $actionName => $fileExtension)
-    {
+    /*foreach (self::$types as $actionName => $fileExtension)
+    {*/
       self::addRoute(
         $routing,
-        $actionName,
-        $prefix.'/:name.'.$fileExtension,
+        'asset',
+        $prefix.'/:name',
         array(
           'module' => 'sfDynamics',
-          'action' => $actionName
-        )
+          'action' => 'asset'
+        ),
+        array(),
+        array('segment_separators' => array('/'))
       );
 
       foreach (array('language'=>'/l/:language', 'theme'=>'/t/:theme', 'language_theme'=> '/l/:language/t/:theme') as $routeName => $routeEnhancer)
       {
         self::addRoute(
           $routing,
-          $actionName.'_'.$routeName,
-          $prefix.$routeEnhancer.'/:name.'.$fileExtension,
+          'asset_'.$routeName,
+          $prefix.$routeEnhancer.'/:name.',
           array(
             'module' => 'sfDynamics',
-            'action' => $actionName
-          )
+            'action' => 'asset'
+          ),
+          array(),
+          array('segment_separators' => array('/'))
         );
       }
-    }
+    /*}*/
   }
 
   /**
@@ -139,7 +143,7 @@ class sfDynamicsRouting
       throw new sfConfigurationException('Invalid asset type');
     }
 
-    return '@'.self::ROUTE.'_'.$translator[$extension].'?name='.str_replace('.', '-', $name);
+    return sprintf('@%s_asset?name=%s.%s', self::ROUTE, $name, $extension);
   }
 
   /**

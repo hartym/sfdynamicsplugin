@@ -159,7 +159,7 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
    */
   static public function checkIsValidPackageName($name)
   {
-    return preg_match('/^[a-z0-9.]+$/i', $name);
+    return preg_match('/^[a-z0-9._-]+$/i', $name);
   }
 
   static public function __set_state($state)
