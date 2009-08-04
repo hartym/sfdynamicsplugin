@@ -151,6 +151,17 @@ class sfDynamicsPackageDefinition extends sfDynamicsAssetCollectionDefinition
     return $xml;
   }
 
+  /**
+   * Is the given name a semantically correct package identifier?
+   *
+   * @param  string $name
+   * @return boolean
+   */
+  static public function checkIsValidPackageName($name)
+  {
+    return preg_match('/^[a-z0-9.]+$/i', $name);
+  }
+
   static public function __set_state($state)
   {
     return self::build(new self(), array('javascripts', 'stylesheets', 'description', 'requires', 'conflicts', 'i18n', 'themes', 'prependPaths', 'appendPaths', 'paths'), $state);

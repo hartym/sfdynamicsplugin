@@ -167,7 +167,7 @@ class sfDynamicsManager
       case 'javascript':
         return '<script type="text/javascript" src="'.$url.'"></script>';
       case 'stylesheet':
-        return '<link rel="stylesheet" type="text/css" media="screen" href="'.$url.'" />';
+        return '<link rel="stylesheet" type="text/css" media="all" href="'.$url.'" />';
       default:
         throw new BadMethodCallException('Invalid asset type.');
     }

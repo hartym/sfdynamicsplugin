@@ -10,7 +10,7 @@ class sfDynamicsActions extends sfActions
     try
     {
       $this->name = str_replace('-', '.', $this->getRequest()->getParameter('name'));
-      $this->forward404Unless(preg_match('/[a-z0-9.]+$/', $this->name));
+      $this->forward404Unless(sfDynamicsPackageDefinition::checkIsValidPackageName($this->name));
 
       $this->package = $this->manager->getPackage($this->name);
     }

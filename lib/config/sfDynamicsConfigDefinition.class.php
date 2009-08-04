@@ -167,12 +167,18 @@ class sfDynamicsConfigDefinition extends sfDynamicsBaseDefinition
       {
         throw new sfDynamicsConfigurationException('Invalid «import» tag.'."\n\n".'A «resource» attribute is needed, containing the name of the resource to import.');
       }
+
       $this->doImport('config/'.$resource);
     }
 
     foreach ($xml->package as $package)
     {
       $packageName = (string)$package['name'];
+
+      if (!sfDynamicsPackageDefinition::checkIsValidPackageName($packageName))
+      {
+        throw new sfConfigurationException(sprintf('Invalid package name «%s»', $packageName));
+      }
 
       $this->doPackage($packageName, $package);
     }
