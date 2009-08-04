@@ -18,6 +18,18 @@ It will automatically load every needed files, taking care of dependances,
 your app in debug mode, it will also take care of {link:packing} all package
 files.
 
+A package XML tag must have a "name" attribute, that may contain letters,
+digits and dots.
+
+## Example
+
+    Here is the simplest package definition.
+
+    [xml]
+    <package name="my.package">
+      <javascript>myscript</javascript>
+    </package>
+
 ## Children nodes
 
   * `path`: optional, any number
