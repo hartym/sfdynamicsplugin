@@ -188,4 +188,28 @@ class sfDynamicsManager
     }
     return $content;
   }
+  
+  public function filterContent(sfEvent $event, $content)
+  {
+    $prepend  = sfDynamicsConfig::getAssetsPositionInHead() == 'prepend';
+    $response = $event->getSubject();
+    $pos      = $prepend ? strpos($content, '<head>') : strpos($content, '</head>');
+
+    if (false !== $pos)
+    {
+      if ($prepend)
+      {
+        $pos += 6;
+      }
+    
+      $html = $this->generateAssetsHtml();
+
+      if ($html)
+      {
+        $content = substr($content, 0, $pos)."\n".$html.substr($content, $pos);
+      }
+    }
+
+    return $content;
+  }
 }
