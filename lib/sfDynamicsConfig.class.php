@@ -78,4 +78,16 @@ class sfDynamicsConfig
   {
     return sfConfig::get('app_sfDynamicsPlugin_supercache_web_path', 'dynamics');
   }
+  
+  static public function getAssetsPositionInHead()
+  {
+    $position = sfConfig::get('app_sfDynamicsPlugin_assets_position_in_head', 'append');
+
+    if (!in_array($position, array('append', 'prepend')))
+    {
+      throw new sfDynamicsConfigurationException('Invalid assets position in head');
+    }
+
+    return $position;
+  }
 }
