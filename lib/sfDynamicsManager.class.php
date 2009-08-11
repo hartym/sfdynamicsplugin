@@ -175,22 +175,6 @@ class sfDynamicsManager
 
   public function filterContent(sfEvent $event, $content)
   {
-    $response = $event->getSubject();
-
-    if (false !== ($pos = strpos($content, '</head>')))
-    {
-      $html = $this->generateAssetsHtml();
-
-      if ($html)
-      {
-        $content = substr($content, 0, $pos)."\n".$html.substr($content, $pos);
-      }
-    }
-    return $content;
-  }
-  
-  public function filterContent(sfEvent $event, $content)
-  {
     $prepend  = sfDynamicsConfig::getAssetsPositionInHead() == 'prepend';
     $response = $event->getSubject();
     $pos      = $prepend ? strpos($content, '<head>') : strpos($content, '</head>');
