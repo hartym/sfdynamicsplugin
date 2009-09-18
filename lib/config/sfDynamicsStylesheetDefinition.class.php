@@ -43,7 +43,7 @@ class sfDynamicsStylesheetDefinition extends sfDynamicsAssetDefinition
       $code = preg_replace_callback($findUrlRegexp, $callback, $code);
     }
 
-    return $code;
+    return sprintf('%s /* */', $code); // this avoid CSS hacks to break next stylesheet
   }
 
   /**
