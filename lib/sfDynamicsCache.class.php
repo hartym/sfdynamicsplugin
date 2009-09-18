@@ -40,7 +40,7 @@ class sfDynamicsCache extends sfFileCache
    */
   static public function getSuperCacheDir($full=false)
   {
-    return ($full?sfConfig::get('sf_web_dir'):'').DIRECTORY_SEPARATOR.sfDynamicsConfig::getSuperCacheDir();
+    return ($full?sfConfig::get('sf_web_dir').DIRECTORY_SEPARATOR:'/').sfDynamicsConfig::getSuperCacheDir();
   }
 
   /**
