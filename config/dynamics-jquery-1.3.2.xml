@@ -68,7 +68,6 @@
   <package name="jquery.ui.accordion">
     <require>jquery.ui.core</require>
     <javascript>jquery/1.3.2/ui/ui.accordion</javascript>
-    <stylesheet>jquery/ui/themes/base/ui.accordion</stylesheet>
   </package>
   <package name="jquery.ui.datepicker">
     <require>jquery.ui.core</require>
