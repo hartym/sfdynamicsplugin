@@ -1,46 +1,45 @@
-;(function($) {
-  
-  $.effects.transfer = function(o) {
+/*
+ * jQuery UI Effects Transfer 1.7.2
+ *
+ * Copyright (c) 2009 AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT (MIT-LICENSE.txt)
+ * and GPL (GPL-LICENSE.txt) licenses.
+ *
+ * http://docs.jquery.com/UI/Effects/Transfer
+ *
+ * Depends:
+ *	effects.core.js
+ */
+(function($) {
 
-    return this.queue(function() {
+$.effects.transfer = function(o) {
+	return this.queue(function() {
+		var elem = $(this),
+			target = $(o.options.to),
+			endPosition = target.offset(),
+			animation = {
+				top: endPosition.top,
+				left: endPosition.left,
+				height: target.innerHeight(),
+				width: target.innerWidth()
+			},
+			startPosition = elem.offset(),
+			transfer = $('<div class="ui-effects-transfer"></div>')
+				.appendTo(document.body)
+				.addClass(o.options.className)
+				.css({
+					top: startPosition.top,
+					left: startPosition.left,
+					height: elem.innerHeight(),
+					width: elem.innerWidth(),
+					position: 'absolute'
+				})
+				.animate(animation, o.duration, o.options.easing, function() {
+					transfer.remove();
+					(o.callback && o.callback.apply(elem[0], arguments));
+					elem.dequeue();
+				});
+	});
+};
 
-      // Create element
-      var el = $(this);
-      
-      // Set options
-      var mode = $.effects.setMode(el, o.options.mode || 'effect'); // Set Mode
-      var target = $(o.options.to); // Find Target
-      var position = el.offset();
-	  var transfer = $('<div class="ui-effects-transfer"></div>').appendTo(document.body);
-      
-      // Set target css
-      transfer.addClass(o.options.className);
-      transfer.css({
-        top: position.top,
-        left: position.left,
-        height: el.outerHeight(true) - parseInt(transfer.css('borderTopWidth')) - parseInt(transfer.css('borderBottomWidth')),
-        width: el.outerWidth(true) - parseInt(transfer.css('borderLeftWidth')) - parseInt(transfer.css('borderRightWidth')),
-        position: 'absolute'
-      });
-      
-      // Animation
-      position = target.offset();
-      animation = {
-        top: position.top,
-        left: position.top,
-        height: target.outerHeight() - parseInt(transfer.css('borderTopWidth')) - parseInt(transfer.css('borderBottomWidth')),
-        width: target.outerWidth() - parseInt(transfer.css('borderLeftWidth')) - parseInt(transfer.css('borderRightWidth'))
-      };
-      
-      // Animate
-      transfer.animate(animation, o.duration, o.options.easing, function() {
-        transfer.remove(); // Remove div
-        if(o.callback) o.callback.apply(el[0], arguments); // Callback
-        el.dequeue();
-      }); 
-      
-    });
-    
-  };
-  
 })(jQuery);
