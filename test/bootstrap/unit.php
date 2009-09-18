@@ -1,10 +1,13 @@
 <?php
 
-$_SERVER['SYMFONY'] = dirname(__FILE__).'/../../../../lib/vendor/symfony/lib';
-
 if (!isset($_SERVER['SYMFONY']))
 {
-  throw new RuntimeException('Could not find symfony core libraries.');
+  $_SERVER['SYMFONY'] = dirname(__FILE__).'/../../../../lib/vendor/symfony/lib';
+}
+
+if (!is_dir($_SERVER['SYMFONY']))
+{
+  throw new RuntimeException(sprintf('Could not find symfony core libraries in %s.', $_SERVER['SYMFONY']));
 }
 
 require_once $_SERVER['SYMFONY'].'/autoload/sfCoreAutoload.class.php';
