@@ -56,7 +56,7 @@ This tells sfDynamics that there is a «my.first.package» package, which depend
 on the `jquery` package, and that contains one javascript and one stylesheet
 file. We now need to create thoose files. Create the
 `%sf_root_dir%/data/js/my.first.javascript.js` and the
-`%sf_root_dir%/data/js/my.first.stylesheet.css` files.
+`%sf_root_dir%/data/css/my.first.stylesheet.css` files.
 
 In `%sf_root_dir%/data/js/my.first.javascript.js`, write:
 
@@ -68,7 +68,7 @@ In `%sf_root_dir%/data/js/my.first.javascript.js`, write:
       }
     };
 
-In `%sf_root_dir%/data/js/my.first.stylesheet.css`, write:
+In `%sf_root_dir%/data/css/my.first.stylesheet.css`, write:
 
     [css]
     .jamming
