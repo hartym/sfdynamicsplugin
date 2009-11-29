@@ -161,6 +161,9 @@
     <require>yui3.substitute</require>
     <require>yui3.widget</require>
     <javascript>yui3/console/console</javascript>
+    <stylesheet>yui3/console/assets/console-core</stylesheet>
+    <stylesheet>yui3/console/assets/skins/sam/console-skin</stylesheet>
+    <stylesheet>yui3/console/assets/skins/sam/console</stylesheet>
   </package>
 
   <!-- 
@@ -170,6 +173,9 @@
     <require>yui3.console</require>
     <require>yui3.plugin</require>
     <javascript>yui3/console/console-filters</javascript>
+    <stylesheet>yui3/console/assets/console-filters-core</stylesheet>
+    <stylesheet>yui3/console/assets/skins/sam/console-filters-skin</stylesheet>
+    <stylesheet>yui3/console/assets/skins/sam/console-filters</stylesheet>
   </package>
 
   <!-- 
@@ -178,6 +184,38 @@
   <package name="yui3.cookie">
     <require>yui3.yui-base</require>
     <javascript>yui3/cookie/cookie</javascript>
+  </package>
+
+  <!-- 
+   cssbase
+  -->
+  <package name="yui3.cssbase">
+    <stylesheet>yui3/cssbase/base-context</stylesheet>
+    <stylesheet>yui3/cssbase/base</stylesheet>
+  </package>
+
+  <!-- 
+   cssfonts
+  -->
+  <package name="yui3.cssfonts">
+    <stylesheet>yui3/cssfonts/fonts-context</stylesheet>
+    <stylesheet>yui3/cssfonts/fonts</stylesheet>
+  </package>
+
+  <!-- 
+   cssgrids
+  -->
+  <package name="yui3.cssgrids">
+    <stylesheet>yui3/cssgrids/grids-context</stylesheet>
+    <stylesheet>yui3/cssgrids/grids</stylesheet>
+  </package>
+
+  <!-- 
+   cssreset
+  -->
+  <package name="yui3.cssreset">
+    <stylesheet>yui3/cssreset/reset-context</stylesheet>
+    <stylesheet>yui3/cssreset/reset</stylesheet>
   </package>
 
   <!-- 
@@ -203,7 +241,7 @@
   </package>
 
   <package name="yui3.dataschema-json">
-    <require>yui3on</require>
+    <require>yui3.json</require>
     <require>yui3.dataschema-base</require>
     <javascript>yui3/dataschema/dataschema-json</javascript>
   </package>
@@ -616,16 +654,16 @@
    json
   -->
 
-  <package name="yui3on">
-    <require>yui3on-parse</require>
-    <require>yui3on-stringify</require>
+  <package name="yui3.json">
+    <require>yui3.json-parse</require>
+    <require>yui3.json-stringify</require>
   </package>
 
-  <package name="yui3on-parse">
+  <package name="yui3.json-parse">
     <javascript>yui3/json/json-parse</javascript>
   </package>
 
-  <package name="yui3on-stringify">
+  <package name="yui3.json-stringify">
     <javascript>yui3/json/json-stringify</javascript>
   </package>
 
@@ -723,7 +761,10 @@
     <require>yui3.node</require>
     <require>yui3.classnamemanager</require>
     <require>yui3.node-focusmanager</require>
-    <javascript>yui3/node-focusmanager/node-focusmanager</javascript>
+    <javascript>yui3/node-focusmanager/node-menunav</javascript>
+    <stylesheet>yui3/node-menunav/assets/node-menunav-core</stylesheet>
+    <stylesheet>yui3/node-menunav/assets/skins/sam/node-menunav-skin</stylesheet>
+    <stylesheet>yui3/node-menunav/assets/skins/sam/node-menunav</stylesheet>
   </package>
 
   <!-- 
@@ -745,8 +786,11 @@
     <require>yui3.widget-position-ext</require>
     <require>yui3.widget-stdmod</require>
     <javascript>yui3/overlay/overlay</javascript>
+    <stylesheet>yui3/overlay/assets/overlay-core</stylesheet>
+    <stylesheet>yui3/overlay/assets/skins/sam/overlay-skin</stylesheet>
+    <stylesheet>yui3/overlay/assets/skins/sam/overlay</stylesheet>
   </package>
-
+  
   <!-- 
    plugin
   -->
@@ -816,6 +860,9 @@
 
   <package name="yui3.slider">
     <javascript>yui3/slider/slider</javascript>
+    <stylesheet>yui3/slider/assets/skins/sam/slider-skin</stylesheet>
+    <stylesheet>yui3/slider/assets/skins/sam/slider</stylesheet>
+    <stylesheet>yui3/slider/assets/slider-core</stylesheet>
   </package>
 
   <!-- 
@@ -853,6 +900,7 @@
     <require>yui3.substitute</require>
     <require>yui3.event-base</require>
     <javascript>yui3/test/test</javascript>
+    <stylesheet>yui3/test/assets/test-console</stylesheet>
   </package>
 
   <!-- 
@@ -877,6 +925,9 @@
     <require>yui3.node</require>
     <require>yui3.classnamemanager</require>
     <javascript>yui3/widget/widget</javascript>
+    <stylesheet>yui3/widget/assets/widget-core</stylesheet>
+    <stylesheet>yui3/widget/assets/skins/sam/widget-skin</stylesheet>
+    <stylesheet>yui3/widget/assets/skins/sam/widget</stylesheet>
   </package>
 
   <!-- 
@@ -905,6 +956,9 @@
   <package name="yui3.widget-stack">
     <require>yui3.widget</require>
     <javascript>yui3/widget/widget-stack</javascript>
+    <stylesheet>yui3/widget/assets/widget-stack-core</stylesheet>
+    <stylesheet>yui3/widget/assets/skins/sam/widget-stack-skin</stylesheet>
+    <stylesheet>yui3/widget/assets/skins/sam/widget-stack</stylesheet>
   </package>
 
   <!-- 
