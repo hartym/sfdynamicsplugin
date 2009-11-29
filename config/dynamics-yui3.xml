@@ -1,0 +1,994 @@
+<?xml version="1.0" ?>
+
+<dynamics>
+
+  <package name="yui3.all">
+    <require>yui3.anim</require>
+    <require>yui3.async-queue</require>
+    <require>yui3.attribute</require>
+    <require>yui3.ac-plugin</require>
+    <require>yui3.base</require>
+    <require>yui3.cache</require>
+    <require>yui3.classnamemanager</require>
+    <require>yui3.collection</require>
+    <require>yui3.compat</require>
+    <require>yui3.console</require>
+    <require>yui3.console-filters</require>
+    <require>yui3.cookie</require>
+    <require>yui3.dataschema</require>
+    <require>yui3.datasource</require>
+    <require>yui3.datatype</require>
+    <require>yui3.dd</require>
+    <require>yui3.dom</require>
+    <require>yui3.dom-style</require>
+    <require>yui3.dump</require>
+    <require>yui3.event</require>
+    <require>yui3.history</require>
+    <require>yui3.imageloader</require>
+    <require>yui3.io</require>
+    <require>yui3on</require>
+    <require>yui3.loader</require>
+    <require>yui3.node</require>
+    <require>yui3.align-plugin</require>
+    <require>yui3.shim-plugin</require>
+    <require>yui3.oop</require>
+    <require>yui3.overlay</require>
+    <require>yui3.plugin</require>
+    <require>yui3.pluginhost</require>
+    <require>yui3.profiler</require>
+    <require>yui3.querystring</require>
+    <require>yui3.queue-promote</require>
+    <require>yui3.slider</require>
+    <require>yui3.stylesheet</require>
+    <require>yui3.substitute</require>
+    <require>yui3.swfdetect</require>
+    <require>yui3.test</require>
+    <require>yui3.value-change</require>
+    <require>yui3.widget</require>
+    <require>yui3.yui</require>
+  </package>
+
+  <!-- 
+   anim
+  -->
+
+  <package name="yui3.anim">
+    <require>yui3.anim-base</require>
+    <require>yui3.anim-color</require>
+    <require>yui3.anim-curve</require>
+    <require>yui3.anim-easing</require>
+    <require>yui3.anim-node-plugin</require>
+    <require>yui3.anim-scroll</require>
+    <require>yui3.anim-xy</require>
+  </package>
+
+  <package name="yui3.anim-base">
+    <require>yui3.base-base</require>
+    <require>yui3.node-style</require>
+    <javascript>yui3/anim/anim-base</javascript>
+  </package>
+
+  <package name="yui3.anim-color">
+    <require>yui3.anim-base</require>
+    <javascript>yui3/anim/anim-color</javascript>
+  </package>
+
+  <package name="yui3.anim-curve">
+    <require>yui3.anim-xy</require>
+    <javascript>yui3/anim/anim-curve</javascript>
+  </package>
+
+  <package name="yui3.anim-easing">
+    <require>yui3.anim-base</require>
+    <javascript>yui3/anim/anim-easing</javascript>
+  </package>
+
+  <package name="yui3.anim-node-plugin">
+    <require>yui3.anim-base</require>
+    <require>yui3.node-pluginhost</require>
+    <javascript>yui3/anim/anim-node-plugin</javascript>
+  </package>
+
+  <package name="yui3.anim-scroll">
+    <require>yui3.anim-base</require>
+    <javascript>yui3/anim/anim-scroll</javascript>
+  </package>
+
+  <package name="yui3.anim-xy">
+    <require>yui3.anim-base</require>
+    <require>yui3.node-screen</require>
+    <javascript>yui3/anim/anim-xy</javascript>
+  </package>
+
+  <!-- 
+   async-queue
+  -->
+  <package name="yui3.async-queue">
+    <require>yui3.event-custom</require>
+    <javascript>yui3/async-queue/async-queue</javascript>
+  </package>
+
+  <!-- 
+   attribute
+  -->
+  <package name="yui3.attribute">
+    <require>yui3.attribute-base</require>
+    <require>yui3.attribute-complex</require>
+  </package>
+
+  <package name="yui3.attribute-base">
+    <require>yui3.event-custom</require>
+    <javascript>yui3/attribute/attribute-base</javascript>
+  </package>
+
+  <package name="yui3.attribute-complex">
+    <require>yui3.attribute-base</require>
+    <javascript>yui3/attribute/attribute-complex</javascript>
+  </package>
+
+  <!-- 
+   autocomplete
+  -->
+
+  <package name="yui3.ac-plugin">
+    <require>yui3.node-base</require>
+    <require>yui3.plugin</require>
+    <require>yui3.value-change</require>
+    <require>yui3.event-key</require>
+    <javascript>yui3/ac-plugin/ac-plugin</javascript>
+  </package>
+
+  <package name="yui3.autocomplete">
+    <require>yui3.ac-plugin</require>
+  </package>
+
+  <!-- 
+   base
+  -->
+  <package name="yui3.base">
+    <require>yui3.base-base</require>
+    <require>yui3.base-pluginhost</require>
+    <require>yui3.base-build</require>
+  </package>
+
+  <package name="yui3.base-base">
+    <require>yui3.attribute-base</require>
+    <javascript>yui3/base/base-base</javascript>
+  </package>
+
+  <package name="yui3.base-build">
+    <require>yui3.base-base</require>
+    <javascript>yui3/base/base-build</javascript>
+  </package>
+
+  <package name="yui3.base-pluginhost">
+    <require>yui3.base-base</require>
+    <require>yui3.pluginhost</require>
+    <javascript>yui3/base/base-pluginhost</javascript>
+  </package>
+
+  <!-- 
+   cache
+  -->
+  <package name="yui3.cache">
+    <require>yui3.plugin</require>
+    <javascript>yui3/cache/cache</javascript>
+  </package>
+
+  <package name="yui3.classnamemanager">
+    <javascript>yui3/classnamemanager/classnamemanager</javascript>
+  </package>
+
+  <!-- 
+   collection
+  -->
+
+  <package name="yui3.collection">
+    <javascript>yui3/collection/collection</javascript>
+  </package>
+
+  <!--
+   compat
+   -->
+
+  <package name="yui3.compat">
+    <require>yui3.dom</require>
+    <require>yui3.event-base</require>
+    <require>yui3.dump</require>
+    <require>yui3.substitute</require>
+    <javascript>yui3/compat/compat</javascript>
+  </package>
+
+  <!-- 
+   console
+  -->
+
+  <package name="yui3.console">
+    <require>yui3.substitute</require>
+    <require>yui3.widget</require>
+    <javascript>yui3/console/console</javascript>
+  </package>
+
+  <!-- 
+   console-filters
+  -->
+  <package name="yui3.console-filters">
+    <require>yui3.console</require>
+    <require>yui3.plugin</require>
+    <javascript>yui3/console/console-filters</javascript>
+  </package>
+
+  <!-- 
+   cookie
+  -->
+  <package name="yui3.cookie">
+    <require>yui3.yui-base</require>
+    <javascript>yui3/cookie/cookie</javascript>
+  </package>
+
+  <!-- 
+   dataschema
+  -->
+
+  <package name="yui3.dataschema">
+    <require>yui3.dataschema-base</require>
+    <require>yui3.dataschema-json</require>
+    <require>yui3.dataschema-xml</require>
+    <require>yui3.dataschema-array</require>
+    <require>yui3.dataschema-text</require>
+  </package>
+
+  <package name="yui3.dataschema-array">
+    <require>yui3.dataschema-base</require>
+    <javascript>yui3/dataschema/dataschema-array</javascript>
+  </package>
+
+  <package name="yui3.dataschema-base">
+    <require>yui3.base</require>
+    <javascript>yui3/dataschema/dataschema-base</javascript>
+  </package>
+
+  <package name="yui3.dataschema-json">
+    <require>yui3on</require>
+    <require>yui3.dataschema-base</require>
+    <javascript>yui3/dataschema/dataschema-json</javascript>
+  </package>
+
+  <package name="yui3.dataschema-text">
+    <require>yui3.dataschema-base</require>
+    <javascript>yui3/dataschema/dataschema-text</javascript>
+  </package>
+
+  <package name="yui3.dataschema-xml">
+    <require>yui3.dataschema-base</require>
+    <javascript>yui3/dataschema/dataschema-xml</javascript>
+  </package>
+
+  <!-- 
+   datasource
+  -->
+
+  <package name="yui3.datasource">
+    <require>yui3.datasource-local</require>
+    <require>yui3.datasource-io</require>
+    <require>yui3.datasource-get</require>
+    <require>yui3.datasource-function</require>
+    <require>yui3.datasource-cache</require>
+    <require>yui3.datasource-jsonschema</require>
+    <require>yui3.datasource-xmlschema</require>
+    <require>yui3.datasource-arrayschema</require>
+    <require>yui3.datasource-textschema</require>
+    <require>yui3.datasource-polling</require>
+  </package>
+
+  <package name="yui3.datasource-arrayschema">
+    <require>yui3.plugin</require>
+    <require>yui3.datasource-local</require>
+    <require>yui3.dataschema-array</require>
+    <javascript>yui3/datasource/datasource-arrayschema</javascript>
+  </package>
+
+  <package name="yui3.datasource-cache">
+    <require>yui3.datasource-local</require>
+    <require>yui3.cache</require>
+    <javascript>yui3/datasource/datasource-cache</javascript>
+  </package>
+
+  <package name="yui3.datasource-function">
+    <require>yui3.datasource-local</require>
+    <javascript>yui3/datasource/datasource-function</javascript>
+  </package>
+
+  <package name="yui3.datasource-get">
+    <require>yui3.datasource-local</require>
+    <require>yui3.get</require>
+    <javascript>yui3/datasource/datasource-get</javascript>
+  </package>
+
+  <package name="yui3.datasource-io">
+    <require>yui3.datasource-local</require>
+    <require>yui3.io</require>
+    <javascript>yui3/datasource/datasource-io</javascript>
+  </package>
+
+  <package name="yui3.datasource-jsonschema">
+    <require>yui3.plugin</require>
+    <require>yui3.datasource-local</require>
+    <require>yui3.dataschema-json</require>
+    <javascript>yui3/datasource/datasource-jsonschema</javascript>
+  </package>
+
+  <package name="yui3.datasource-local">
+    <require>yui3.base</require>
+    <javascript>yui3/datasource/datasource-local</javascript>
+  </package>
+
+  <package name="yui3.datasource-polling">
+    <require>yui3.datasource-local</require>
+    <javascript>yui3/datasource/datasource-polling</javascript>
+  </package>
+
+  <package name="yui3.datasource-textschema">
+    <require>yui3.datasource-local</require>
+    <require>yui3.dataschema-text</require>
+    <javascript>yui3/datasource/datasource-textschema</javascript>
+  </package>
+
+  <package name="yui3.datasource-xmlschema">
+    <require>yui3.plugin</require>
+    <require>yui3.datasource-local</require>
+    <require>yui3.dataschema-xml</require>
+    <javascript>yui3/datasource/datasource-xmlschema</javascript>
+  </package>
+
+  <!-- 
+   datatype
+  -->
+
+  <package name="yui3.datatype">
+    <require>yui3.datatype-number</require>
+    <require>yui3.datatype-date</require>
+    <require>yui3.datatype-xml</require>
+  </package>
+
+
+  <package name="yui3.datatype-number">
+    <require>yui3.datatype-number-parse</require>
+    <require>yui3.datatype-number-format</require>
+  </package>
+
+  <package name="yui3.datatype-number-parse">
+    <javascript>yui3/datatype/datatype-number-parse</javascript>
+  </package>
+
+  <package name="yui3.datatype-number-format">
+    <javascript>yui3/datatype/datatype-number-format</javascript>
+  </package>
+
+  <package name="yui3.datatype-date">
+    <require>yui3.datatype-date-parse</require>
+    <require>yui3.datatype-date-format</require>
+  </package>
+
+  <package name="yui3.datatype-date-parse">
+    <javascript>yui3/datatype/datatype-date-parse</javascript>
+  </package>
+
+  <package name="yui3.datatype-date-format">
+    <javascript>yui3/datatype/datatype-date-format</javascript>
+  </package>
+
+  <package name="yui3.datatype-xml">
+    <require>yui3.datatype-xml-parse</require>
+    <require>yui3.datatype-xml-format</require>
+  </package>
+
+  <package name="yui3.datatype-xml-parse">
+    <javascript>yui3/datatype/datatype-xml-parse</javascript>
+  </package>
+
+  <package name="yui3.datatype-xml-format">
+    <javascript>yui3/datatype/datatype-xml-format</javascript>
+  </package>
+
+  <!-- 
+    dd
+  -->
+
+  <package name="yui3.dd">
+    <require>yui3.dd-ddm-base</require>
+    <require>yui3.dd-ddm</require>
+    <require>yui3.dd-ddm-drop</require>
+    <require>yui3.dd-drag</require>
+    <require>yui3.dd-proxy</require>
+    <require>yui3.dd-constrain</require>
+    <require>yui3.dd-plugin</require>
+    <require>yui3.dd-drop</require>
+    <require>yui3.dd-drop-plugin</require>
+    <require>yui3.dd-scroll</require>
+  </package>
+
+  <package name="yui3.dd-constrain">
+    <require>yui3.dd-drag</require>
+    <javascript>yui3/dd/dd-constrain</javascript>
+  </package>
+
+  <package name="yui3.dd-ddm-base">
+    <require>yui3.node</require>
+    <require>yui3.base</require>
+    <javascript>yui3/dd/dd-ddm-base</javascript>
+  </package>
+
+  <package name="yui3.dd-ddm-drop">
+    <require>yui3.dd-ddm</require>
+    <javascript>yui3/dd/dd-ddm-drop</javascript>
+  </package>
+
+  <package name="yui3.dd-ddm">
+    <require>yui3.dd-ddm-base</require>
+    <require>yui3.event-resize</require>
+    <javascript>yui3/dd/dd-ddm</javascript>
+  </package>
+
+  <package name="yui3.dd-drag">
+    <require>yui3.dd-ddm-base</require>
+    <javascript>yui3/dd/dd-drag</javascript>
+  </package>
+
+  <package name="yui3.dd-drop">
+    <require>yui3.dd-ddm-drop</require>
+    <require>yui3.dd-drag</require>
+    <javascript>yui3/dd/dd-drop</javascript>
+  </package>
+
+  <package name="yui3.dd-drop-plugin">
+    <require>yui3.dd-drop</require>
+    <javascript>yui3/dd/dd-drop-plugin</javascript>
+  </package>
+
+  <package name="yui3.dd-plugin">
+    <require>yui3.dd-drag</require>
+    <require>yui3.dd-constrain</require>
+    <require>yui3.dd-proxy</require>
+    <javascript>yui3/dd/dd-plugin</javascript>
+  </package>
+
+  <package name="yui3.dd-proxy">
+    <require>yui3.dd-ddm</require>
+    <require>yui3.dd-drag</require>
+    <javascript>yui3/dd/dd-proxy</javascript>
+  </package>
+
+  <package name="yui3.dd-scroll">
+    <require>yui3.dd-drag</require>
+    <require>yui3.dd-proxy</require>
+    <javascript>yui3/dd/dd-scroll</javascript>
+  </package>
+
+  <package name="yui3.dom">
+    <require>yui3.dom-base</require>
+    <require>yui3.dom-style</require>
+    <require>yui3.dom-screen</require>
+    <require>yui3.selector</require>
+  </package>
+
+  <package name="yui3.dom-base">
+    <require>yui3.oop</require>
+    <javascript>yui3/dom/dom-base</javascript>
+  </package>
+
+  <package name="yui3.dom-screen">
+    <require>yui3.dom-base</require>
+    <require>yui3.dom-style</require>
+    <javascript>yui3/dom/dom-screen</javascript>
+  </package>
+
+  <package name="yui3.selector-css2">
+    <require>yui3.selector-native</require>
+    <javascript>yui3/dom/selector-css2</javascript>
+  </package>
+
+  <package name="yui3.selector-css3">
+    <require>yui3.dom-base</require>
+    <require>yui3.selector-native</require>
+    <require>yui3.selector-css2</require>
+    <javascript>yui3/dom/selector-css3</javascript>
+  </package>
+
+  <package name="yui3.selector-native">
+    <require>yui3.dom-base</require>
+    <javascript>yui3/dom/selector-native</javascript>
+  </package>
+
+  <package name="yui3.selector">
+    <require>yui3.selector-native</require>
+    <require>yui3.selector-css2</require>
+    <javascript>yui3/dom/selector</javascript>
+  </package>
+
+  <package name="yui3.dom-style">
+    <require>yui3.dom-base</require>
+    <javascript>yui3/dom/dom-style</javascript>
+  </package>
+
+  <!-- 
+   dump
+  -->
+
+  <package name="yui3.dump">
+    <javascript>yui3/dump/dump</javascript>
+  </package>
+
+  <!-- 
+   event
+  -->
+
+  <package name="yui3.event">
+    <require>yui3.event-base</require>
+    <require>yui3.event-delegate</require>
+    <require>yui3.event-mousewheel</require>
+    <require>yui3.event-mouseenter</require>
+    <require>yui3.event-key</require>
+    <require>yui3.event-focus</require>
+    <require>yui3.event-resize</require>
+  </package>
+
+  <package name="yui3.event-base">
+    <require>yui3.event-custom-base</require>
+    <javascript>yui3/event/event-base</javascript>
+  </package>
+
+  <package name="yui3.event-delegate">
+    <require>yui3.node-base</require>
+    <javascript>yui3/event/event-delegate</javascript>
+  </package>
+
+  <package name="yui3.event-focus">
+    <require>yui3.node-base</require>
+    <javascript>yui3/event/event-focus</javascript>
+  </package>
+
+  <package name="yui3.event-key">
+    <require>yui3.node-base</require>
+    <javascript>yui3/event/event-key</javascript>
+  </package>
+
+  <package name="yui3.event-mouseenter">
+    <require>yui3.node-base</require>
+    <javascript>yui3/event/event-mouseenter</javascript>
+  </package>
+
+  <package name="yui3.event-mousewheel">
+    <require>yui3.node-base</require>
+    <javascript>yui3/event/event-mousewheel</javascript>
+  </package>
+
+  <package name="yui3.event-resize">
+    <require>yui3.node-base</require>
+    <javascript>yui3/event/event-resize</javascript>
+  </package>
+
+  <!-- 
+   event-custom
+  -->
+
+  <package name="yui3.event-custom">
+    <require>yui3.event-custom-base</require>
+    <require>yui3.event-custom-complex</require>
+  </package>
+
+  <package name="yui3.event-custom-base">
+    <require>yui3.oop</require>
+    <javascript>yui3/event-custom/event-custom-base</javascript>
+  </package>
+
+  <package name="yui3.event-custom-complex">
+    <require>yui3.event-custom-base</require>
+    <javascript>yui3/event-custom/event-custom-complex</javascript>
+  </package>
+
+  <!-- 
+   event-simulate
+  -->
+
+  <package name="yui3.event-simulate">
+    <require>yui3.event-base</require>
+    <javascript>yui3/event-simulate/event-simulate</javascript>
+  </package>
+
+  <!-- 
+   history
+  -->
+
+  <package name="yui3.history">
+    <require>yui3.node-base</require>
+    <javascript>yui3/history/history</javascript>
+  </package>
+
+  <!-- 
+   imageloader
+  -->
+
+  <package name="yui3.imageloader">
+    <require>yui3.base-base</require>
+    <require>yui3.node-style</require>
+    <require>yui3.node-screen</require>
+    <javascript>yui3/imageloader/imageloader</javascript>
+  </package>
+
+  <!-- 
+   io
+  -->
+
+  <package name="yui3.io">
+    <require>yui3.io-base</require>
+    <require>yui3.io-form</require>
+    <require>yui3.io-xdr</require>
+    <require>yui3.io-upload-iframe</require>
+    <require>yui3.io-queue</require>
+  </package>
+
+  <package name="yui3.io-base">
+    <require>yui3.event-custom-base</require>
+    <require>yui3.querystring-stringify-simple</require>
+    <javascript>yui3/io/io-base</javascript>
+  </package>
+
+  <package name="yui3.io-form">
+    <require>yui3.io-base</require>
+    <require>yui3.node-base</require>
+    <javascript>yui3/io/io-form</javascript>
+  </package>
+
+  <package name="yui3.io-queue">
+    <require>yui3.io-base</require>
+    <require>yui3.queue-promote</require>
+    <javascript>yui3/io/io-queue</javascript>
+  </package>
+
+  <package name="yui3.io-upload-iframe">
+    <require>yui3.io-base</require>
+    <require>yui3.node-base</require>
+    <javascript>yui3/io/io-upload-iframe</javascript>
+  </package>
+
+  <package name="yui3.io-xdr">
+    <require>yui3.io-base</require>
+    <require>yui3.datatype-xml</require>
+    <javascript>yui3/io/io-xdr</javascript>
+  </package>
+
+  <!-- 
+   json
+  -->
+
+  <package name="yui3on">
+    <require>yui3on-parse</require>
+    <require>yui3on-stringify</require>
+  </package>
+
+  <package name="yui3on-parse">
+    <javascript>yui3/json/json-parse</javascript>
+  </package>
+
+  <package name="yui3on-stringify">
+    <javascript>yui3/json/json-stringify</javascript>
+  </package>
+
+  <!-- 
+   loader
+  -->
+
+  <package name="yui3.loader">
+    <javascript>yui3/loader/loader</javascript>
+  </package>
+
+  <!-- 
+   node
+  -->
+
+  <package name="yui3.node">
+    <require>yui3.node-base</require>
+    <require>yui3.node-style</require>
+    <require>yui3.node-screen</require>
+    <require>yui3.node-pluginhost</require>
+    <require>yui3.node-event-delegate</require>
+    <require>yui3.dom</require>
+    <require>yui3.event-base</require>
+    <require>yui3.event-delegate</require>
+    <require>yui3.pluginhost</require>
+  </package>
+
+  <package name="yui3.align-plugin">
+    <require>yui3.node-screen</require> <!--  required node-region (not found) -->
+    <javascript>yui3/node/align-plugin</javascript>
+  </package>
+
+  <package name="yui3.node-base">
+    <require>yui3.dom-base</require>
+    <require>yui3.selector-css2</require>
+    <require>yui3.event-base</require>
+    <javascript>yui3/node/node-base</javascript>
+  </package>
+
+  <package name="yui3.node-event-delegate">
+    <require>yui3.node-base</require>
+    <require>yui3.event-delegate</require>
+    <require>yui3.pluginhost</require>
+    <javascript>yui3/node/node-event-delegate</javascript>
+  </package>
+
+  <package name="yui3.node-pluginhost">
+    <require>yui3.node-base</require>
+    <require>yui3.pluginhost</require>
+    <javascript>yui3/node/node-pluginhost</javascript>
+  </package>
+
+  <package name="yui3.node-screen">
+    <require>yui3.dom-screen</require>
+    <javascript>yui3/node/node-screen</javascript>
+  </package>
+
+  <package name="yui3.shim-plugin">
+    <require>yui3.node-style</require>
+    <require>yui3.node-pluginhost</require>
+    <javascript>yui3/node/shim-plugin</javascript>
+  </package>
+
+  <package name="yui3.node-event-simulate">
+    <require>yui3.node-base</require>
+    <require>yui3.event-simulate</require>
+    <javascript>yui3/node/node-event-simulate</javascript>
+  </package>
+
+  <package name="yui3.node-style">
+    <require>yui3.dom-style</require>
+    <require>yui3.node-base</require>
+    <javascript>yui3/node/node-style</javascript>
+  </package>
+
+  <!-- 
+   node-focusmanager
+  -->
+
+  <package name="yui3.node-focusmanager">
+    <require>yui3.attribute</require>
+    <require>yui3.node</require>
+    <require>yui3.plugin</require>
+    <require>yui3.node-event-simulate</require>
+    <require>yui3.event-key</require>
+    <require>yui3.event-focus</require>
+    <javascript>yui3/node-focusmanager/node-focusmanager</javascript>
+  </package>
+
+  <!-- 
+   node-focusmanager
+  -->
+
+  <package name="yui3.node-menunav">
+    <require>yui3.node</require>
+    <require>yui3.classnamemanager</require>
+    <require>yui3.node-focusmanager</require>
+    <javascript>yui3/node-focusmanager/node-focusmanager</javascript>
+  </package>
+
+  <!-- 
+   oop
+  -->
+
+  <package name="yui3.oop">
+    <javascript>yui3/oop/oop</javascript>
+  </package>
+
+  <!-- 
+   overlay
+  -->
+
+  <package name="yui3.overlay">
+    <require>yui3.widget</require>
+    <require>yui3.widget-position</require>
+    <require>yui3.widget-stack</require>
+    <require>yui3.widget-position-ext</require>
+    <require>yui3.widget-stdmod</require>
+    <javascript>yui3/overlay/overlay</javascript>
+  </package>
+
+  <!-- 
+   plugin
+  -->
+
+  <package name="yui3.plugin">
+    <require>yui3.base-base</require>
+    <javascript>yui3/plugin/plugin</javascript>
+  </package>
+
+  <!-- 
+   pluginhost
+  -->
+
+  <package name="yui3.pluginhost">
+    <require>yui3.yui-base</require>
+    <javascript>yui3/pluginhost/pluginhost</javascript>
+  </package>
+
+  <!-- 
+   profiler
+  -->
+
+  <package name="yui3.profiler">
+    <require>yui3.oop</require>
+    <javascript>yui3/profiler/profiler</javascript>
+  </package>
+
+  <!--
+   querystring
+  -->
+
+  <package name="yui3.querystring">
+    <require>yui3.querystring-parse</require>
+    <require>yui3.querystring-stringify</require>
+  </package>
+
+  <!-- querystring-parse overrides querystring-parse-simple -->
+  <package name="yui3.querystring-parse">
+    <require>yui3.collection</require>
+    <javascript>yui3/querystring/querystring-parse</javascript>
+  </package>
+
+  <package name="yui3.querystring-parse-simple">
+    <javascript>yui3/querystring/querystring-parse-simple</javascript>
+  </package>
+
+  <!-- querystring-stringify overrides querystring-stringify-simple -->
+  <package name="yui3.querystring-stringify">
+    <javascript>yui3/querystring/querystring-stringify</javascript>
+  </package>
+
+  <package name="yui3.querystring-stringify-simple">
+    <javascript>yui3/querystring/querystring-stringify-simple</javascript>
+  </package>
+
+  <!-- 
+   queue-promote
+  -->
+
+  <package name="yui3.queue-promote">
+    <javascript>yui3/queue-promote/queue-promote</javascript>
+  </package>
+
+  <!-- 
+   slider
+  -->
+
+  <package name="yui3.slider">
+    <javascript>yui3/slider/slider</javascript>
+  </package>
+
+  <!-- 
+   stylesheet
+  -->
+
+  <package name="yui3.stylesheet">
+    <javascript>yui3/stylesheet/stylesheet</javascript>
+  </package>
+
+  <!-- 
+   substitute
+  -->
+
+  <package name="yui3.substitute">
+    <require>yui3.dump</require>
+    <javascript>yui3/substitute/substitute</javascript>
+  </package>
+
+  <!-- 
+   swfdetect
+  -->
+
+  <package name="yui3.swfdetect">
+    <!-- Not in build
+    <javascript>yui3/swfdetect/swfdetect</javascript>
+    -->
+  </package>
+
+  <!-- 
+   test
+  -->
+
+  <package name="yui3.test">
+    <require>yui3.substitute</require>
+    <require>yui3.event-base</require>
+    <javascript>yui3/test/test</javascript>
+  </package>
+
+  <!-- 
+   value-change
+  -->
+
+  <package name="yui3.value-change">
+    <require>yui3.node-base</require>
+    <require>yui3.event-focus</require>
+    <require>yui3.event-custom</require>
+    <javascript>yui3/value-change/value-change</javascript>
+  </package>
+
+  <!-- 
+   widget
+  -->
+
+  <package name="yui3.widget">
+    <require>yui3.attribute</require>
+    <require>yui3.event-focus</require>
+    <require>yui3.base</require>
+    <require>yui3.node</require>
+    <require>yui3.classnamemanager</require>
+    <javascript>yui3/widget/widget</javascript>
+  </package>
+
+  <!-- 
+   widget-position
+  -->
+
+  <package name="yui3.widget-position">
+    <require>yui3.widget</require>
+    <javascript>yui3/widget/widget-position</javascript>
+  </package>
+
+  <!-- 
+   widget-position-ext
+  -->
+
+  <package name="yui3.widget-position-ext">
+    <require>yui3.widget</require>
+    <require>yui3.widget-position</require>
+    <javascript>yui3/widget/widget-position-ext</javascript>
+  </package>
+
+  <!-- 
+   widget-stack
+  -->
+
+  <package name="yui3.widget-stack">
+    <require>yui3.widget</require>
+    <javascript>yui3/widget/widget-stack</javascript>
+  </package>
+
+  <!-- 
+   widget-stdmod
+  -->
+
+  <package name="yui3.widget-stdmod">
+    <require>yui3.widget</require>
+    <javascript>yui3/widget/widget-stdmod</javascript>
+  </package>
+
+  <!-- 
+   yui
+  -->
+
+  <package name="yui3.yui">
+    <require>yui3.yui-base</require>
+    <require>yui3.get</require>
+    <require>yui3.yui-log</require>
+    <require>yui3.yui-later</require>
+  </package>
+
+  <package name="yui3.yui-later">
+    <require>yui3.yui-base</require>
+    <javascript>yui3/yui/yui-later</javascript>
+  </package>
+
+  <package name="yui3.yui-log">
+    <require>yui3.yui-base</require>
+    <javascript>yui3/yui/yui-log</javascript>
+  </package>
+
+  <package name="yui3.get">
+    <javascript>yui3/yui/get</javascript>
+  </package>
+
+  <package name="yui3.yui-base">
+    <javascript>yui3/yui/yui-base</javascript>
+  </package>
+
+</dynamics>
