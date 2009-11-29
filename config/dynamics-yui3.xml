@@ -2,52 +2,6 @@
 
 <dynamics>
 
-  <package name="yui3.all">
-    <require>yui3.anim</require>
-    <require>yui3.async-queue</require>
-    <require>yui3.attribute</require>
-    <require>yui3.ac-plugin</require>
-    <require>yui3.base</require>
-    <require>yui3.cache</require>
-    <require>yui3.classnamemanager</require>
-    <require>yui3.collection</require>
-    <require>yui3.compat</require>
-    <require>yui3.console</require>
-    <require>yui3.console-filters</require>
-    <require>yui3.cookie</require>
-    <require>yui3.dataschema</require>
-    <require>yui3.datasource</require>
-    <require>yui3.datatype</require>
-    <require>yui3.dd</require>
-    <require>yui3.dom</require>
-    <require>yui3.dom-style</require>
-    <require>yui3.dump</require>
-    <require>yui3.event</require>
-    <require>yui3.history</require>
-    <require>yui3.imageloader</require>
-    <require>yui3.io</require>
-    <require>yui3on</require>
-    <require>yui3.loader</require>
-    <require>yui3.node</require>
-    <require>yui3.align-plugin</require>
-    <require>yui3.shim-plugin</require>
-    <require>yui3.oop</require>
-    <require>yui3.overlay</require>
-    <require>yui3.plugin</require>
-    <require>yui3.pluginhost</require>
-    <require>yui3.profiler</require>
-    <require>yui3.querystring</require>
-    <require>yui3.queue-promote</require>
-    <require>yui3.slider</require>
-    <require>yui3.stylesheet</require>
-    <require>yui3.substitute</require>
-    <require>yui3.swfdetect</require>
-    <require>yui3.test</require>
-    <require>yui3.value-change</require>
-    <require>yui3.widget</require>
-    <require>yui3.yui</require>
-  </package>
-
   <!-- 
    anim
   -->
