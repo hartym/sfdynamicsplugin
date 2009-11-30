@@ -46,16 +46,16 @@ class sfDynamicsRouting
     {
       list($sfVersionMajor, $sfVersionMinor, $sfVersionRelease) = explode('.', SYMFONY_VERSION);
 
-      if (($sfVersionMajor!=1) || (!in_array($sfVersionMinor, array(2,3))))
+      if (($sfVersionMajor!=1) || (!in_array($sfVersionMinor, array(2, 3, 4))))
       {
-        throw new sfConfigurationException(self::PLUGIN_NAME.' needs symfony 1.2 to 1.3 to run.');
+        throw new sfConfigurationException(self::PLUGIN_NAME.' needs symfony 1.2 to 1.4 to run.');
       }
 
       self::$newStyleRoutes = (bool)($sfVersionMinor>1);
     }
     else
     {
-      throw new sfConfigurationException(self::PLUGIN_NAME.' needs symfony 1.2 to 1.3 to run, but no version were found.');
+      throw new sfConfigurationException(self::PLUGIN_NAME.' needs symfony 1.2 to 1.4 to run, but no version were found.');
     }
   }
 
