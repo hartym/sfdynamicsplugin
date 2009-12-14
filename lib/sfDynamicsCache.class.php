@@ -12,13 +12,18 @@ class sfDynamicsCache extends sfFileCache
 {
   public function initialize($options = array())
   {
-    $options = array_merge($options, array('cache_dir'=>self::getCacheDir()));
+    $options = array_merge($options, array('cache_dir' => self::getCacheDir()));
 
     parent::initialize($options);
   }
 
+  public function isStillUpToDate($package, $type, $key)
+  {
+    return filemtime($this->getFilePath($key)) >= $package->getModificationTimeFor($type);
+  }
+
   /**
-   * getCacheDir - gives the normal cache path (full filesystem path)
+   * Retrieves the base cache directory (absolute)
    *
    * @return string
    */
@@ -27,20 +32,30 @@ class sfDynamicsCache extends sfFileCache
     return sfConfig::get('sf_cache_dir').DIRECTORY_SEPARATOR.'sfDynamicsPlugin';
   }
 
-  static public function generateKey(sfDynamicsAssetCollectionDefinition $package, $type)
+  static public function generateKey(sfDynamicsPackageDefinition $package, $type)
   {
-    return '/'.sfConfig::get('sf_environment').(sfConfig::get('sf_debug')?'/debug':'').'/'.$type.'/'.md5($package->getCacheKey());
+    return '/'.sfConfig::get('sf_environment').(sfConfig::get('sf_debug')?'/debug':'')
+           .'/'.$type
+           .'/'.md5($package->getCacheKey());
   }
 
   /**
-   * getSuperCacheDir - give the directory where supercache of minified assets are stored
+   * Retrieves the base supercache directory (absolute or relative)
    *
-   * @param  boolean $full if true, gives the filesystem path. If false, gives the web path
+   * @param  boolean $absolute -- if true, gives the filesystem path. If false,
+   *                              gives the web path.
    * @return string
    */
-  static public function getSuperCacheDir($full=false)
+  static public function getSuperCacheDir($absolute=false)
   {
-    return ($full?sfConfig::get('sf_web_dir').DIRECTORY_SEPARATOR:'/').sfDynamicsConfig::getSuperCacheDir();
+    if ($absolute)
+    {
+      return sfConfig::get('sf_web_dir').DIRECTORY_SEPARATOR.sfDynamicsConfig::getSuperCacheDir();
+    }
+    else
+    {
+      return '/'.sfDynamicsConfig::getSuperCacheDir();
+    }
   }
 
   /**

@@ -2,7 +2,8 @@
 
 ## Description
 
-This is the root node. Each file must have one `dynamics` file and only one, containing all other tags. It has no attributes.
+This is the root node. Each file must have one `dynamics` file and only one,
+containing all other tags. It has no attributes.
 
 ## Children nodes
 
@@ -11,5 +12,6 @@ This is the root node. Each file must have one `dynamics` file and only one, con
 
 ## PHP definition
 
-The `dynamics` tags are managed by one instance of `sfDynamicsConfigDefinition` that will merge all root tags of the different
-XML configuration files included.
+The `dynamics` tags are managed by one instance of `sfDynamicsConfigDefinition`
+that will merge all root tags of the different XML configuration files
+included.

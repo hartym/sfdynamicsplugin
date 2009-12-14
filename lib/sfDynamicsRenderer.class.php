@@ -29,18 +29,36 @@ class sfDynamicsRenderer
 
       if (sfDynamicsConfig::isCacheEnabled())
       {
-        $cache = sfDynamics::getCache();
         $cacheKey = sfDynamicsCache::generateKey($package, $type);
+        $cache = sfDynamics::getCache();
 
         if ($cache->has($cacheKey))
         {
-          $result = $cache->get($cacheKey);
+          if (sfDynamicsConfig::isCacheUpToDateCheckEnabled())
+          {
+            foreach ($assets as $asset)
+            {
+              // this is needed to know the actual file path on disk, and to know its mtime.
+              $asset->computePath($paths);
+            }
+
+            if ($cache->isStillUpToDate($package, $type, $cacheKey))
+            {
+              $result = $cache->get($cacheKey);
+            }
+          }
+          else
+          {
+            $result = $cache->get($cacheKey);
+          }
         }
       }
 
+      // still no result? let's build it!
       if (!isset($result))
       {
-        $result = $this->{'filterConcatenated'.ucfirst($type)}($package, $this->getConcatenatedAssets($package, $paths, $assets));
+        $result = $this->getConcatenatedAssets($package, $paths, $assets);
+        $result = sfDynamicsConfig::getConcatenatedAssetFilterChainFor($type)->filter($result);
 
         if (sfDynamicsConfig::isCacheEnabled())
         {
@@ -54,42 +72,6 @@ class sfDynamicsRenderer
     {
       return '';
     }
-  }
-
-  /**
-   * filterJavascript - javascript specific rendering filters
-   *
-   * @param  sfDynamicsAssetCollectionDefinition $package
-   * @param  string $code
-   * @todo move to AssetCollection (JavascriptCollection ?)
-   * @return string
-   */
-  protected function filterConcatenatedJavascript(sfDynamicsAssetCollectionDefinition $package, $code)
-  {
-    if (sfDynamicsConfig::isJavascriptMinifierEnabled($package))
-    {
-      $code = JSMin::minify($code);
-    }
-
-    return $code;
-  }
-
-  /**
-   * filterStylesheet - stylesheet specific rendering filters
-   *
-   * @param  sfDynamicsAssetCollectionDefinition $package
-   * @param  string $code
-   * @todo move to AssetCollection (StylesheetCollection ?)
-   * @return string
-   */
-  protected function filterConcatenatedStylesheet(sfDynamicsAssetCollectionDefinition $package, $code)
-  {
-    if (sfDynamicsConfig::isStylesheetTidyEnabled($package))
-    {
-      $code = preg_replace('/\s\s+/m', ' ', str_replace(array("\n", "\t"), ' ', $code));
-    }
-
-    return $code;
   }
 
   /**

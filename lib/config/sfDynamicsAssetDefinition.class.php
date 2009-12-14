@@ -58,6 +58,11 @@ abstract class sfDynamicsAssetDefinition extends sfDynamicsBaseDefinition
     return $this->path;
   }
 
+  public function getModificationTime()
+  {
+    return filemtime($this->getPath());
+  }
+
   public function computePath(array $paths)
   {
     if (is_null($this->path))
