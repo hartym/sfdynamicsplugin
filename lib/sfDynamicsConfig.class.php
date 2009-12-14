@@ -5,7 +5,7 @@
  *
  * Centralise simple configuration triggers.
  *
- * @todo allow overiding this in app.yml (not urgent)
+ * @todo allow overiding this in app.yml (partially implemented)
  *
  * @package sfDynamicsPlugin
  * @version SVN: $Id: $
@@ -13,32 +13,52 @@
  */
 class sfDynamicsConfig
 {
+  /**
+   * Cache for concatenated asset filter chain. Multiple call won't
+   * reinstanciate the filters. Keys are asset types.
+   */
+  static protected $concatenatedAssetFilterChainCache = array();
+  static protected $concatenatedAssetFilterChainDefaults = array(
+      'javascript' => array('sfDynamicsJSMinJavascriptFilter'),
+      'stylesheet' => array('sfDynamicsSimpleStylesheetFilter'),
+    );
+
+  /**
+   * Internal symfony cache usage setting
+   *
+   * It is recommended to leave this to true, even when sf_debug is true. The
+   * cache will be ignored if its timestamp is older than one of the asset files.
+   *
+   * @return boolean
+   */
   static public function isCacheEnabled()
   {
-    return !sfConfig::get('sf_debug');
-  }
-
-  static public function isSupercacheEnabled()
-  {
-    return !sfConfig::get('sf_debug');
+    return sfConfig::get('app_sfDynamicsPlugin_enable_cache', true);
   }
 
   /**
-   * isJavascriptPackerEnabled - THIS IS BOGUS
+   * Are we checking modification time of each package file to know if cache is
+   * valid, or not? To keep good balance between performances, and
+   * developpability, we'll check only in debug mode.
    *
-   * JS Packer does not work with javascripts without endline semicolon
-   *
-   * @param mixed $package
-   * @return void
+   * @return boolean
    */
-  static public function isJavascriptPackerEnabled($package)
+  static public function isCacheUpToDateCheckEnabled()
   {
-    return false;
+    return sfConfig::get('sf_debug');
   }
 
-  static public function isJavascriptMinifierEnabled($package)
+  /**
+   * Web server static file cache usage setting
+   *
+   * It is recommended to activate this in production environment, for a huge
+   * performance boost.
+   *
+   * @return boolean
+   */
+  static public function isSupercacheEnabled()
   {
-    return !sfConfig::get('sf_debug');
+    return sfConfig::get('app_sfDynamicsPlugin_enable_supercache', !sfConfig::get('sf_debug'));
   }
 
   static public function isGroupingEnabledFor($type)
@@ -59,14 +79,12 @@ class sfDynamicsConfig
     return true;
   }
 
+  /**
+   * from __future__ import relative_paths_resolution
+   */
   static public function isStylesheetRelativePathsResolutionEnabled($package)
   {
-    return false;
-  }
-
-  static public function isStylesheetTidyEnabled($package)
-  {
-    return !sfConfig::get('sf_debug');
+    return sfConfig::get('app_sfDynamicsPlugin_enable_experimental_relative_paths_resolution', false);
   }
 
   /**
@@ -78,16 +96,33 @@ class sfDynamicsConfig
   {
     return sfConfig::get('app_sfDynamicsPlugin_supercache_web_path', 'dynamics');
   }
-  
+
   static public function getAssetsPositionInHead()
   {
     $position = sfConfig::get('app_sfDynamicsPlugin_assets_position_in_head', 'append');
 
     if (!in_array($position, array('append', 'prepend')))
     {
-      throw new sfDynamicsConfigurationException('Invalid assets position in head');
+      throw new sfDynamicsConfigurationException('Invalid assets position in head.');
     }
 
     return $position;
+  }
+
+  static public function getConcatenatedAssetFilterChainFor($type)
+  {
+    if (!isset(self::$concatenatedAssetFilterChainCache[$type]))
+    {
+      self::$concatenatedAssetFilterChainCache[$type] = new sfDynamicsAssetFilterChain();
+
+      $config = sfConfig::get(sprintf('app_sfDynamicsPlugin_concatenated_%s_filter_chain', $type), self::$concatenatedAssetFilterChainDefaults[$type]);
+
+      foreach($config as $filterClassName)
+      {
+        self::$concatenatedAssetFilterChainCache[$type]->addByName($filterClassName);
+      }
+    }
+
+    return self::$concatenatedAssetFilterChainCache[$type];
   }
 }

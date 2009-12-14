@@ -23,8 +23,12 @@ precedence and ignore the default file provided by the plugin.
   * [Read about configuration files bundled with
     sfDynamics](/documentation/bundled_configuration)
 
+Some general behvior customization are also available [in your application's
+app.yml file](/documentation/configuration-application_configuration).
+
 # Configuration Reference
 
+  * [app.yml](/documentation/configuration-application_configuration).
   * [dynamics](/documentation/configuration-dynamics)
   * [dynamics-plugin](/documentation/configuration-dynamicsplugin)
   * [import](/documentation/configuration-import)

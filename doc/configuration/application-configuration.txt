@@ -1,0 +1,83 @@
+# Customize behavior in app.yml
+
+For each applications using sfDynamics, you can use the `app.yml` file (under
+%sf_app_dir%/config) to customize the default behavior of the plugin.
+
+Everything is under the `sfDynamicsPlugin` section, and everything has a
+default value.
+
+## Supercache web path
+
+This directive let you choose the name of the directory under %sf_web_dir% in
+which the assets supercache will be.
+
+Default value: dynamics
+
+### Example
+
+    [yaml]
+    all:
+      sfDynamicsPlugin:
+        supercache_web_path: assets
+
+Packed and grouped assets will be put under `%sf_root_dir%/web/medias`. This
+must be a directory and must be web server writable (the plugin will attempt to
+create it and chmod it, but this is a bit bogus and may be removed in a future
+release).
+
+## Assets position in head
+
+This directive let you choose if the assets must be loaded at the beginning or
+at the end of the <head> tag.
+
+Possible values: append, prepend
+
+Default value: append
+
+### Example
+
+    [yaml]
+    all:
+      sfDynamicsPlugin:
+        assets_position_in_head: prepend
+
+The <script> and <link> tags for assets inclusion will be included just after
+the <head> tag, instead of just before the </head> tag.
+
+## Concatenated javascript and stylesheet filter chains (since 0.9.5)
+
+Those directives (`concatenated_javascript_filter_chain` and `concatenated_stylesheet_filter_chain`)
+let you override default javascript and stylesheets filters. For example, you can use
+your own javascript packer, or process stylesheets, by creating your own `sfDynamicsBaseAssetFilter`
+subclass.
+
+Possible values: array of `sfDynamicsBaseAssetFilter` subclass names.
+
+Default value for javascripts: ['sfDynamicsJSMinJavascriptFilter'] 
+Default value for stylesheets: ['sfDynamicsSimpleStylesheetFilter'] 
+
+### Example
+
+    [yaml]
+    all:
+      sfDynamicsPlugin:
+        concatenated_javascript_filter_chain:
+          - sfDynamicsExperimentalClosureAPIJavascriptFilter
+
+Instead of using the JSMin packer, prefer using the google closure API (via
+HTTP POST) to pack the scripts. (not recommended)
+
+## Experimental relative paths resolution
+
+Undocumented yet.
+
+Default value: false
+
+## Enable cache (as of 0.9.5)
+
+Don't change this unless you know what you're doing.
+
+## Enable supercache (as of 0.9.5)
+
+Don't change this unless you know what you're doing.
+

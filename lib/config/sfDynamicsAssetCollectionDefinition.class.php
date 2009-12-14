@@ -17,12 +17,7 @@ class sfDynamicsAssetCollectionDefinition extends sfDynamicsBaseDefinition
 
   public function getCacheKey()
   {
-    return
-      'js => '.implode(';', $this->getJavascripts()).' '.
-      'css => '.implode(';', $this->getStylesheets()).' '.
-      'options => jspacker:'.(sfDynamicsConfig::isJavascriptPackerEnabled($this)?'yes':'no').
-                ' jsminifier:'.(sfDynamicsConfig::isJavascriptMinifierEnabled($this)?'yes':'no').
-                ' csstidy:'.(sfDynamicsConfig::isStylesheetTidyEnabled($this)?'yes':'no');
+    return implode(';', $this->getJavascripts()).';;'.implode(';', $this->getStylesheets());
   }
 
   public function hasStylesheets()
@@ -33,6 +28,19 @@ class sfDynamicsAssetCollectionDefinition extends sfDynamicsBaseDefinition
   public function hasJavascripts()
   {
     return !empty($this->javascripts);
+  }
+
+  public function getModificationTimeFor($type)
+  {
+    $varname = $type.'s';
+    $mtime = 0;
+
+    foreach ($this->$varname as $asset)
+    {
+      $mtime = max($mtime, $asset->getModificationTime());
+    }
+
+    return $mtime;
   }
 
   public function parseXml($xml)

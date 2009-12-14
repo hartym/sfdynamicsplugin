@@ -30,6 +30,8 @@ class sfDynamics
         $context = sfContext::getInstance();
       }
 
+      self::checkConfiguration($context);
+
       self::$manager = new sfDynamicsManager($context);
     }
 
@@ -67,7 +69,7 @@ class sfDynamics
   {
     static $cache = null;
 
-    if(is_null($cache))
+    if (is_null($cache))
     {
       $cache = new sfDynamicsCache();
     }
@@ -94,6 +96,24 @@ class sfDynamics
       case 'css': return 'stylesheet';
       default:
         throw new BadMethodCallException(sprintf('Invalid asset extension «%s».', $extension));
+    }
+  }
+
+  /**
+   * Checks that the current project context is suitable to use sfDynamics.
+   *
+   * @return void
+   */
+  static public function checkConfiguration(sfContext $context)
+  {
+    if ($context->getConfiguration() instanceof sfApplicationConfiguration)
+    {
+      $enabledModules = sfConfig::get('sf_enabled_modules');
+
+      if (!in_array('sfDynamics', $enabledModules))
+      {
+        throw new sfDynamicsConfigurationException("sfDynamics module is not enabled in current application.\n\nTo be able to load an sfDynamicsManager instance (which is required to load a sfDynamics package), you must enable it under the enabled_modules list in your application's settings.yml.");
+      }
     }
   }
 }

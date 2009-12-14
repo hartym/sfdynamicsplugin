@@ -68,9 +68,10 @@ class sfDynamicsManager
   }
 
   /**
-   * Loads a behavior
+   * Loads a dynamics package
    *
-   * @param string Behavior name
+   * @param string -- Package name, as defined in loaded xml configuration
+   *                  files "name" attribute of "package" tags.
    */
   public function load($packageName)
   {
@@ -107,7 +108,7 @@ class sfDynamicsManager
   }
 
   /**
-   * adds a list of assets of given type to the list to add when filtering the response
+   * Adds a list of assets of given type to the list to add when filtering the response
    */
   public function addAssets($assets, $type)
   {
@@ -177,15 +178,10 @@ class sfDynamicsManager
   {
     $prepend  = sfDynamicsConfig::getAssetsPositionInHead() == 'prepend';
     $response = $event->getSubject();
-    $pos      = $prepend ? strpos($content, '<head>') : strpos($content, '</head>');
+    $pos      = $prepend ? strpos($content, '<head>')+6 : strpos($content, '</head>');
 
     if (false !== $pos)
     {
-      if ($prepend)
-      {
-        $pos += 6;
-      }
-    
       $html = $this->generateAssetsHtml();
 
       if ($html)
