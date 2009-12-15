@@ -32,7 +32,7 @@ class sfDynamicsCache extends sfFileCache
     return sfConfig::get('sf_cache_dir').DIRECTORY_SEPARATOR.'sfDynamicsPlugin';
   }
 
-  static public function generateKey(sfDynamicsPackageDefinition $package, $type)
+  static public function generateKey(sfDynamicsAssetCollectionDefinition $package, $type)
   {
     return '/'.sfConfig::get('sf_environment').(sfConfig::get('sf_debug')?'/debug':'')
            .'/'.$type
