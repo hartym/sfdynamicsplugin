@@ -1,0 +1,771 @@
+<?xml version="1.0" ?>
+<dynamics>
+	 
+	 <package name="mootools">
+     <description>Contains mootools core and more.</description>  	
+     <require>moocore.core</require>	
+     <require>moocore.more</require>	
+	 </package>
+	  			
+  	<package name="moocore.core">
+  		<description>Contains all moocore.core submodules</description>
+		<require>moocore.core.core</require>	
+		<require>moocore.core.browser</require>		
+	</package>
+	  			
+  	<package name="moocore.native">
+  		<description>Contains all moocore.native submodules</description>
+		<require>moocore.native.array</require>	
+		<require>moocore.native.function</require>	
+		<require>moocore.native.number</require>	
+		<require>moocore.native.string</require>	
+		<require>moocore.native.hash</require>	
+		<require>moocore.native.event</require>		
+	</package>
+	  			
+  	<package name="moocore.class">
+  		<description>Contains all moocore.class submodules</description>
+		<require>moocore.class.class</require>	
+		<require>moocore.class.class.extras</require>		
+	</package>
+	  			
+  	<package name="moocore.element">
+  		<description>Contains all moocore.element submodules</description>
+		<require>moocore.element.element</require>	
+		<require>moocore.element.element.event</require>	
+		<require>moocore.element.element.style</require>	
+		<require>moocore.element.element.dimensions</require>		
+	</package>
+	  			
+  	<package name="moocore.utilities">
+  		<description>Contains all moocore.utilities submodules</description>
+		<require>moocore.utilities.selectors</require>	
+		<require>moocore.utilities.domready</require>	
+		<require>moocore.utilities.json</require>	
+		<require>moocore.utilities.cookie</require>	
+		<require>moocore.utilities.swiff</require>		
+	</package>
+	  			
+  	<package name="moocore.fx">
+  		<description>Contains all moocore.fx submodules</description>
+		<require>moocore.fx.fx</require>	
+		<require>moocore.fx.fx.css</require>	
+		<require>moocore.fx.fx.tween</require>	
+		<require>moocore.fx.fx.morph</require>	
+		<require>moocore.fx.fx.transitions</require>		
+	</package>
+	  			
+  	<package name="moocore.request">
+  		<description>Contains all moocore.request submodules</description>
+		<require>moocore.request.request</require>	
+		<require>moocore.request.request.html</require>	
+		<require>moocore.request.request.json</require>		
+	</package>
+	  			
+  	<package name="moocore">
+  		<description>Contains all moocore modules</description>
+		<require>moocore.core</require>	
+		<require>moocore.native</require>	
+		<require>moocore.class</require>	
+		<require>moocore.element</require>	
+		<require>moocore.utilities</require>	
+		<require>moocore.fx</require>	
+		<require>moocore.request</require>		
+	</package>
+	  			
+  	<package name="moocore.core.core">
+  		<description>The core of MooTools, contains all the base functions and the Native and Hash implementations. Required by all the other scripts.</description>  		
+  		<javascript>mootools-core/Core/Core.js</javascript>
+		<require>moocore.core.core</require>		
+	</package>
+	  			
+  	<package name="moocore.core.browser">
+  		<description>The Browser Core. Contains Browser initialization, Window and Document, and the Browser Hash.</description>  		
+  		<javascript>mootools-core/Core/Browser.js</javascript>
+		<require>moocore.core.core</require>		
+	</package>
+	  			
+  	<package name="moocore.native.array">
+  		<description>Contains Array Prototypes like each, contains, and erase.</description>  		
+  		<javascript>mootools-core/Native/Array.js</javascript>
+		<require>moocore.core.core</require>		
+	</package>
+	  			
+  	<package name="moocore.native.function">
+  		<description>Contains Function Prototypes like create, bind, pass, and delay.</description>  		
+  		<javascript>mootools-core/Native/Function.js</javascript>
+		<require>moocore.core.core</require>		
+	</package>
+	  			
+  	<package name="moocore.native.number">
+  		<description>Contains Number Prototypes like limit, round, times, and ceil.</description>  		
+  		<javascript>mootools-core/Native/Number.js</javascript>
+		<require>moocore.core.core</require>		
+	</package>
+	  			
+  	<package name="moocore.native.string">
+  		<description>Contains String Prototypes like camelCase, capitalize, test, and toInt.</description>  		
+  		<javascript>mootools-core/Native/String.js</javascript>
+		<require>moocore.core.core</require>		
+	</package>
+	  			
+  	<package name="moocore.native.hash">
+  		<description>Contains Hash Prototypes. Provides a means for overcoming the JavaScript practical impossibility of extending native Objects.</description>  		
+  		<javascript>mootools-core/Native/Hash.js</javascript>
+		<require>moocore.core.core</require>		
+	</package>
+	  			
+  	<package name="moocore.native.event">
+  		<description>Contains the Event Class, to make the event object cross-browser.</description>  		
+  		<javascript>mootools-core/Native/Event.js</javascript>
+		<require>moocore.core.browser</require>	
+		<require>moocore.native.array</require>	
+		<require>moocore.native.function</require>	
+		<require>moocore.native.number</require>	
+		<require>moocore.native.string</require>	
+		<require>moocore.native.hash</require>		
+	</package>
+	  			
+  	<package name="moocore.class.class">
+  		<description>Contains the Class Function for easily creating, extending, and implementing reusable Classes.</description>  		
+  		<javascript>mootools-core/Class/Class.js</javascript>
+		<require>moocore.core.core</require>	
+		<require>moocore.native.array</require>	
+		<require>moocore.native.string</require>	
+		<require>moocore.native.function</require>	
+		<require>moocore.native.number</require>	
+		<require>moocore.native.hash</require>		
+	</package>
+	  			
+  	<package name="moocore.class.class.extras">
+  		<description>Contains Utility Classes that can be implemented into your own Classes to ease the execution of many common tasks.</description>  		
+  		<javascript>mootools-core/Class/Class.Extras.js</javascript>
+		<require>moocore.class.class</require>		
+	</package>
+	  			
+  	<package name="moocore.element.element">
+  		<description>One of the most important items in MooTools. Contains the dollar function, the dollars function, and an handful of cross-browser, time-saver methods to let you easily work with HTML Elements.</description>  		
+  		<javascript>mootools-core/Element/Element.js</javascript>
+		<require>moocore.core.browser</require>	
+		<require>moocore.native.array</require>	
+		<require>moocore.native.string</require>	
+		<require>moocore.native.function</require>	
+		<require>moocore.native.number</require>	
+		<require>moocore.native.hash</require>		
+	</package>
+	  			
+  	<package name="moocore.element.element.event">
+  		<description>Contains Element methods for dealing with events. This file also includes mouseenter and mouseleave custom Element Events.</description>  		
+  		<javascript>mootools-core/Element/Element.Event.js</javascript>
+		<require>moocore.element.element</require>	
+		<require>moocore.native.event</require>		
+	</package>
+	  			
+  	<package name="moocore.element.element.style">
+  		<description>Contains methods for interacting with the styles of Elements in a fashionable way.</description>  		
+  		<javascript>mootools-core/Element/Element.Style.js</javascript>
+		<require>moocore.element.element</require>		
+	</package>
+	  			
+  	<package name="moocore.element.element.dimensions">
+  		<description>Contains methods to work with size, scroll, or positioning of Elements and the window object.</description>  		
+  		<javascript>mootools-core/Element/Element.Dimensions.js</javascript>
+		<require>moocore.element.element</require>		
+	</package>
+	  			
+  	<package name="moocore.utilities.selectors">
+  		<description>Adds advanced CSS-style querying capabilities for targeting HTML Elements. Includes pseudo selectors.</description>  		
+  		<javascript>mootools-core/Utilities/Selectors.js</javascript>
+		<require>moocore.element.element</require>		
+	</package>
+	  			
+  	<package name="moocore.utilities.domready">
+  		<description>Contains the custom event domready.</description>  		
+  		<javascript>mootools-core/Utilities/DomReady.js</javascript>
+		<require>moocore.element.element.event</require>		
+	</package>
+	  			
+  	<package name="moocore.utilities.json">
+  		<description>JSON encoder and decoder.</description>  		
+  		<javascript>mootools-core/Utilities/JSON.js</javascript>
+		<require>moocore.native.array</require>	
+		<require>moocore.native.string</require>	
+		<require>moocore.native.function</require>	
+		<require>moocore.native.number</require>	
+		<require>moocore.native.hash</require>		
+	</package>
+	  			
+  	<package name="moocore.utilities.cookie">
+  		<description>Class for creating, reading, and deleting browser Cookies.</description>  		
+  		<javascript>mootools-core/Utilities/Cookie.js</javascript>
+		<require>moocore.core.browser</require>	
+		<require>moocore.class.class.extras</require>		
+	</package>
+	  			
+  	<package name="moocore.utilities.swiff">
+  		<description>Wrapper for embedding SWF movies. Supports External Interface Communication.</description>  		
+  		<javascript>mootools-core/Utilities/Swiff.js</javascript>
+		<require>moocore.class.class.extras</require>		
+	</package>
+	  			
+  	<package name="moocore.fx.fx">
+  		<description>Contains the basic animation logic to be extended by all other Fx Classes.</description>  		
+  		<javascript>mootools-core/Fx/Fx.js</javascript>
+		<require>moocore.class.class.extras</require>		
+	</package>
+	  			
+  	<package name="moocore.fx.fx.css">
+  		<description>Contains the CSS animation logic. Used by Fx.Tween, Fx.Morph, Fx.Elements.</description>  		
+  		<javascript>mootools-core/Fx/Fx.CSS.js</javascript>
+		<require>moocore.fx.fx</require>	
+		<require>moocore.element.element.style</require>		
+	</package>
+	  			
+  	<package name="moocore.fx.fx.tween">
+  		<description>Formerly Fx.Style, effect to transition any CSS property for an element.</description>  		
+  		<javascript>mootools-core/Fx/Fx.Tween.js</javascript>
+		<require>moocore.fx.fx.css</require>		
+	</package>
+	  			
+  	<package name="moocore.fx.fx.morph">
+  		<description>Formerly Fx.Styles, effect to transition any number of CSS properties for an element using an object of rules, or CSS based selector rules.</description>  		
+  		<javascript>mootools-core/Fx/Fx.Morph.js</javascript>
+		<require>moocore.fx.fx.css</require>		
+	</package>
+	  			
+  	<package name="moocore.fx.fx.transitions">
+  		<description>Contains a set of advanced transitions to be used with any of the Fx Classes.</description>  		
+  		<javascript>mootools-core/Fx/Fx.Transitions.js</javascript>
+		<require>moocore.fx.fx</require>		
+	</package>
+	  			
+  	<package name="moocore.request.request">
+  		<description>Powerful all purpose Request Class. Uses XMLHTTPRequest.</description>  		
+  		<javascript>mootools-core/Request/Request.js</javascript>
+		<require>moocore.class.class.extras</require>	
+		<require>moocore.element.element</require>		
+	</package>
+	  			
+  	<package name="moocore.request.request.html">
+  		<description>Extends the basic Request Class with additional methods for interacting with HTML responses.</description>  		
+  		<javascript>mootools-core/Request/Request.HTML.js</javascript>
+		<require>moocore.request.request</require>	
+		<require>moocore.element.element</require>		
+	</package>
+	  			
+  	<package name="moocore.request.request.json">
+  		<description>Extends the basic Request Class with additional methods for sending and receiving JSON data.</description>  		
+  		<javascript>mootools-core/Request/Request.JSON.js</javascript>
+		<require>moocore.request.request</require>	
+		<require>moocore.utilities.json</require>		
+	</package>
+	
+	  			
+  	<package name="moomore.core">
+  		<description>Contains all moomore.core submodules</description>
+		<require>moomore.core.more</require>	
+		<require>moomore.core.lang</require>	
+		<require>moomore.core.log</require>		
+	</package>
+	  			
+  	<package name="moomore.class">
+  		<description>Contains all moomore.class submodules</description>
+		<require>moomore.class.class.refactor</require>	
+		<require>moomore.class.class.binds</require>	
+		<require>moomore.class.class.occlude</require>	
+		<require>moomore.class.chain.wait</require>		
+	</package>
+	  			
+  	<package name="moomore.native">
+  		<description>Contains all moomore.native submodules</description>
+		<require>moomore.native.array.extras</require>	
+		<require>moomore.native.date</require>	
+		<require>moomore.native.date.extras</require>	
+		<require>moomore.native.hash.extras</require>	
+		<require>moomore.native.string.extras</require>	
+		<require>moomore.native.string.querystring</require>	
+		<require>moomore.native.uri</require>	
+		<require>moomore.native.uri.relative</require>		
+	</package>
+	  			
+  	<package name="moomore.element">
+  		<description>Contains all moomore.element submodules</description>
+		<require>moomore.element.element.forms</require>	
+		<require>moomore.element.element.measure</require>	
+		<require>moomore.element.element.pin</require>	
+		<require>moomore.element.element.position</require>	
+		<require>moomore.element.element.shortcuts</require>		
+	</package>
+	  			
+  	<package name="moomore.forms">
+  		<description>Contains all moomore.forms submodules</description>
+		<require>moomore.forms.formvalidator</require>	
+		<require>moomore.forms.formvalidator.inline</require>	
+		<require>moomore.forms.formvalidator.extras</require>	
+		<require>moomore.forms.overtext</require>		
+	</package>
+	  			
+  	<package name="moomore.fx">
+  		<description>Contains all moomore.fx submodules</description>
+		<require>moomore.fx.fx.elements</require>	
+		<require>moomore.fx.fx.accordion</require>	
+		<require>moomore.fx.fx.move</require>	
+		<require>moomore.fx.fx.reveal</require>	
+		<require>moomore.fx.fx.scroll</require>	
+		<require>moomore.fx.fx.slide</require>	
+		<require>moomore.fx.fx.smoothscroll</require>	
+		<require>moomore.fx.fx.sort</require>		
+	</package>
+	  			
+  	<package name="moomore.drag">
+  		<description>Contains all moomore.drag submodules</description>
+		<require>moomore.drag.drag</require>	
+		<require>moomore.drag.drag.move</require>	
+		<require>moomore.drag.slider</require>	
+		<require>moomore.drag.sortables</require>		
+	</package>
+	  			
+  	<package name="moomore.request">
+  		<description>Contains all moomore.request submodules</description>
+		<require>moomore.request.request.jsonp</require>	
+		<require>moomore.request.request.queue</require>	
+		<require>moomore.request.request.periodical</require>		
+	</package>
+	  			
+  	<package name="moomore.utilities">
+  		<description>Contains all moomore.utilities submodules</description>
+		<require>moomore.utilities.assets</require>	
+		<require>moomore.utilities.color</require>	
+		<require>moomore.utilities.group</require>	
+		<require>moomore.utilities.hash.cookie</require>	
+		<require>moomore.utilities.iframeshim</require>		
+	</package>
+	  			
+  	<package name="moomore.interface">
+  		<description>Contains all moomore.interface submodules</description>
+		<require>moomore.interface.scroller</require>	
+		<require>moomore.interface.tips</require>		
+	</package>
+	  			
+  	<package name="moomore.localization">
+  		<description>Contains all moomore.localization submodules</description>
+		<require>moomore.localization.date.english.us</require>	
+		<require>moomore.localization.formvalidator.english</require>		
+	</package>
+	  			
+  	<package name="moomore">
+  		<description>Contains all moomore modules</description>
+		<require>moomore.core</require>	
+		<require>moomore.class</require>	
+		<require>moomore.native</require>	
+		<require>moomore.element</require>	
+		<require>moomore.forms</require>	
+		<require>moomore.fx</require>	
+		<require>moomore.drag</require>	
+		<require>moomore.request</require>	
+		<require>moomore.utilities</require>	
+		<require>moomore.interface</require>	
+		<require>moomore.localization</require>		
+	</package>
+	  			
+  	<package name="moomore.core.more">
+  		<description>Defines MooTools.More.version.</description>  		
+  		<javascript>mootools-more/Core/More.js</javascript>
+		<require>moocore.core.core</require>		
+	</package>
+	  			
+  	<package name="moomore.core.lang">
+  		<description>Enables classes to contain text that can be localized to specific languages.</description>  		
+  		<javascript>mootools-more/Core/Lang.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.class.class.extras</require>		
+	</package>
+	  			
+  	<package name="moomore.core.log">
+  		<description>A default logger for MooTools. Logs to Firebug or a similar console unless it is not present.</description>  		
+  		<javascript>mootools-more/Core/Log.js</javascript>
+		<require>moocore.class.class</require>		
+	</package>
+	  			
+  	<package name="moomore.class.class.refactor">
+  		<description>Allows for a class to extend itself without damaging it's namespace.</description>  		
+  		<javascript>mootools-more/Class/Class.Refactor.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.class.class</require>		
+	</package>
+	  			
+  	<package name="moomore.class.class.binds">
+  		<description>Adds the Binds Mutator to all classes.</description>  		
+  		<javascript>mootools-more/Class/Class.Binds.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.class.class</require>		
+	</package>
+	  			
+  	<package name="moomore.class.class.occlude">
+  		<description>Mixin class for preventing a class from applying itself to the same element twice.</description>  		
+  		<javascript>mootools-more/Class/Class.Occlude.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.class.class</require>	
+		<require>moocore.element.element</require>		
+	</package>
+	  			
+  	<package name="moomore.class.chain.wait">
+  		<description>Adds a delay method for chaining that allows you to easily introduce pauses.</description>  		
+  		<javascript>mootools-more/Class/Chain.Wait.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.class.class.extras</require>		
+	</package>
+	  			
+  	<package name="moomore.native.array.extras">
+  		<description>Extends the Array native object to include useful methods to work with arrays.</description>  		
+  		<javascript>mootools-more/Native/Array.Extras.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.core.core</require>	
+		<require>moocore.native.array</require>		
+	</package>
+	  			
+  	<package name="moomore.native.date">
+  		<description>Extends the Date native object to include methods useful in managing dates.</description>  		
+  		<javascript>mootools-more/Native/Date.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.core.core</require>	
+		<require>moocore.native.string</require>	
+		<require>moocore.native.number</require>	
+		<require>moocore.native.array</require>	
+		<require>moomore.native.string.extras</require>	
+		<require>moomore.core.lang</require>	
+		<require>moomore.localization.date.english.us</require>		
+	</package>
+	  			
+  	<package name="moomore.native.date.extras">
+  		<description>Extends the Date native object to include extra methods (on top of those in Date.js).</description>  		
+  		<javascript>mootools-more/Native/Date.Extras.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moomore.native.date</require>		
+	</package>
+	  			
+  	<package name="moomore.native.hash.extras">
+  		<description>Extends the Hash native object to include getFromPath which allows a path notation to child elements.</description>  		
+  		<javascript>mootools-more/Native/Hash.Extras.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.core.core</require>		
+	</package>
+	  			
+  	<package name="moomore.native.string.extras">
+  		<description>Extends the String native object to include methods useful in managing strings (query strings, urls, etc).</description>  		
+  		<javascript>mootools-more/Native/String.Extras.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.native.string</require>	
+		<require>moocore.native.array</require>	
+		<require>moomore.native.hash.extras</require>		
+	</package>
+	  			
+  	<package name="moomore.native.string.querystring">
+  		<description>...</description>  		
+  		<javascript>mootools-more/Native/String.QueryString.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.native.string</require>	
+		<require>moocore.native.array</require>		
+	</package>
+	  			
+  	<package name="moomore.native.uri">
+  		<description>Provides methods useful in managing the window location and uris.</description>  		
+  		<javascript>mootools-more/Native/URI.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.native.function</require>	
+		<require>moocore.native.array</require>	
+		<require>moocore.native.hash</require>		
+	</package>
+	  			
+  	<package name="moomore.native.uri.relative">
+  		<description>Extends the URI class to add methods for computing relative and absolute urls.</description>  		
+  		<javascript>mootools-more/Native/URI.Relative.js</javascript>
+		<require>moomore.native.uri</require>		
+	</package>
+	  			
+  	<package name="moomore.element.element.forms">
+  		<description>Extends the Element native object to include methods useful in managing inputs.</description>  		
+  		<javascript>mootools-more/Element/Element.Forms.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.element.element</require>		
+	</package>
+	  			
+  	<package name="moomore.element.element.measure">
+  		<description>Extends the Element native object to include methods useful in measuring dimensions.</description>  		
+  		<javascript>mootools-more/Element/Element.Measure.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.element.element.style</require>		
+	</package>
+	  			
+  	<package name="moomore.element.element.pin">
+  		<description>Extends the Element native object to include the pin method useful for fixed positioning for elements.</description>  		
+  		<javascript>mootools-more/Element/Element.Pin.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.element.element.event</require>	
+		<require>moocore.element.element.dimensions</require>	
+		<require>moocore.element.element.style</require>		
+	</package>
+	  			
+  	<package name="moomore.element.element.position">
+  		<description>Extends the Element native object to include methods useful positioning elements relative to others.</description>  		
+  		<javascript>mootools-more/Element/Element.Position.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.element.element.dimensions</require>	
+		<require>moomore.element.element.measure</require>		
+	</package>
+	  			
+  	<package name="moomore.element.element.shortcuts">
+  		<description>Extends the Element native object to include some shortcut methods.</description>  		
+  		<javascript>mootools-more/Element/Element.Shortcuts.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.element.element.style</require>		
+	</package>
+	  			
+  	<package name="moomore.forms.formvalidator">
+  		<description>A css-class based form validation system.</description>  		
+  		<javascript>mootools-more/Forms/FormValidator.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moomore.core.lang</require>	
+		<require>moocore.class.class.extras</require>	
+		<require>moomore.class.class.binds</require>	
+		<require>moocore.utilities.selectors</require>	
+		<require>moocore.element.element.event</require>	
+		<require>moocore.element.element.style</require>	
+		<require>moocore.utilities.json</require>	
+		<require>moomore.native.date</require>	
+		<require>moomore.element.element.forms</require>	
+		<require>moomore.localization.formvalidator.english</require>		
+	</package>
+	  			
+  	<package name="moomore.forms.formvalidator.inline">
+  		<description>A css-class based form validation system.</description>  		
+  		<javascript>mootools-more/Forms/FormValidator.Inline.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moomore.forms.formvalidator</require>		
+	</package>
+	  			
+  	<package name="moomore.forms.formvalidator.extras">
+  		<description>Additional validators for FormValidator.</description>  		
+  		<javascript>mootools-more/Forms/FormValidator.Extras.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moomore.forms.formvalidator</require>		
+	</package>
+	  			
+  	<package name="moomore.forms.overtext">
+  		<description>Displays text over empty inputs until the user focuses the input or adds information.</description>  		
+  		<javascript>mootools-more/Forms/OverText.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.class.class.extras</require>	
+		<require>moocore.element.element.event</require>	
+		<require>moomore.class.class.binds</require>	
+		<require>moomore.class.class.occlude</require>	
+		<require>moomore.element.element.position</require>	
+		<require>moomore.element.element.shortcuts</require>		
+	</package>
+	  			
+  	<package name="moomore.fx.fx.elements">
+  		<description>Effect to change any number of CSS properties of any number of Elements.</description>  		
+  		<javascript>mootools-more/Fx/Fx.Elements.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.fx.fx.css</require>		
+	</package>
+	  			
+  	<package name="moomore.fx.fx.accordion">
+  		<description>An Fx.Elements extension which allows you to easily create accordion type controls.</description>  		
+  		<javascript>mootools-more/Fx/Fx.Accordion.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moomore.fx.fx.elements</require>	
+		<require>moocore.element.element.event</require>		
+	</package>
+	  			
+  	<package name="moomore.fx.fx.move">
+  		<description>Moves an element to another location (relative to another element) with a transition.</description>  		
+  		<javascript>mootools-more/Fx/Fx.Move.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.fx.fx.morph</require>	
+		<require>moomore.element.element.position</require>		
+	</package>
+	  			
+  	<package name="moomore.fx.fx.reveal">
+  		<description>Executes a transition from display:block to display:none and vice versa.</description>  		
+  		<javascript>mootools-more/Fx/Fx.Reveal.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.fx.fx.morph</require>	
+		<require>moomore.element.element.shortcuts</require>	
+		<require>moomore.element.element.measure</require>		
+	</package>
+	  			
+  	<package name="moomore.fx.fx.scroll">
+  		<description>Effect to smoothly scroll any element, including the window.</description>  		
+  		<javascript>mootools-more/Fx/Fx.Scroll.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.fx.fx</require>	
+		<require>moocore.element.element.event</require>	
+		<require>moocore.element.element.dimensions</require>		
+	</package>
+	  			
+  	<package name="moomore.fx.fx.slide">
+  		<description>Effect to slide an element in and out of view.</description>  		
+  		<javascript>mootools-more/Fx/Fx.Slide.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.fx.fx</require>	
+		<require>moocore.element.element.style</require>		
+	</package>
+	  			
+  	<package name="moomore.fx.fx.smoothscroll">
+  		<description>Class for creating a smooth scrolling effect to all internal links on the page.</description>  		
+  		<javascript>mootools-more/Fx/Fx.SmoothScroll.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moomore.fx.fx.scroll</require>	
+		<require>moocore.utilities.selectors</require>		
+	</package>
+	  			
+  	<package name="moomore.fx.fx.sort">
+  		<description>Reorders a group of items with a transition.</description>  		
+  		<javascript>mootools-more/Fx/Fx.Sort.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moomore.fx.fx.elements</require>	
+		<require>moocore.element.element.dimensions</require>	
+		<require>moomore.element.element.measure</require>		
+	</package>
+	  			
+  	<package name="moomore.drag.drag">
+  		<description>The base Drag Class. Can be used to drag and resize Elements using mouse events.</description>  		
+  		<javascript>mootools-more/Drag/Drag.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.class.class.extras</require>	
+		<require>moocore.element.element.event</require>	
+		<require>moocore.element.element.style</require>		
+	</package>
+	  			
+  	<package name="moomore.drag.drag.move">
+  		<description>A Drag extension that provides support for the constraining of draggables to containers and droppables.</description>  		
+  		<javascript>mootools-more/Drag/Drag.Move.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moomore.drag.drag</require>	
+		<require>moocore.element.element.dimensions</require>		
+	</package>
+	  			
+  	<package name="moomore.drag.slider">
+  		<description>Class for creating horizontal and vertical slider controls.</description>  		
+  		<javascript>mootools-more/Drag/Slider.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moomore.class.class.binds</require>	
+		<require>moomore.drag.drag</require>	
+		<require>moocore.element.element.dimensions</require>		
+	</package>
+	  			
+  	<package name="moomore.drag.sortables">
+  		<description>Class for creating a drag and drop sorting interface for lists of items.</description>  		
+  		<javascript>mootools-more/Drag/Sortables.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moomore.drag.drag.move</require>		
+	</package>
+	  			
+  	<package name="moomore.request.request.jsonp">
+  		<description>Creates a Json request using a script tag include and handles the callbacks for you.</description>  		
+  		<javascript>mootools-more/Request/Request.JSONP.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moomore.core.log</require>	
+		<require>moocore.core.browser</require>	
+		<require>moocore.element.element</require>	
+		<require>moocore.request.request</require>	
+		<require>moocore.class.class.extras</require>		
+	</package>
+	  			
+  	<package name="moomore.request.request.queue">
+  		<description>Manages a group of Request instances so that connections are queued.</description>  		
+  		<javascript>mootools-more/Request/Request.Queue.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.request.request</require>		
+	</package>
+	  			
+  	<package name="moomore.request.request.periodical">
+  		<description>Requests the same url at a time interval that increases when no data is returned from the requested server.</description>  		
+  		<javascript>mootools-more/Request/Request.Periodical.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.request.request</require>	
+		<require>moomore.class.class.refactor</require>		
+	</package>
+	  			
+  	<package name="moomore.utilities.assets">
+  		<description>Provides methods to dynamically load JavaScript, CSS, and Image files into the document.</description>  		
+  		<javascript>mootools-more/Utilities/Assets.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.element.element.event</require>		
+	</package>
+	  			
+  	<package name="moomore.utilities.color">
+  		<description>Class for creating and manipulating colors in JavaScript. Supports HSB -> RGB Conversions and vice versa.</description>  		
+  		<javascript>mootools-more/Utilities/Color.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.core.core</require>	
+		<require>moocore.native.array</require>	
+		<require>moocore.native.string</require>	
+		<require>moocore.native.function</require>	
+		<require>moocore.native.number</require>	
+		<require>moocore.native.hash</require>		
+	</package>
+	  			
+  	<package name="moomore.utilities.group">
+  		<description>Class for monitoring collections of events.</description>  		
+  		<javascript>mootools-more/Utilities/Group.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.class.class.extras</require>		
+	</package>
+	  			
+  	<package name="moomore.utilities.hash.cookie">
+  		<description>Class for creating, reading, and deleting browser Cookies in JSON format.</description>  		
+  		<javascript>mootools-more/Utilities/Hash.Cookie.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.class.class.extras</require>	
+		<require>moocore.utilities.cookie</require>	
+		<require>moocore.utilities.json</require>		
+	</package>
+	  			
+  	<package name="moomore.utilities.iframeshim">
+  		<description>Creates a transparent iframe to mask out items not drawn by the browser (flash, select lists, etc) for IE6.</description>  		
+  		<javascript>mootools-more/Utilities/IframeShim.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moomore.element.element.position</require>	
+		<require>moocore.element.element.event</require>	
+		<require>moocore.element.element.style</require>	
+		<require>moocore.class.class.extras</require>	
+		<require>moomore.class.class.occlude</require>		
+	</package>
+	  			
+  	<package name="moomore.interface.scroller">
+  		<description>Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries.</description>  		
+  		<javascript>mootools-more/Interface/Scroller.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.class.class.extras</require>	
+		<require>moocore.element.element.event</require>	
+		<require>moocore.element.element.dimensions</require>		
+	</package>
+	  			
+  	<package name="moomore.interface.tips">
+  		<description>Class for creating nice tooltips that follow the mouse cursor when hovering over an element.</description>  		
+  		<javascript>mootools-more/Interface/Tips.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moocore.class.class.extras</require>	
+		<require>moocore.element.element.event</require>	
+		<require>moocore.element.element.style</require>	
+		<require>moocore.element.element.dimensions</require>	
+		<require>moomore.element.element.measure</require>		
+	</package>
+	  			
+  	<package name="moomore.localization.date.english.us">
+  		<description>Date messages in English (with conventions for the US).</description>  		
+  		<javascript>mootools-more/Localization/Date.English.US.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moomore.core.lang</require>		
+	</package>
+	  			
+  	<package name="moomore.localization.formvalidator.english">
+  		<description>FormValidator messages in English.</description>  		
+  		<javascript>mootools-more/Localization/FormValidator.English.js</javascript>
+		<require>moomore.core.more</require>	
+		<require>moomore.core.lang</require>		
+	</package>
+	
+</dynamics>			
