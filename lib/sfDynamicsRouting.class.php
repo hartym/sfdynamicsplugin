@@ -96,12 +96,24 @@ class sfDynamicsRouting
     $routing = $event->getSubject();
     $prefix = sfConfig::get('app_'.self::PLUGIN_NAME.'_base_route', '/dynamics');
 
-    /*foreach (self::$types as $actionName => $fileExtension)
-    {*/
+    self::addRoute(
+      $routing,
+      'asset',
+      $prefix.'/:name',
+      array(
+        'module' => 'sfDynamics',
+        'action' => 'asset'
+      ),
+      array(),
+      array('segment_separators' => array('/'))
+    );
+
+    foreach (array('language'=>'/l/:language', 'theme'=>'/t/:theme', 'language_theme'=> '/l/:language/t/:theme') as $routeName => $routeEnhancer)
+    {
       self::addRoute(
         $routing,
-        'asset',
-        $prefix.'/:name',
+        'asset_'.$routeName,
+        $prefix.$routeEnhancer.'/:name.',
         array(
           'module' => 'sfDynamics',
           'action' => 'asset'
@@ -109,22 +121,7 @@ class sfDynamicsRouting
         array(),
         array('segment_separators' => array('/'))
       );
-
-      foreach (array('language'=>'/l/:language', 'theme'=>'/t/:theme', 'language_theme'=> '/l/:language/t/:theme') as $routeName => $routeEnhancer)
-      {
-        self::addRoute(
-          $routing,
-          'asset_'.$routeName,
-          $prefix.$routeEnhancer.'/:name.',
-          array(
-            'module' => 'sfDynamics',
-            'action' => 'asset'
-          ),
-          array(),
-          array('segment_separators' => array('/'))
-        );
-      }
-    /*}*/
+    }
   }
 
   /**
