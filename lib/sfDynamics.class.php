@@ -32,7 +32,8 @@ class sfDynamics
 
       self::checkConfiguration($context);
 
-      self::$manager = new sfDynamicsManager($context);
+      $managerClass = sfConfig::get('app_sfDynamicsPlugin_manager', 'sfDynamicsManager');
+      self::$manager = new $managerClass($context);
     }
 
     return self::$manager;
