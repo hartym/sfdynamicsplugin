@@ -1,3 +1,4 @@
 *.swp
+*.swo
 /test/fixtures/project/cache/*
 /test/fixtures/project/log/*
