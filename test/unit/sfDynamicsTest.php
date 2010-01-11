@@ -24,5 +24,5 @@ if (!sfContext::hasInstance())
   }
   $t->info('A frontend context has been initialized for tests');
 }
-sfConfig::set('app_sfDynamicsPlugin_manager', 'ManagerMock');
+sfConfig::set('app_sfDynamicsPlugin_manager_class', 'ManagerMock');
 $t->isa_ok(sfDynamics::getManager(), 'ManagerMock', '::getManager() the manager class can be customized in app.yml');

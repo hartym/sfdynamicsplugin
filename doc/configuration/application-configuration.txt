@@ -67,6 +67,18 @@ Default value for stylesheets: ['sfDynamicsSimpleStylesheetFilter']
 Instead of using the JSMin packer, prefer using the google closure API (via
 HTTP POST) to pack the scripts. (not recommended)
 
+## Manager class
+
+Thanks to Erig Rogé, sfDynamicsManager instance creation is now taken care of
+by a factory, and you can customize the class used in app.yml.
+
+### Example
+
+    [yaml]
+    all:
+      sfDynamicsPlugin:
+        manager_class: myOwnDynamicsManager
+
 ## Experimental relative paths resolution
 
 Undocumented yet.
