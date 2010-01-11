@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<dynamics>
+  <package name="test">
+  </package>
+  <package name="test1">
+  </package>
+  <package name="test2">
+  </package>
+</dynamics>

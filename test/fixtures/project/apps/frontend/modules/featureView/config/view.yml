@@ -1,0 +1,6 @@
+moduleActionScopeSuccess:
+  dynamics: [test2]
+
+all:
+  dynamics: [test1]
+

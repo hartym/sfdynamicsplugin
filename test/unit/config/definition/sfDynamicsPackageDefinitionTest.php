@@ -1,9 +1,9 @@
 <?php
 
-require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
-require_once(dirname(__FILE__).'/../../../lib/config/sfDynamicsBaseDefinition.class.php');
-require_once(dirname(__FILE__).'/../../../lib/config/sfDynamicsAssetCollectionDefinition.class.php');
-require_once(dirname(__FILE__).'/../../../lib/config/sfDynamicsPackageDefinition.class.php');
+require_once(dirname(__FILE__).'/../../../bootstrap/unit.php');
+require_once(dirname(__FILE__).'/../../../../lib/config/definition/sfDynamicsBaseDefinition.class.php');
+require_once(dirname(__FILE__).'/../../../../lib/config/definition/sfDynamicsAssetCollectionDefinition.class.php');
+require_once(dirname(__FILE__).'/../../../../lib/config/definition/sfDynamicsPackageDefinition.class.php');
 
 $testCount = 3;
 $jsArray   = array('testjs');

@@ -9,9 +9,10 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [main]
-
+  stylesheets:    []
   javascripts:    []
+  dynamics:       [test]
 
   has_layout:     on
   layout:         layout
+

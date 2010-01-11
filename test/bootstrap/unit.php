@@ -18,3 +18,11 @@ require_once $configuration->getSymfonyLibDir().'/vendor/lime/lime.php';
 
 require_once dirname(__FILE__).'/../../config/sfDynamicsPluginConfiguration.class.php';
 $plugin_configuration = new sfDynamicsPluginConfiguration($configuration, dirname(__FILE__).'/../..');
+
+// Helper for cross platform testcases that validate output (from symfony test
+// suite)
+function fix_linebreaks($content)
+{
+  return str_replace(array("\r\n", "\n", "\r"), "\n", $content);
+}
+

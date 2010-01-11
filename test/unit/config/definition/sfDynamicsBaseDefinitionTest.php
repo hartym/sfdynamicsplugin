@@ -1,6 +1,6 @@
 <?php
-require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
-require_once(dirname(__FILE__).'/../../../lib/config/sfDynamicsBaseDefinition.class.php');
+require_once(dirname(__FILE__).'/../../../bootstrap/unit.php');
+require_once(dirname(__FILE__).'/../../../../lib/config/definition/sfDynamicsBaseDefinition.class.php');
 
 $testCount = 2;
 $_test = 'foo/bar';
