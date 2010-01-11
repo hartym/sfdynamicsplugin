@@ -4,4 +4,9 @@ security:  ~
 # insert your own filters here
 
 cache:     ~
+
+<?php if (substr(SYMFONY_VERSION, 0, 3) == '1.2'): ?>
+common:    ~
+<?php endif; ?>
+
 execution: ~
